@@ -2,7 +2,7 @@
 
 ## Background
 
-The VDW standard macros are stored in a single file, the authoritative version of which is stored on the web server at HCSRN.org. You can browse this code by [clicking this link](http://hcsrn.org/sas/standard_macros.sas) (hcsrn.org).
+The VDW standard macros are stored in a single file, the authoritative version of which is stored on the web server at kpwhri.github.io. You can browse this code by [clicking this link](http://kpwhri.github.io/public_vdw_assets/standard_macros.sas).
 
 The easiest way to bring these macros into your SAS session is to first %include the StdVars.sas file for your site into your program, and then write this into your program:
 ```sas
@@ -14,7 +14,7 @@ The reason that works is because of this standard FILENAME statement, which is c
 ```
 Depending on how your site has configured that &\_vdw\_asset\_loc variable, using this method should always get you the most recent version of these macros.
 
-If you have written a macro you would like included please send to [Roy Pardee](https://www.hcsrn.org/share/page/user/pardee.r@ghc.org/profile).
+If you have written a macro you would like included please send to [Roy Pardee](https://www.hcsrnalfresco.org/share/page/user/pardee.r@ghc.org/profile).
 
 ## Macros
 
