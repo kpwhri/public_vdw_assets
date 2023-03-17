@@ -5,7 +5,7 @@ Strictly speaking, StdVars.sas defines a set of standard macro variables that VD
 
 * dataset variables
 * site information variables
-* filenames (including especially vdw_macs which you can %include to bring the VDW standard macros into your session)
+* filenames (including especially vdw_macs which you can %include to bring [the VDW standard macros](readme.md) into your session)
 * system options
 
 ## The Standard Variables
@@ -31,7 +31,7 @@ The below table holds a complete and accurate list of the core VDW standard vari
 | |`&_vdw_lab`| " for the Lab Results dataset|\_my\_vdw\_lib.lab_results|
 | |`&_vdw_lab_notes`|" for the Lab Result Notes dataset|\_my\_vdw\_lib.lab_long_char|
 | |`&_vdw_social_hx`|" for the Socialy History dataset|\_my\_vdw\_lib.SocialHx|
-|Site Identification|&_SiteName|Full name of the site|St Louis University/AHEAD Institute|
+|Site Identification|`&_SiteName`|Full name of the site|St Louis University/AHEAD Institute|
 | |`&_SiteAbbr`|Initials of the site|SLU|
 | |`&_SiteCode`|An arbitrary two-digit numeric code identifying each site (are we maintaining these? they've sort of fallen out of favor).|01|
 |Utility|`&lowest_count`|Many sites /projects have something like blanket IRB approval for generating/sending frequency data, so long as cells with "low" counts are masked. This variable holds what is considered "low" at the site. The most commonly used value is 5. You can use this in your code to mask or redact counts that are higher than this number.|5|
@@ -70,14 +70,14 @@ In order to support this flexibility, we have two additional macro variables def
 
 |Variable|Description|Comments|
 |--------|-----------|--------|
-|&_vdw_asset_engine|Which FILENAME engine to use to read the various asset files|Should be one of two values: URL for direct reads off of kpwhri.github.io, or blank for reading out of a local directory|
-|&_vdw_asset_loc|Location from which to read the various asset files|Should be set to either http://kpwhri.github.io/public_vdw_assets for direct reads off kpwhri.github.io or a local directory spec (e.g., //my_server/my_share).|
+|`&_vdw_asset_engine`|Which FILENAME engine to use to read the various asset files|Should be one of two values: URL for direct reads off of kpwhri.github.io, or blank for reading out of a local directory|
+|`&_vdw_asset_loc`|Location from which to read the various asset files|Should be set to either `http://kpwhri.github.io/public_vdw_assets` for direct reads off kpwhri.github.io or a local directory spec (e.g., `//my_server/my_share`).|
 
 ## The macro 'assets'
 
 |File|Description|
 |----|-----------|
-|standard_macros.sas|The main macros file|
+|[standard_macros.sas](standard_macros.sas)|The main macros file|
 |cdc-child-bmi-code.sas|CDC code for assigning percentile scores to pediatric Body Mass Index measurements. Called by the wrapper macro %GetKidBMIPercentiles.|
 |CDCref_d.xpt|A reference dataset containing the normative data needed by the above CDC code.|
 |formats.xpt|A dataset containing format data for the various formats defined by %vdw_formats.|
