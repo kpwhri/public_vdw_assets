@@ -55,7 +55,7 @@ One other crucial bit of environment for VDW users is access to the VDW standard
 1. Your sas environment, network configuration, and security policy does not prevent it.
 2. You want your users to have the benefit of any updates (e.g., fixes, new macros) as soon as they are released, without having to wait for you to update your local copy.
 3. You don't have the time or inclination to scrutinize updates to ensure their safety.
-4. You trust that those empowered to change this code (currently just Roy @ KPWA) will not do nefarious things to it.
+4. You trust that those empowered to change this code (currently [the KPWHRI organization owners](https://github.com/orgs/kpwhri/people?query=role%3Aowner)) will not do nefarious things to it.
 5. You trust that Roy will keep his ssh private key private.
 6. You trust that github will not be compromised (or if it is, that this code is not disturbed).
 
@@ -77,8 +77,8 @@ In order to support this flexibility, we have two additional macro variables def
 
 |File|Description|
 |----|-----------|
-|[standard_macros.sas](standard_macros.sas)|The main macros file|
-|cdc-child-bmi-code.sas|CDC code for assigning percentile scores to pediatric Body Mass Index measurements. Called by the wrapper macro %GetKidBMIPercentiles.|
-|CDCref_d.xpt|A reference dataset containing the normative data needed by the above CDC code.|
-|formats.xpt|A dataset containing format data for the various formats defined by %vdw_formats.|
-|pregnancy_codes.xpt|A dataset of diagnosis & procedure codes used by the %pregnancy_periods macro.|
+|[standard_macros.sas](http://kpwhri.github.io/public_vdw_assets/standard_macros.sas)|The main macros file|
+|[cdc-child-bmi-code.sas](http://kpwhri.github.io/public_vdw_assets/cdc-child-bmi-code.sas)|CDC code for assigning percentile scores to pediatric Body Mass Index measurements. Called by the wrapper macro %GetKidBMIPercentiles.|
+|[CDCref_d.xpt](http://kpwhri.github.io/public_vdw_assets/CDCref_d.xpt)|A reference dataset containing the normative data needed by the above CDC code.|
+|[formats.xpt](http://kpwhri.github.io/public_vdw_assets/formats.xpt)|A dataset containing format data for the various formats defined by %vdw_formats.|
+|[pregnancy_codes.xpt](http://kpwhri.github.io/public_vdw_assets/pregnancy_codes.xpt)|A dataset of diagnosis & procedure codes used by the %pregnancy_periods macro.|
