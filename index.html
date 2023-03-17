@@ -1,1 +1,3205 @@
-<p>check it out</p>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>body {
+  max-width: 980px;
+  border: 1px solid #ddd;
+  outline: 1300px solid #fff;
+  margin: 16px auto;
+}
+
+body .markdown-body
+{
+  padding: 45px;
+}
+
+@font-face {
+  font-family: fontawesome-mini;
+  src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+}
+
+.markdown-body {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: #333333;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.markdown-body a {
+  background: transparent;
+}
+
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline: 0;
+}
+
+.markdown-body b,
+.markdown-body strong {
+  font-weight: bold;
+}
+
+.markdown-body mark {
+  background: #ff0;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body sub,
+.markdown-body sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.markdown-body sup {
+  top: -0.5em;
+}
+.markdown-body sub {
+  bottom: -0.25em;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.markdown-body img {
+  border: 0;
+}
+
+.markdown-body hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+.markdown-body pre {
+  overflow: auto;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre,
+.markdown-body samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+.markdown-body input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+.markdown-body html input[disabled] {
+  cursor: default;
+}
+
+.markdown-body input {
+  line-height: normal;
+}
+
+.markdown-body input[type="checkbox"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.markdown-body table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+
+.markdown-body .codehilitetable,
+.markdown-body .highlighttable {
+  border: 0;
+  border-spacing: 0;
+}
+
+.markdown-body .codehilitetable tr,
+.markdown-body .highlighttable {
+  border: 0;
+}
+
+.markdown-body .codehilitetable pre,
+.markdown-body .codehilitetable div.codehilite,
+.markdown-body .highlighttable pre,
+.markdown-body .highlighttable div.highlight {
+  margin: 0;
+}
+
+.markdown-body .linenos,
+.markdown-body .code,
+.markdown-body .codehilitetable td,
+.markdown-body .highlighttable td {
+  border: 0;
+  padding: 0;
+}
+
+.markdown-body td:not(.linenos) .linenodiv {
+  padding: 0 !important;
+}
+
+.markdown-body .code {
+  width: 100%;
+}
+
+.markdown-body .linenos div pre,
+.markdown-body .linenodiv pre,
+.markdown-body .linenodiv {
+  border: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.markdown-body .code div pre,
+.markdown-body .code div {
+  border: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.markdown-body * {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body input {
+  font: 13px Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.4;
+}
+
+.markdown-body a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+.markdown-body a:hover,
+.markdown-body a:focus,
+.markdown-body a:active {
+  text-decoration: underline;
+}
+
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.markdown-body hr:before,
+.markdown-body hr:after {
+  display: table;
+  content: " ";
+}
+
+.markdown-body hr:after {
+  clear: both;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+
+.markdown-body h1 {
+  font-size: 30px;
+}
+
+.markdown-body h2 {
+  font-size: 21px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+}
+
+.markdown-body h4 {
+  font-size: 14px;
+}
+
+.markdown-body h5 {
+  font-size: 12px;
+}
+
+.markdown-body h6 {
+  font-size: 11px;
+}
+
+.markdown-body blockquote {
+  margin: 0;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown-body ul ul ol,
+.markdown-body ul ol ol,
+.markdown-body ol ul ol,
+.markdown-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown-body dd {
+  margin-left: 0;
+}
+
+.markdown-body code,
+.markdown-body pre,
+.markdown-body samp {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+}
+
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body kbd {
+  background-color: #e7e7e7;
+  background-image: -moz-linear-gradient(#fefefe, #e7e7e7);
+  background-image: -webkit-linear-gradient(#fefefe, #e7e7e7);
+  background-image: linear-gradient(#fefefe, #e7e7e7);
+  background-repeat: repeat-x;
+  border-radius: 2px;
+  border: 1px solid #cfcfcf;
+  color: #000;
+  padding: 3px 5px;
+  line-height: 10px;
+  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  display: inline-block;
+}
+
+.markdown-body>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+.markdown-body .headerlink {
+  font: normal 400 16px fontawesome-mini;
+  vertical-align: middle;
+  margin-left: -16px;
+  float: left;
+  display: inline-block;
+  text-decoration: none;
+  opacity: 0;
+  color: #333;
+}
+
+.markdown-body .headerlink:focus {
+  outline: none;
+}
+
+.markdown-body h1 .headerlink {
+  margin-top: 0.8rem;
+}
+
+.markdown-body h2 .headerlink,
+.markdown-body h3 .headerlink {
+  margin-top: 0.6rem;
+}
+
+.markdown-body h4 .headerlink {
+  margin-top: 0.2rem;
+}
+
+.markdown-body h5 .headerlink,
+.markdown-body h6 .headerlink {
+  margin-top: 0;
+}
+
+.markdown-body .headerlink:hover,
+.markdown-body h1:hover .headerlink,
+.markdown-body h2:hover .headerlink,
+.markdown-body h3:hover .headerlink,
+.markdown-body h4:hover .headerlink,
+.markdown-body h5:hover .headerlink,
+.markdown-body h6:hover .headerlink {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.markdown-body h1 {
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+
+.markdown-body h4 {
+  font-size: 1.25em;
+}
+
+.markdown-body h5 {
+  font-size: 1em;
+}
+
+.markdown-body h6 {
+  font-size: 1em;
+  color: #777;
+}
+
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body dl,
+.markdown-body table,
+.markdown-body pre,
+.markdown-body .admonition {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-body hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 2em;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body li>p {
+  margin-top: 16px;
+}
+
+.markdown-body dl {
+  padding: 0;
+}
+
+.markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+
+.markdown-body table th {
+  font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body code,
+.markdown-body samp {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+
+.markdown-body code:before,
+.markdown-body code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+
+.markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.markdown-body .codehilite,
+.markdown-body .highlight {
+  margin-bottom: 16px;
+}
+
+.markdown-body .codehilite pre,
+.markdown-body .highlight pre,
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+
+.markdown-body .codehilite pre,
+.markdown-body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.markdown-body pre {
+  word-wrap: normal;
+}
+
+.markdown-body pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after {
+  content: normal;
+}
+
+/* Admonition */
+.markdown-body .admonition {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  position: relative;
+  border-radius: 3px;
+  border: 1px solid #e0e0e0;
+  border-left: 6px solid #333;
+  padding: 10px 10px 10px 30px;
+}
+
+.markdown-body .admonition table {
+  color: #333;
+}
+
+.markdown-body .admonition p {
+  padding: 0;
+}
+
+.markdown-body .admonition-title {
+  font-weight: bold;
+  margin: 0;
+}
+
+.markdown-body .admonition>.admonition-title {
+  color: #333;
+}
+
+.markdown-body .attention>.admonition-title {
+  color: #a6d796;
+}
+
+.markdown-body .caution>.admonition-title {
+  color: #d7a796;
+}
+
+.markdown-body .hint>.admonition-title {
+  color: #96c6d7;
+}
+
+.markdown-body .danger>.admonition-title {
+  color: #c25f77;
+}
+
+.markdown-body .question>.admonition-title {
+  color: #96a6d7;
+}
+
+.markdown-body .note>.admonition-title {
+  color: #d7c896;
+}
+
+.markdown-body .admonition:before,
+.markdown-body .attention:before,
+.markdown-body .caution:before,
+.markdown-body .hint:before,
+.markdown-body .danger:before,
+.markdown-body .question:before,
+.markdown-body .note:before {
+  font: normal normal 16px fontawesome-mini;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 1.5;
+  color: #333;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.markdown-body .admonition:before {
+  content: "\f056\00a0";
+  color: 333;
+}
+
+.markdown-body .attention:before {
+  content: "\f058\00a0";
+  color: #a6d796;
+}
+
+.markdown-body .caution:before {
+  content: "\f06a\00a0";
+  color: #d7a796;
+}
+
+.markdown-body .hint:before {
+  content: "\f05a\00a0";
+  color: #96c6d7;
+}
+
+.markdown-body .danger:before {
+  content: "\f057\00a0";
+  color: #c25f77;
+}
+
+.markdown-body .question:before {
+  content: "\f059\00a0";
+  color: #96a6d7;
+}
+
+.markdown-body .note:before {
+  content: "\f040\00a0";
+  color: #d7c896;
+}
+
+.markdown-body .admonition::after {
+  content: normal;
+}
+
+.markdown-body .attention {
+  border-left: 6px solid #a6d796;
+}
+
+.markdown-body .caution {
+  border-left: 6px solid #d7a796;
+}
+
+.markdown-body .hint {
+  border-left: 6px solid #96c6d7;
+}
+
+.markdown-body .danger {
+  border-left: 6px solid #c25f77;
+}
+
+.markdown-body .question {
+  border-left: 6px solid #96a6d7;
+}
+
+.markdown-body .note {
+  border-left: 6px solid #d7c896;
+}
+
+.markdown-body .admonition>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body .admonition>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* progress bar*/
+.markdown-body .progress {
+  display: block;
+  width: 300px;
+  margin: 10px 0;
+  height: 24px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #ededed;
+  position: relative;
+  box-shadow: inset -1px 1px 3px rgba(0, 0, 0, .1);
+}
+
+.markdown-body .progress-label {
+  position: absolute;
+  text-align: center;
+  font-weight: bold;
+  width: 100%; margin: 0;
+  line-height: 24px;
+  color: #333;
+  text-shadow: 1px 1px 0 #fefefe, -1px -1px 0 #fefefe, -1px 1px 0 #fefefe, 1px -1px 0 #fefefe, 0 1px 0 #fefefe, 0 -1px 0 #fefefe, 1px 0 0 #fefefe, -1px 0 0 #fefefe, 1px 1px 2px #000;
+  -webkit-font-smoothing: antialiased !important;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.markdown-body .progress-bar {
+  height: 24px;
+  float: left;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #96c6d7;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), inset 0 -1px 0 rgba(0, 0, 0, .1);
+  background-size: 30px 30px;
+  background-image: -webkit-linear-gradient(
+    135deg, rgba(255, 255, 255, .4) 27%,
+    transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%,
+    transparent 77%, transparent
+  );
+  background-image: -moz-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: -ms-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: -o-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+}
+
+.markdown-body .progress-100plus .progress-bar {
+  background-color: #a6d796;
+}
+
+.markdown-body .progress-80plus .progress-bar {
+  background-color: #c6d796;
+}
+
+.markdown-body .progress-60plus .progress-bar {
+  background-color: #d7c896;
+}
+
+.markdown-body .progress-40plus .progress-bar {
+  background-color: #d7a796;
+}
+
+.markdown-body .progress-20plus .progress-bar {
+  background-color: #d796a6;
+}
+
+.markdown-body .progress-0plus .progress-bar {
+  background-color: #c25f77;
+}
+
+.markdown-body .candystripe-animate .progress-bar{
+  -webkit-animation: animate-stripes 3s linear infinite;
+  -moz-animation: animate-stripes 3s linear infinite;
+  animation: animate-stripes 3s linear infinite;
+}
+
+@-webkit-keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+@-moz-keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+@keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+.markdown-body .gloss .progress-bar {
+  box-shadow:
+    inset 0 4px 12px rgba(255, 255, 255, .7),
+    inset 0 -12px 0 rgba(0, 0, 0, .05);
+}
+
+/* MultiMarkdown Critic Blocks */
+.markdown-body .critic_mark {
+  background: #ff0;
+}
+
+.markdown-body .critic_delete {
+  color: #c82829;
+  text-decoration: line-through;
+}
+
+.markdown-body .critic_insert {
+  color: #718c00 ;
+  text-decoration: underline;
+}
+
+.markdown-body .critic_comment {
+  color: #8e908c;
+  font-style: italic;
+}
+
+.markdown-body .headeranchor {
+  font: normal normal 16px fontawesome-mini;
+  line-height: 1;
+  display: inline-block;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.headeranchor:before {
+  content: '\e157';
+}
+
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+
+.markdown-body .task-list-item input {
+  margin: 0 4px 0.25em -20px;
+  vertical-align: middle;
+}
+
+/* Media */
+@media only screen and (min-width: 480px) {
+  .markdown-body {
+    font-size:14px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .markdown-body {
+    font-size:16px;
+  }
+}
+
+@media print {
+  .markdown-body * {
+    background: transparent !important;
+    color: black !important;
+    filter:none !important;
+    -ms-filter: none !important;
+  }
+
+  .markdown-body {
+    font-size:12pt;
+    max-width:100%;
+    outline:none;
+    border: 0;
+  }
+
+  .markdown-body a,
+  .markdown-body a:visited {
+    text-decoration: underline;
+  }
+
+  .markdown-body .headeranchor-link {
+    display: none;
+  }
+
+  .markdown-body a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  .markdown-body abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  .markdown-body .ir a:after,
+  .markdown-body a[href^="javascript:"]:after,
+  .markdown-body a[href^="#"]:after {
+    content: "";
+  }
+
+  .markdown-body pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .markdown-body pre,
+  .markdown-body blockquote {
+    border: 1px solid #999;
+    padding-right: 1em;
+    page-break-inside: avoid;
+  }
+
+  .markdown-body .progress,
+  .markdown-body .progress-bar {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .markdown-body .progress {
+    border: 1px solid #ddd;
+  }
+
+  .markdown-body .progress-bar {
+    height: 22px;
+    border-right: 1px solid #ddd;
+  }
+
+  .markdown-body tr,
+  .markdown-body img {
+    page-break-inside: avoid;
+  }
+
+  .markdown-body img {
+    max-width: 100% !important;
+  }
+
+  .markdown-body p,
+  .markdown-body h2,
+  .markdown-body h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .markdown-body h2,
+  .markdown-body h3 {
+    page-break-after: avoid;
+  }
+}
+</style><style>/*GitHub*/
+.highlight {background-color:#fff;color:#333333;}
+.highlight .hll {background-color:#ffffcc;}
+.highlight .c{color:#999988;font-style:italic}
+.highlight .err{color:#a61717;background-color:#e3d2d2}
+.highlight .k{font-weight:bold}
+.highlight .o{font-weight:bold}
+.highlight .cm{color:#999988;font-style:italic}
+.highlight .cp{color:#999999;font-weight:bold}
+.highlight .c1{color:#999988;font-style:italic}
+.highlight .cs{color:#999999;font-weight:bold;font-style:italic}
+.highlight .gd{color:#000000;background-color:#ffdddd}
+.highlight .ge{font-style:italic}
+.highlight .gr{color:#aa0000}
+.highlight .gh{color:#999999}
+.highlight .gi{color:#000000;background-color:#ddffdd}
+.highlight .go{color:#888888}
+.highlight .gp{color:#555555}
+.highlight .gs{font-weight:bold}
+.highlight .gu{color:#800080;font-weight:bold}
+.highlight .gt{color:#aa0000}
+.highlight .kc{font-weight:bold}
+.highlight .kd{font-weight:bold}
+.highlight .kn{font-weight:bold}
+.highlight .kp{font-weight:bold}
+.highlight .kr{font-weight:bold}
+.highlight .kt{color:#445588;font-weight:bold}
+.highlight .m{color:#009999}
+.highlight .s{color:#dd1144}
+.highlight .n{color:#333333}
+.highlight .na{color:teal}
+.highlight .nb{color:#0086b3}
+.highlight .nc{color:#445588;font-weight:bold}
+.highlight .no{color:teal}
+.highlight .ni{color:purple}
+.highlight .ne{color:#990000;font-weight:bold}
+.highlight .nf{color:#990000;font-weight:bold}
+.highlight .nn{color:#555555}
+.highlight .nt{color:navy}
+.highlight .nv{color:teal}
+.highlight .ow{font-weight:bold}
+.highlight .w{color:#bbbbbb}
+.highlight .mf{color:#009999}
+.highlight .mh{color:#009999}
+.highlight .mi{color:#009999}
+.highlight .mo{color:#009999}
+.highlight .sb{color:#dd1144}
+.highlight .sc{color:#dd1144}
+.highlight .sd{color:#dd1144}
+.highlight .s2{color:#dd1144}
+.highlight .se{color:#dd1144}
+.highlight .sh{color:#dd1144}
+.highlight .si{color:#dd1144}
+.highlight .sx{color:#dd1144}
+.highlight .sr{color:#009926}
+.highlight .s1{color:#dd1144}
+.highlight .ss{color:#990073}
+.highlight .bp{color:#999999}
+.highlight .vc{color:teal}
+.highlight .vg{color:teal}
+.highlight .vi{color:teal}
+.highlight .il{color:#009999}
+.highlight .gc{color:#999;background-color:#EAF2F5}
+</style><title>README</title></head><body><article class="markdown-body"><h1 id="hcsrn-virtual-data-warehouse-standard-macros">HCSRN Virtual Data Warehouse Standard Macros<a class="headerlink" href="#hcsrn-virtual-data-warehouse-standard-macros" title="Permanent link"></a></h1>
+<h2 id="background">Background<a class="headerlink" href="#background" title="Permanent link"></a></h2>
+<p>The VDW standard macros are stored in a single file, the authoritative version of which is stored on the web server at HCSRN.org. You can browse this code by <a href="http://hcsrn.org/sas/standard_macros.sas">clicking this link</a> (hcsrn.org).</p>
+<p>The easiest way to bring these macros into your SAS session is to first %include the StdVars.sas file for your site into your program, and then write this into your program:
+<div class="highlight"><pre>  %include vdw_macs ;
+</pre></div>
+The reason that works is because of this standard FILENAME statement, which is contained in StdVars.sas at all the sites:
+<div class="highlight"><pre>   filename vdw_macs &amp;_vdw_asset_engine &quot;&amp;_vdw_asset_loc/standard_macros.sas&quot; ; 
+</pre></div>
+Depending on how your site has configured that &amp;_vdw_asset_loc variable, using this method should always get you the most recent version of these macros.</p>
+<p>If you have written a macro you would like included please send to <a href="https://www.hcsrn.org/share/page/user/pardee.r@ghc.org/profile">Roy Pardee</a>.</p>
+<h2 id="macros">Macros<a class="headerlink" href="#macros" title="Permanent link"></a></h2>
+<h3 id="pmca">%PMCA<a class="headerlink" href="#pmca" title="Permanent link"></a></h3>
+<p>Adapted for VDW use from <a href="https://www.kpwashingtonresearch.org/our-research/our-scientists/rita-mangione-smith-md-mph/measurement-tools-research-dr-rita-mangione-smith">the v3.1 code posted to KPWHRI&rsquo;s web site</a> by Phil Crawford.</p>
+<p>Purpose: Computes the Pediatric Medical Complexity Algorithm.</p>
+<p>Inputs: A dataset of MRNs and index dates. Multiple index dates for the same MRN are allowed, but the combinations of (MRN, index_date) values should be unique.</p>
+<p>Outputs: A dataset of MRNs, index dates, condition flags, and overall complexity scores (one conservative, the other less so).</p>
+<h4 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inset</td>
+<td>The name of the input dataset of MRNs and (optionally) index dates.</td>
+</tr>
+<tr>
+<td>index_date</td>
+<td>Either the name of a date variable in the &amp;inset dataset OR a complete SAS date literal (e.g., &lsquo;14-feb-2019&rsquo;d). The macro works with both ICD-9 and ICD-10 codes</td>
+</tr>
+<tr>
+<td>outset</td>
+<td>The name you want for the output dataset.</td>
+</tr>
+<tr>
+<td>days_lookback</td>
+<td>Optional. The number of days you want to look back from &amp;index_date for dx codes that trip the various condition flags. The default is 365.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link"></a></h4>
+<p>Article: Pediatric Medical Complexity Algorithm: A New Method to Stratify Children by Medical Complexity; Tamara D. Simon, Mary Lawrence Cawthon, Susan Stanford, Jean Popalisky, Dorothy Lyons, Peter Woodcox, Margaret Hood, Alex Y. Chen and Rita Mangione-Smith,  <a href="http://pediatrics.aappublications.org/content/early/2014/05/07/peds.2013-3875">Pediatrics; originally published online May 12, 2014;  DOI: 10.1542/peds.2013-3875</a></p>
+<h4 id="sample-call">Sample Call<a class="headerlink" href="#sample-call" title="Permanent link"></a></h4>
+<div class="highlight"><pre>%pcma(inset = s.test_kids
+    , index_date = my_datevar
+    , outset = s.deleteme) ;
+
+%pcma(inset = s.test_kids
+    , index_date = &#39;01-jan-2019&#39;d
+    , outset = s.deleteme) ;
+</pre></div>
+
+<h3 id="calcage">%CalcAge<a class="headerlink" href="#calcage" title="Permanent link"></a></h3>
+<p>Purpose: Calculates age as an integer, producing the number that the person would themselves give if asked their age.</p>
+<p>Inputs: Date of birth; date on which to compute age.</p>
+<p>Outputs: Age in whole years.</p>
+<h4 id="parameters_1">Parameters<a class="headerlink" href="#parameters_1" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BDtVar</td>
+<td>The name of a variable containing a date of birth.  If not specified, defaults to birth_date, which is what that var is called in the VDW demographics file.</td>
+</tr>
+<tr>
+<td>RefDate</td>
+<td>The date on which you want to calculate the person&rsquo;s age.</td>
+</tr>
+</tbody>
+</table>
+<p>Caveat:The current version of this macro produces an error when used on dates of birth that fall on leap days.</p>
+<p>This macro returns an expression usable from both datastep and SQL code.  For example:
+<div class="highlight"><pre>data gnu ;
+  set old ;
+  my_age = %CalcAge(RefDate = &quot;&amp;sysdate&quot;d) ;
+run ;
+
+proc sql ;
+  create table gnu as
+  select*, %CalcAge(BDtVar = dob, RefDate = &quot;25dec2009&quot;d) as my_age
+  from old
+  ;
+quit ;
+</pre></div></p>
+<h3 id="removedset">%RemoveDset<a class="headerlink" href="#removedset" title="Permanent link"></a></h3>
+<p>Purpose: Deletes a dataset if it exists, without causing a WARNING if it does not exist. Inputs: The name of a dataset to delete. Outputs: n/a Parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dset</td>
+<td>Name of the dset you want removed.</td>
+</tr>
+</tbody>
+</table>
+<p>Useful for making sure a program is truly producing all expected datasets&ndash;keeps you from being fooled by the leavings of prior programs or runs.</p>
+<h3 id="getrxforpeople">%GetRxForPeople<a class="headerlink" href="#getrxforpeople" title="Permanent link"></a></h3>
+<p>Purpose: Pulls all rx fills between the supplied dates for the people listed in the user-supplied People dataset.</p>
+<p>Inputs: A dataset containing a list of unduplicated MRNs belonging to the people whose fills you want. Dates over which you want the fills.</p>
+<p>Output(s): The portion of the Rx dataset that describes fills for the people listed in the People dataset.</p>
+<h4 id="parameters_2">Parameters<a class="headerlink" href="#parameters_2" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>People</td>
+<td>The name of the dataset containing the MRNs of the people whose fills you want. This can be a one-part temporary dataset or a two-part permanent dataset.</td>
+</tr>
+<tr>
+<td>StartDt</td>
+<td>A valid SAS date specification without delimiters (e.g., 01Jan2005) that marks off the beginning of the period during which you want Rx fills.</td>
+</tr>
+<tr>
+<td>EndDt</td>
+<td>A date specification marking off the end of the period during which you want Rx fills.</td>
+</tr>
+<tr>
+<td>OutSet</td>
+<td>The name of the output dataset of Rx fills.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="getrxfordrugs">%GetRxForDrugs<a class="headerlink" href="#getrxfordrugs" title="Permanent link"></a></h3>
+<p>Purpose: Gets the pharmacy fills for a specified set of drugs (identified by NDCs) which ocurred between the dates specified in StartDt and EndDt.</p>
+<p>Inputs: A dataset of unduplicated NDC codes for the drugs of interest.</p>
+<p>Output: The portion of the Rx dataset describing fills for the drugs of interest during the time period of interest.</p>
+<h4 id="parameters_3">Parameters<a class="headerlink" href="#parameters_3" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OutSet</td>
+<td>The name of the output dataset of Rx fills.</td>
+</tr>
+<tr>
+<td>DrugLst</td>
+<td>The dataset containing the list of drugs of interest.</td>
+</tr>
+<tr>
+<td>StartDt</td>
+<td>The date that marks off the beginning of the period during which you want Rx fills.</td>
+</tr>
+<tr>
+<td>EndDt</td>
+<td>A date specification marking off the end of the period during which you want Rx fills.</td>
+</tr>
+<tr>
+<td>OutSet</td>
+<td>The name of the output dataset of Rx fills.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="getpxforpeople">%GetPxForPeople<a class="headerlink" href="#getpxforpeople" title="Permanent link"></a></h3>
+<p>Purpose: Pulls the set of procedures performed on any of a user-supplied list of People, during a user-specified period of interest.</p>
+<p>Inputs: A dataset containing an unduplicated set of MRNs for the people of interest; a time period of interest.</p>
+<p>Output: That portion of the Proc dataset containing procedures performed on one of the people in the supplied People dataset.</p>
+<h4 id="parameters_4">Parameters<a class="headerlink" href="#parameters_4" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>People</td>
+<td>The name of the input People dataset</td>
+</tr>
+<tr>
+<td>StartDt</td>
+<td>The beginning of the period of interest.</td>
+</tr>
+<tr>
+<td>EndDt</td>
+<td>The end of the period of interest.</td>
+</tr>
+<tr>
+<td>OutSet</td>
+<td>The desired name of the output dataset of procedure records.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="getdxforpeople">%GetDxForPeople<a class="headerlink" href="#getdxforpeople" title="Permanent link"></a></h3>
+<p>Purpose: Pulls the set of diagnoses applying to any of a user-supplied list of People, during a user-specified period of interest.</p>
+<p>Inputs: A dataset containing an unduplicated set of MRNs for the people of interest; a time period of interest.</p>
+<p>Output: That portion of the Diag dataset containing procedures performed on one of the people in the supplied People dataset.</p>
+<h4 id="parameters_5">Parameters<a class="headerlink" href="#parameters_5" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>People</td>
+<td>The name of the input People dataset</td>
+</tr>
+<tr>
+<td>StartDt</td>
+<td>The beginning of the period of interest.</td>
+</tr>
+<tr>
+<td>EndDt</td>
+<td>The end of the period of interest.</td>
+</tr>
+<tr>
+<td>OutSet</td>
+<td>The desired name of the output dataset of diagnosis code records.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="getdxfordx">%GetDxForDx<a class="headerlink" href="#getdxfordx" title="Permanent link"></a></h3>
+<p>Purpose: Pulls the set of Diag records bearing any of a user-supplied list of diagnosis codes, during a user specified period of interest.</p>
+<p>Inputs: A dataset containing an unduplicated list of ICD-9 diagnosis codes of interest; a time period of interest.</p>
+<p>Output: That portion of the Diag dataset containing one of the diagnosis codes of interest during the specified period.</p>
+<h4 id="parameters_6">Parameters<a class="headerlink" href="#parameters_6" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DxLst</td>
+<td>The name of the input dataset of diagnosis codes</td>
+</tr>
+<tr>
+<td>DxVarName</td>
+<td>The name of the variable in DxLst that contains the diagnosis codes.</td>
+</tr>
+<tr>
+<td>StartDt</td>
+<td>The beginning of the period of interest.</td>
+</tr>
+<tr>
+<td>EndDt</td>
+<td>The end of the period of interest.</td>
+</tr>
+<tr>
+<td>OutSet</td>
+<td>The desired name of the output dataset of procedure records.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="getpxforpx">GetPxForPx<a class="headerlink" href="#getpxforpx" title="Permanent link"></a></h3>
+<p>Purpose: Pulls the set of Proc records bearing any of a user-supplied list of procedure codes, during a user specified period of interest.</p>
+<p>InputsA dataset containing an unduplicated list of any combination of CPT-4 and ICD-9 procedure codes of interest; a time peiod of interest.</p>
+<p>Output: That portion of the Proc dataset containing one of the diagnosis codes of interest during the specified period.</p>
+<h4 id="parameters_7">Parameters<a class="headerlink" href="#parameters_7" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PxLst</td>
+<td>The name of the variable in PxLst that contains the procedure codes</td>
+</tr>
+<tr>
+<td>PxCodeTypeVarName</td>
+<td>The name of the variable in PxLst that contains the code type information that modifies the Procedure code var. This var must mirror the format and content of the Codetype in the Proc dataset.</td>
+</tr>
+<tr>
+<td>StartDt</td>
+<td>The beginning of the period of interest.</td>
+</tr>
+<tr>
+<td>EndDt</td>
+<td>The end of the period of interest.</td>
+</tr>
+<tr>
+<td>Outset</td>
+<td>The desired name of the output dataset of procedure records.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="getrxforpeopleanddrugs">%GetRxForPeopleAndDrugs<a class="headerlink" href="#getrxforpeopleanddrugs" title="Permanent link"></a></h3>
+<p>Purpose: Pulls all rx fills for a specific set of drugs between the supplied dates for the people listed in the user-suppied People dataset.</p>
+<p>Inputs: A dataset containing a list of unduplicated MRNs belonging to the people whose fills you want. The NDC codes of the drugs of interest. Dates over which you want the fills.</p>
+<p>Output(s): The portion of the Rx dataset that describes fills for the people listed in the People dataset.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>People</td>
+<td>The name of the dataset containing the MRNs of the people whose fills you want. This can be a one-part temporary dataset or a two-part permanent dataset</td>
+</tr>
+<tr>
+<td>DrugLst</td>
+<td>The name of the datasets containing the NDC codes of interest.</td>
+</tr>
+<tr>
+<td>StartDt</td>
+<td>A valid SAS date specification without delimiters (e.g., 01Jan2005) that marks off the beginning of the period during which you want Rx fills.</td>
+</tr>
+<tr>
+<td>EndDt</td>
+<td>A date specification marking off the end of the period during which you want Rx fills.</td>
+</tr>
+<tr>
+<td>OutSet</td>
+<td>The name of the output dataset of Rx fills.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="getdxforpeopleanddx">%GetDxForPeopleAndDx<a class="headerlink" href="#getdxforpeopleanddx" title="Permanent link"></a></h3>
+<p>Purpose: Pulls all diagnoses for a specific set of diagnoses between the supplied dates for the people listed in the userer-supplied eople datset.</p>
+<p>Inputs: A dataset containing a list of unduplicated MRNs belonging to the people whose diagnosis records you want. A dataset containing the Diagnosis codes of interest. The dates over which you want the records.</p>
+<p>Output(s): The portion of the DX dataset that describes diagnoses of interest for the people listed in the People dataset.</p>
+<h4 id="parameters_8">Parameters<a class="headerlink" href="#parameters_8" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>People</td>
+<td>The name of the dataset containing the MRNs of the people whose dx recs you want. This can be a one-part temporary dataset or a two-part permanent dataset.</td>
+</tr>
+<tr>
+<td>DxLst</td>
+<td>The name of the datasets containing the ICD9 codes of interest.</td>
+</tr>
+<tr>
+<td>StartDt</td>
+<td>A valid SAS date specification without delimiters (e.g., 01Jan2005) that marks off the beginning of the period during which you want dx recs.</td>
+</tr>
+<tr>
+<td>EndDt</td>
+<td>A date specification marking off the end of the period during which you want dx records.</td>
+</tr>
+<tr>
+<td>OutSet</td>
+<td>The name of the output dataset of diagnoses of interest.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cancerschema">%CancerSchema<a class="headerlink" href="#cancerschema" title="Permanent link"></a></h3>
+<p>Purpose: Allocates tumors int CancerSchema according to AJCC 6 and 7 definitions.
+Inputs: The VDW Tumor file, start dates, and end dates.
+Output(s): The ouput dataset contains the tumor table for time period of interest with 2 additional variables CancerSchemaAjcc7thEdition, and CancerSchemaAjcc6thEdition.</p>
+<h4 id="parameters_9">Parameters<a class="headerlink" href="#parameters_9" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OutputDS</td>
+<td>The name of the output with the 2 new variables.</td>
+</tr>
+<tr>
+<td>StartDt</td>
+<td>A valid SAS date specification without delimiters (e.g., 01Jan2005) that marks off the beginning of the period of interest.</td>
+</tr>
+<tr>
+<td>EndDt</td>
+<td>A date specification marking off the end of the period of interest.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="breastcancerdefinition01">%BreastCancerDefinition01<a class="headerlink" href="#breastcancerdefinition01" title="Permanent link"></a></h3>
+<p>Purpose: Pulls the set of &ldquo;incident&rdquo; (that is, first-ocurring during the specified date range) breast cancers, both invasive and in-situ (but excluding LCIS). These criteria are based on the ones used for the Early Screeing study.
+Inputs: Endpoints of the time period of interest.
+Output: A dataset of MRNs, Dx dates, Estrogen Receptor Mark er statuses, and stage information for each woman&rsquo;s first breast tumor ocurring during the period of interest.</p>
+<h4 id="parameters_10">Parameters<a class="headerlink" href="#parameters_10" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>StartDt</td>
+<td>The beginning of the period of interest.</td>
+</tr>
+<tr>
+<td>EndDt</td>
+<td>The end of the period of interest</td>
+</tr>
+<tr>
+<td>OutSet</td>
+<td>The name of the output dataset.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="breastcancerdefinition02">%BreastCancerDefinition02<a class="headerlink" href="#breastcancerdefinition02" title="Permanent link"></a></h3>
+<p>Purpose: Pulls the set of &ldquo;incident&rdquo; (that is, first-ocurring, over the whole range of the tumor file) invasive breast tumors (so no DCIS, unlike the 01 definition). These criteria are based on the ones used for the <a href="/C:/Users/o578092/documents/vdw/macros/resolveuid/f1658048c59d2ac094d4dc267b574acb">Pharmacovigilance Study</a>.
+Inputs: Endpoints of the time period of interest, a name for the output dataset of tumors, optionally, a name for another dataset of tumor records for women who have &gt; 1 qualifying tumor on the very same day.
+Output: A dataset of <strong>tumors</strong> (not women, as with the 01 definition), all variables in the local file.</p>
+<h4 id="parameters_11">Parameters<a class="headerlink" href="#parameters_11" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>StartDt</td>
+<td>The beginning of the period of interest.</td>
+</tr>
+<tr>
+<td>EndDt</td>
+<td>The end of the period of interest</td>
+</tr>
+<tr>
+<td>OutSet</td>
+<td>The name of the output dataset.</td>
+</tr>
+<tr>
+<td>OutMultFirsts</td>
+<td>Optional&ndash;name of a dataset to hold the records for women who have multiple first qualifying tumors.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pullcontinuous">%PullContinuous<a class="headerlink" href="#pullcontinuous" title="Permanent link"></a></h3>
+<p>Purpose: Pulls the set of people who were continuously enrolled for a user-specified number of months before and after a constant or person-specific Index Date, with optional allowance for user-specified gaps in enrollment.</p>
+<p>Inputs: A dataset of MRNs of the people whose enrollment you need evaluated; specification of the Index Date around which you want enrollment evaluated. The Required # of months of continuous enrollment pre- and post- Index Date; Allowed # of months gaps in enrollment tolerated. For cases where index dates are person-specific, the Index Date spec must be the name of a variable in the input dataset that holds each person&rsquo;s index date. For cases where everyone has the same index date, the Index Date spec can be a date constant, e.g., <code>'31Dec2005'd</code>.</p>
+<p>Note that this macro assumes that there are no overlapping periods in the enroll data. SDMs are referred to the <code>%CleanEnroll</code> mcro |for a means of making sure this is true at your sites.
+Output: A dataset matching the structure and contents of the input dataset, but limited to people who meet the enrollment criteria.</p>
+<h4 id="parameters_12">Parameters<a class="headerlink" href="#parameters_12" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>InSet</td>
+<td>The name of the input dataset of MRNs of the people whose enrollment you want evaluated.</td>
+</tr>
+<tr>
+<td>OutSet</td>
+<td>The name you want for the output dataset. This dataset will match the structure &amp; contents of InSet, except that anyone whose enrollment is lacking will be eliminated.</td>
+</tr>
+<tr>
+<td>IndexDate</td>
+<td>Either the name of a date variable in InSet, or, a complete date literal (e.g., &ldquo;01Jan2005&rdquo;d)</td>
+</tr>
+<tr>
+<td>PreIndexEnrolledMonths</td>
+<td>The required # of continuous months of enrollment prior to the Index Date, where the definition of &lsquo;continuous&rsquo; is modified by the PreIndexGapTolerance parameter below.</td>
+</tr>
+<tr>
+<td>PreIndexGapTolerance</td>
+<td>The # of months of disenrollment tolerated in the definition of &lsquo;continuous&rsquo; prior to the Index Date.</td>
+</tr>
+<tr>
+<td>PostIndexEnrolledMonths</td>
+<td>The required # of continuous months of enrollment after the Index Date</td>
+</tr>
+<tr>
+<td>PostIndexGapTolerance</td>
+<td>The # of months of disenrollment tolerated in the definition of &lsquo;continuous&rsquo; after the Index Date.</td>
+</tr>
+<tr>
+<td>EnrollDSet</td>
+<td>Optional.The name of the dataset to use to pick out enroll records for the group in InSet.Leave this off to have the macro use the library/dataset specified in StdVars.sas. This parameter can be useful in cases where you only want to take particular types of enrollment into account (e.g., only enrollment with Medicare coverage).Just grab out your own subset of the enroll records, and specify the name of your dataset in this parameter.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="getfollowuptime">%GetFollowUpTime<a class="headerlink" href="#getfollowuptime" title="Permanent link"></a></h3>
+<p>Purpose: Evaluates enrollment data for an input dataset of people from a user-specified IndexDate, up until a user specified EndDate, adding a variable to the input dataset giving the earlier of EndDate or the end of each person&rsquo;s continuous enrollment. People with no enrollment during the period between IndexDate and EndDate will have a missing value in the added variable.</p>
+<p>Both IndexDate and EndDate can vary from person to person (in which case these parameters should name variables in the People dataset) or can be date constants that apply to everyone.</p>
+<p>Inputs: A dataset of unduplicated MRNs</p>
+<p>Output(s): A new dataset identical to the one named in the People parameter, but with an additional variable that answers the question &lsquo;at what point after index date did this person&rsquo;s continuous enrollment end, if it ended before EndDate?&rsquo;</p>
+<h4 id="parameters_13">Parameter|s|<a class="headerlink" href="#parameters_13" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>People</td>
+<td>The name of the dataset containing the MRNs of the people whose followup time you want.</td>
+</tr>
+<tr>
+<td>IndexDate</td>
+<td>The start of the period over which you want followup time evaluated.This can be either the name of a variable in the People dataset, or a complete sas date literal (e.g., &lsquo;25dec2004&rsquo;d).</td>
+</tr>
+<tr>
+<td>EndDate</td>
+<td>The end of the period over which you would like continuous enrollment evaluated.This can be either the name of a variable in the People dataset, or a complete sas date literal (e.g., &lsquo;25dec2004&rsquo;d).</td>
+</tr>
+<tr>
+<td>GapTolerance</td>
+<td>The largest number of days of non-enrollment in between enrolled periods to ignore in determining the end of continuous enrollment.</td>
+</tr>
+<tr>
+<td>CallEndDateVar</td>
+<td>The name you want for the additional variable.</td>
+</tr>
+<tr>
+<td>OutSet</td>
+<td>The name you want for the output dataset.</td>
+</tr>
+<tr>
+<td>EnrollDset</td>
+<td>Optional.The name of the dataset from which the macro should draw Enroll records.If left off, the macro will use the dataset indicated in the local StdVars.sas file. This can be useful if for example, you only want to consider particular types of enrollment (e.g., enrollment w/Medicaid coverage) for your application.Simply draw out your own subset of the standard Enroll file for the people in People, subset it as you like, and pass the name of your custom Enroll file into the macro.</td>
+</tr>
+<tr>
+<td>Reverse</td>
+<td>Optional. A value of 0 (default) will run the macro going forward in time from IndexDate until EndDate as described in the purpose. Specifying a value of 1 instead answers the question &ldquo;at what point before index date did the person&rsquo;s continuous enrollment start, if it started after EndDate?&rdquo;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="collapseperiods">%CollapsePeriods<a class="headerlink" href="#collapseperiods" title="Permanent link"></a></h3>
+<p>Purpose: Takes an input dataset of start/stop periods and collapses contiguous, overlapping, or |near-contiguous (e.g., w/in ||tolerance) periods over which none of the variables on the dataset change.</p>
+<p>This macro is useful for determining the extent of continuous enrollment. Just draw out a set of enrollment records, drop any variables whose changes are not of interest (e.g., if you don&rsquo;t care about the type of coverage, drop all the ins_: vars) and run it through this macro.</p>
+<p>Inputs: A dataset with a period-start variable (e.g., enr_start), and a period-end variable (e.g., enr_end), and any number of additional variables (e.g., mrn, primary care physician indicator, etc.)</p>
+<p>Output(s): If the &amp;OutSet parameter is given, a new dataset of collapsed periods. If not, the input dataset is modified in-place.</p>
+<h4 id="parameters_14">Parameters<a class="headerlink" href="#parameters_14" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lib</td>
+<td>The name of the sas library where your input dataset is located (e.g., &lsquo;work&rsquo;, &lsquo;perm&rsquo;, etc.)</td>
+</tr>
+<tr>
+<td>DSet</td>
+<td>The name of your input dataset</td>
+</tr>
+<tr>
+<td>RecStart</td>
+<td>The name of the date variable in Dset holding the start of a period.</td>
+</tr>
+<tr>
+<td>RecEnd</td>
+<td>The name of the date variable in Dset holding the end of a period.</td>
+</tr>
+<tr>
+<td>PersonID</td>
+<td>The name of the variable in Dset that uniquely identifies a person.  Defaults to MRN.</td>
+</tr>
+<tr>
+<td>OutSet</td>
+<td>(Optional) The name of a dataset to put the collapsed records in.  If not given, the dataset specified in &amp;Lib..&amp;DSet is replaced.</td>
+</tr>
+<tr>
+<td>DaysTol</td>
+<td>The number of days gap to ignore between otherwise contiguous periods of no change.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_1">Sample Call<a class="headerlink" href="#sample-call_1" title="Permanent link"></a></h4>
+<div class="highlight"><pre>%CollapsePeriods(Lib        = work
+               , DSet       = raw_enroll
+               , RecStart   = enr_start
+               , RecEnd     = enr_end
+               , PersonID   = MRN
+               , OutSet     = mylib.collapsed_enroll
+               , DaysTol    = 1
+               ) ;
+</pre></div>
+
+<h3 id="ndclookup">%NDCLookup<a class="headerlink" href="#ndclookup" title="Permanent link"></a></h3>
+<p>Purpose: Searches the EverNDC drug lookup table for NDCs of interest, on the basis of a user-supplied dataset of text string to look for (like for instance &lsquo;tamox&rsquo; in a search for Tamoxifen and its synonyms.).</p>
+<p>Inputs: A dataset of search strings.</p>
+<p>Output: A dataset of NDC codes potentially of interest.</p>
+<h4 id="parameters_15">Parameters<a class="headerlink" href="#parameters_15" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inds</td>
+<td>The name of the input dataset of text strings to search for. These strings must be in a variable named &lsquo;DrugName&rsquo;.</td>
+</tr>
+<tr>
+<td>Outds</td>
+<td>The portion of EverNDC that contains one or more of the supplied search strings.</td>
+</tr>
+<tr>
+<td>EverNDC</td>
+<td>The dataset name of your local copy of EverNDC.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deiddset">%DeIDDset<a class="headerlink" href="#deiddset" title="Permanent link"></a></h3>
+<p>Purpose: De-identifies a dataset by replacing a user-specified ID variable (e.g., MRN) with an arbitrary ID variable (e.g., StudyID) and creates a crosswalk dataset that relates the original ID values to the new StudyIDs.</p>
+<p>Inputs: A dataset to de-identify.</p>
+<p>Output: A crosswalk dataset, and a de-identified version of the input dataset.</p>
+<h4 id="parameters_16">Parameters<a class="headerlink" href="#parameters_16" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>InSet</td>
+<td>Name of the dataset you want de-identified. THIS DSET IS ALTERED BY THE MACRO!</td>
+</tr>
+<tr>
+<td>XWalkSet</td>
+<td>Name of the output ID-crosswalk dataset.</td>
+</tr>
+<tr>
+<td>OldIDVar</td>
+<td>Name of the ID variable you want removed (e.g., MRN)</td>
+</tr>
+<tr>
+<td>NewIDVar</td>
+<td>Name for the new ID variable the macro creates (e.g., StudyID).</td>
+</tr>
+<tr>
+<td>NewIDLen</td>
+<td>The length of the new ID variable.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="charlson">%Charlson<a class="headerlink" href="#charlson" title="Permanent link"></a></h3>
+<p>Purpose: Calculates the Deyo variant of the Charlson comorbidity index (basically a count of the number of chronic conditions the person has diagnoses for in the year prior to index date weighted by each condition&rsquo;s mortality influence).</p>
+<p>Inputs: A dataset containing a cohort of identified by MRN, each of which has an index date (the date as-of which you want to know their comorbidities).</p>
+<p>Output(s): A dataset containing the MRNs, index dates, the charlson score and a series of flags indicating which of the chronic conditions checked the person suffers from.</p>
+<h4 id="parameters_17">Parameters<a class="headerlink" href="#parameters_17" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>InputDS</td>
+<td>The name of the input cohort dataset of MRNs and index dates.</td>
+</tr>
+<tr>
+<td>IndexDateVarName</td>
+<td>The name of the variable in InputDS that holds the index date.</td>
+</tr>
+<tr>
+<td>OutputDS</td>
+<td>The name of the file that will be output by the macro with the calculated Charlson score on it.</td>
+</tr>
+<tr>
+<td>IndexVarName</td>
+<td>The name of the variable on the output data set that contains the Charlson score.</td>
+</tr>
+<tr>
+<td>InpatOnly</td>
+<td>Lets you choose which types of utilization records you want to use to calculate the score.<br/>I=inpatient only (enctype = &lsquo;IP&rsquo;)<br/>B=both inpatient and ambulatory (enctype in (&lsquo;IP&rsquo;, &lsquo;AV&rsquo;))<br/>A=all types of encounters<br/>C=custom list of encounter types given in enctype_list parameter</td>
+</tr>
+<tr>
+<td>Malig</td>
+<td>Allows you to remove malignancies and metastasis as weights in the charlson score (commonly desired for cohorts of cancer patients).<br/>Y = Zero-weight the cancer flags (useful for cancer studies where everyone will have cancer)<br/>N = Let the cancer flags contribute to the overall score as normal.</td>
+</tr>
+<tr>
+<td>NoEncounterGetsMissing</td>
+<td>Optional. Controls whether people for whom no dx/px data is found get a charlson score of 0 (default) or a missing value.<br/>Y = Yes&ndash;give a 0 value to ppl w/out any dx/px data<br/>N = No&ndash;make the score missing.<br/>For cohorts whose year-pre-index-date data capture is assured (usually via enrollment data), having no encounters should legitimately indicate a lack of any comorbidities &amp; therefore a legit score of 0. Cohorts <strong>not</strong> previously vetted in this way may not support that inference, and users should specify a Y for this parameter to prevent unwarranted interpretation of the Charlson score.</td>
+</tr>
+<tr>
+<td>enctype_list</td>
+<td>A quote-and-comma-delimited list of the encounter types you want the macro to use.  Used in conjunction with InpatOnly, described above.</td>
+</tr>
+<tr>
+<td>days_lookback</td>
+<td>Optional. Number of days to go back from index date to look for diagnoses and procedures for the score. Defaults to 365, which is standard for Charlson</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_2">Sample Call<a class="headerlink" href="#sample-call_2" title="Permanent link"></a></h4>
+<p><div class="highlight"><pre>%charlson(inputds                 = perm.my_cohort
+         , IndexDateVarName       = index_date
+         , outputds               = perm.charlson_scores
+         , IndexVarName           = charlson_score
+         , inpatonly              = C
+         , malig                  = N
+         , NoEncounterGetsMissing = N
+         , enctype_list           = %str(&#39;IP&#39;, &#39;AV&#39;, &#39;ED&#39;)
+         , days_lookback          = 365
+         ) ;
+</pre></div>
+For further details, see the comments at the beginning of the macro and check out <a href="https://www.hcsrn.org/share/page/site/VDW/document-details?nodeRef=workspace://SpacesStore/d919ae80-2f93-473d-ad4c-40a12390720c">this documentation</a> to learn about the Charlson macro.</p>
+<h3 id="pretty-case">%Pretty Case<a class="headerlink" href="#pretty-case" title="Permanent link"></a></h3>
+<p>Purpose: Corrects the case of names and addresses fields for use in mailings. That is, it will change values in the old column (below) to the values in the new column.</p>
+<table>
+<thead>
+<tr>
+<th>Old</th>
+<th>New</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ROY EDMUND PARDEE III</td>
+<td>Roy Edmund Pardee III</td>
+</tr>
+<tr>
+<td>123 N.E. 4TH STREET</td>
+<td>123 N.E. 4th Street</td>
+</tr>
+<tr>
+<td>PO BOX 12</td>
+<td>PO Box 12</td>
+</tr>
+<tr>
+<td>ROY PARDEE C/O ANGELINA JOLIE</td>
+<td>Roy Pardee C/O Angelina Jolie</td>
+</tr>
+<tr>
+<td>743 NE EVERGREEN ST</td>
+<td>743 NE Evergreen St</td>
+</tr>
+<tr>
+<td>82 SLEATER-KINNEY STREET</td>
+<td>82 Sleater-Kinney Street</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_3">Sample Call<a class="headerlink" href="#sample-call_3" title="Permanent link"></a></h4>
+<p><div class="highlight"><pre>%PrettyCase(InSet = source
+    , OutSet = prettified
+    , VarList = first_name last_name line1 line2 city
+    ) ;
+</pre></div>
+Notes: This macro is not intended to replace human judgment&ndash;it should significantly improve the formatting of all-caps variables, and will likely be good enough for many purposes, but it is not as good as having an actual person making these corrections.</p>
+<p>The macro uses some version-9-only functions&ndash;to wit: propcase, prxparse and prxmatch. So it will not be usable on versions of sas earlier than 9.</p>
+<p>It also relies on a hard-coded list of names whose fourth characters should be upcased (e.g., the Mac names—MacDougall, MacDonald, etc.).</p>
+<p>Please let <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#114;&#111;&#121;&#46;&#101;&#46;&#112;&#97;&#114;&#100;&#101;&#101;&#64;&#107;&#112;&#46;&#111;&#114;&#103;">&#114;&#111;&#121;&#46;&#101;&#46;&#112;&#97;&#114;&#100;&#101;&#101;&#64;&#107;&#112;&#46;&#111;&#114;&#103;</a> know about any improvements that could be made.</p>
+<h3 id="getcensusforpeople">%GetCensusForPeople<a class="headerlink" href="#getcensusforpeople" title="Permanent link"></a></h3>
+<p>Purpose: Adds <a href="/C:/Users/o578092/documents/vdw/macros/resolveuid/298755bd417dadd1067f1eb60140461c">Census</a> variables to an input dataset of MRNs</p>
+<p>Inputs: A dataset containing a variable called MRN.</p>
+<p>Output: A dataset containing everything from the input dataset, plus all of the variables in the [[Census]] file.</p>
+<h4 id="parameters_18">Parameters<a class="headerlink" href="#parameters_18" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>InSet</td>
+<td>The name of the input dataset of MRNs. If this dset contains other variables, they should appear in the output dataset as well.</td>
+</tr>
+<tr>
+<td>Outds</td>
+<td>The original dataset, along with all variables from [[Census]] as well. You should get the same number of observations</td>
+</tr>
+<tr>
+<td>CensusYear (optional—defaults to 2000)</td>
+<td>The census files are named after the year during which the demographic data was collected. All sites should have 2000 data at least, other sites may have data from other years.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_4">Sample Call:<a class="headerlink" href="#sample-call_4" title="Permanent link"></a></h4>
+<div class="highlight"><pre>%GetCensusForPeople(InSet = s.drop_me , OutSet = s.drop_me_census , CensusYear = 2010) ;
+</pre></div>
+
+<h3 id="cleanrx">%CleanRx<a class="headerlink" href="#cleanrx" title="Permanent link"></a></h3>
+<p>Purpose: Performs a quality check on the pharmacy data reporting problem obs and variables and optionally producing datasets with problem and non-problem data.</p>
+<p>Inputs: The Rx file, a declared library for output, and user options.</p>
+<p>Output(s): All output is optional - A report of problem data, a table of problem data, and a table of non-problem data.</p>
+<h4 id="parameters_19">Parameters<a class="headerlink" href="#parameters_19" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Outlib</td>
+<td>The library name you&rsquo;ve already declared where you want output you elect to save to go.</td>
+</tr>
+<tr>
+<td>Clean</td>
+<td>A value of &ldquo;Y&rdquo; will output a table of non-problem data in &amp;outlib</td>
+</tr>
+<tr>
+<td>Dirty</td>
+<td>A value of &ldquo;Y&rdquo; will output a table problem data in &amp;outlib</td>
+</tr>
+<tr>
+<td>Report</td>
+<td>A value of &ldquo;Y&rdquo; will produce a report of problem data in the pharmacy file.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="getvitalsignsforpeople">%GetVitalSignsForPeople<a class="headerlink" href="#getvitalsignsforpeople" title="Permanent link"></a></h3>
+<p>Purpose: Pulls all vital signs between the supplied dates for the people listed in the user-supplied People dataset.</p>
+<p>Inputs: A dataset containing a list of unduplicated MRNs belonging to the people whose vitals you want. Dates over which you want the vitals.</p>
+<p>Output(s): The portion of the Vital Signs dataset that describes vitals for the people listed in the People dataset.</p>
+<h4 id="parameters_20">Parameters<a class="headerlink" href="#parameters_20" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>People</td>
+<td>The name of the dataset containing the MRNs of the people whose vitals you want. This can be a one-part temporary dataset or a two-part permanent dataset.</td>
+</tr>
+<tr>
+<td>StartDt</td>
+<td>A valid SAS date specification without delimiters (e.g., 01Jan2005) that marks off the beginning of the period during which you want vitals.</td>
+</tr>
+<tr>
+<td>EndDt</td>
+<td>A date specification marking off the end of the period during which you want vitals.</td>
+</tr>
+<tr>
+<td>OutSet</td>
+<td>The name of the output dataset of vitals.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="diabetes_charlson">%Diabetes_Charlson<a class="headerlink" href="#diabetes_charlson" title="Permanent link"></a></h3>
+<p>Purpose: Pulls all people with diabetes as defined by the Charlson score. Creates a dataset in the work directory called Diabetes_Charlson of the diagnoses along with descriptions of each. Creates a format called Diabetes_Charlson for the diagnoses as well.</p>
+<p>Inputs: Dates over which you want to pull diabetics, optional variable of allowed encounter types.</p>
+<p>Output(s): A table with one record per person meeting the Charlson defintion of diabetics over the dates specified.</p>
+<h4 id="parameters_21">Parameters<a class="headerlink" href="#parameters_21" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>outfile</td>
+<td>Name of the output dataset containing the MRN</td>
+</tr>
+<tr>
+<td>StartDt</td>
+<td>A valid SAS date specification without delimiters (e.g., 01Jan2005) that marks off the beginning of the period during which you want a list of diabetics.</td>
+</tr>
+<tr>
+<td>EndDt</td>
+<td>A date specification marking off the end of the period during which you want a list of diabetics.</td>
+</tr>
+<tr>
+<td>EncType</td>
+<td>A will search All encounters (default), I will search only Inpatient encounters (the traditional Charlson) B will search Both IP and OP for dx, but not other types</td>
+</tr>
+</tbody>
+</table>
+<h3 id="getdaterange">%GetDateRange<a class="headerlink" href="#getdaterange" title="Permanent link"></a></h3>
+<p>Purpose: Creates global variables holding the minimum and maximum values of all date variables in a dataset.</p>
+<p>Inputs: The path and filename of a SAS dataset.</p>
+<p>Output: Global variables in the form of DateVariable_Max and DateVariable_Min containing the max and min dates in the dataset (see example)</p>
+<h4 id="parameters_22">Parameters<a class="headerlink" href="#parameters_22" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Path</td>
+<td>The directory in which the SAS data set lives.</td>
+</tr>
+<tr>
+<td>Filename</td>
+<td>The name of the SAS data set.</td>
+</tr>
+<tr>
+<td>Print</td>
+<td>Value of 0 will supress the printing of the max and min values to the .lst file Value of 1 (default) will print the max and min values to the .lst file.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_5">Sample Call<a class="headerlink" href="#sample-call_5" title="Permanent link"></a></h4>
+<div class="highlight"><pre>%GetDateRange(&amp;_TumorLib., &amp;_TumorData.);
+</pre></div>
+
+<p>This will create global variables such as &amp;DOD_Min, &amp;DOD_Max, DT_SURG_Max, DT_SURG_MIN, and so forth with values in date9 format.</p>
+<h3 id="hypertension_bp">%Hypertension_BP<a class="headerlink" href="#hypertension_bp" title="Permanent link"></a></h3>
+<p>Purpose: Pulls all people with a systolic and-or diastolic BP reading above specified threasholds over specified dates along with their highest systolic and diastolic readings in that period. Can be used to defined hypertension.</p>
+<p>Requirements: %include your standard vars file</p>
+<p>Output: A list of MRN with max values of systolic and diastolic measurements over the date range that meet the defined threashold.</p>
+<h4 id="parameters_23">Parameters<a class="headerlink" href="#parameters_23" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OutFile</td>
+<td>Name of the output dataset you would like to create.</td>
+</tr>
+<tr>
+<td>StartDate</td>
+<td>The date from which you want to start looking for BP.</td>
+</tr>
+<tr>
+<td>EndDate</td>
+<td>The date to which you want to end looking for BP.</td>
+</tr>
+<tr>
+<td>Diastolic_Min</td>
+<td>The minimum diastolic value you wish to allow in Outfile</td>
+</tr>
+<tr>
+<td>Systolic_Min</td>
+<td>The minimum systolic value you wish to allow in the Outfile</td>
+</tr>
+<tr>
+<td>Strict_Equality</td>
+<td>0 (default) allows BP readings of the min values or greater 1 allows only BP readings greater than the min values</td>
+</tr>
+<tr>
+<td>Either</td>
+<td>1 (default) will return a person with either a diastolic OR a systolic value above mins 0 returns only people with both a diastolic AND a systolic value above mins</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cleanenroll">%CleanEnroll<a class="headerlink" href="#cleanenroll" title="Permanent link"></a></h3>
+<p>Purpose: Performs a quality check on enrollment data reporting problem obs and variables and optionally producing datasets with problem and non-problem data.</p>
+<p>Inputs: The Enroll file, a declared library for output, and user options.</p>
+<p>Output(s): All output is optional - A report of problem data, a table of problem data, and a table of non-problem data.</p>
+<h4 id="parameters_24">Parameters<a class="headerlink" href="#parameters_24" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Outlib</td>
+<td>The library name you&rsquo;ve already declared where you want output you elect to save to go.</td>
+</tr>
+<tr>
+<td>Clean</td>
+<td>A value of &ldquo;Y&rdquo; will output a table of non-problem data in &amp;outlib</td>
+</tr>
+<tr>
+<td>Dirty</td>
+<td>A value of &ldquo;Y&rdquo; will output a table problem data in &amp;outlib</td>
+</tr>
+<tr>
+<td>Report</td>
+<td>A value of &ldquo;Y&rdquo; will produce a report of problem data in the enrollment file.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cleanvitals">%CleanVitals<a class="headerlink" href="#cleanvitals" title="Permanent link"></a></h3>
+<p>Purpose: Performs a quality check on vital signs data reporting problem obs and variables and optionally producing datasets with problem and non-problem data.</p>
+<p>Inputs: The Vital Signs file, a declared library for output, and user options.</p>
+<p>Output(s): All output is optional - A report of problem data, a table of problem data, and a table of non-problem data.</p>
+<h4 id="parameters_25">Parameters<a class="headerlink" href="#parameters_25" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Outlib</td>
+<td>The library name you&rsquo;ve already declared where you want output you elect to save to go.</td>
+</tr>
+<tr>
+<td>Clean</td>
+<td>A value of &ldquo;Y&rdquo; will output a table of non-problem data in &amp;outlib</td>
+</tr>
+<tr>
+<td>Dirty</td>
+<td>A value of &ldquo;Y&rdquo; will output a table problem data in &amp;outlib called DIRTY</td>
+</tr>
+<tr>
+<td>Report</td>
+<td>A value of &ldquo;Y&rdquo; will produce a report of problem data in the vital signs file.</td>
+</tr>
+<tr>
+<td>Limits</td>
+<td>A value of &ldquo;Y&rdquo; will output a table named LIMITS to the &amp;outlib with only those observations that contain measures that are [[Compatible With Life]]. Missing values are not excluded. This requires the Birth_Date variable in Demographics.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="simplecontinuous">%SimpleContinuous<a class="headerlink" href="#simplecontinuous" title="Permanent link"></a></h3>
+<p>Purpose: Motivated by a desire for a simpler version of the %PullContinuous macro (which is hard to explain now that Enroll is a start/stop structure, since it purports to evaluate months of enrollment). This one evaluates enrollment over a single period of interest, allowing any number of gaps of at most &amp;DaysTol days. It returns a dset with a flag var called ContinuouslyEnrolled that signifies whether or not the person was continuously enrolled over the period of interest.</p>
+<p>Like PullContinuous, this macro takes an optional input dataset of Enroll records, allowing users to apply constraints to which types of enrollment records are considered.</p>
+<p>Inputs: A dataset of MRNs, dates defining the period of interest, a tolerance parameter signifying the number of days disenrollment to close up, and optionally, a dset of Enroll records to use</p>
+<p>Output(s): A dataset bearing the MRNs input, a 0/1 ContinuouslyEnrolled variable, and a CoveredDays variable reporting the total number of days during the period of interest that the person was enrolled.</p>
+<h4 id="parameters_26">Parameters<a class="headerlink" href="#parameters_26" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>People</td>
+<td>A dataset of MRNs whose enrollment we are considering.</td>
+</tr>
+<tr>
+<td>StartDt</td>
+<td>A date literal identifying the start of the period of interest.</td>
+</tr>
+<tr>
+<td>EndDt</td>
+<td>A date literal identifying the end of the period of interest.</td>
+</tr>
+<tr>
+<td>DaysTol</td>
+<td>The number of days gap between otherwise contiguous periods of enrollment (or at the start or end of the otherwise contiguous period of enrollment) that is tolerable.</td>
+</tr>
+<tr>
+<td>OutSet</td>
+<td>Name for the output dset.</td>
+</tr>
+<tr>
+<td>EnrollDset</td>
+<td>Optional.Name of a custom-prepared dset of Enroll records to use in evaluating the enrollment</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_6">Sample Call<a class="headerlink" href="#sample-call_6" title="Permanent link"></a></h4>
+<div class="highlight"><pre>%SimpleContinuous(People = TestPeople
+               , StartDt = 01jan2006
+               , EndDt   = 31dec2006
+               , DaysTol = 90
+               , OutSet  = TestPeopleEnroll
+              ) ;
+</pre></div>
+
+<h3 id="getkidbmipercentiles">%GetKidBMIPercentiles<a class="headerlink" href="#getkidbmipercentiles" title="Permanent link"></a></h3>
+<p>Adults can be categorized into underweight/overweight/obese categories in a fairly straightforward fashion, on the basis of their Body Mass Index scores alone. Making a similar classification for children is much less straightforward. Their heights/weights have to be compared to a normative sample of weights developed in 1977 by the National Center for Health Statistics. See details <a href="http://www.cdc.gov/nchs/about/major/nhanes/growthcharts/background.htm">here</a>.</p>
+<p>To make these calculations easier, the CDC released<a href="http://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm">this SAS code for calculating the proper percentile scores</a>. The %GetKidBMIPercentiles VDW macro is a thin wrapper around the CDC&rsquo;s code.</p>
+<p>Note: This macro uses the VDW Vital Signs Variable Head_Cir_Raw, which should be in centimeters.</p>
+<p>Note that the CDC&rsquo;s code is valid only for people between the ages of 2 and 17, and the macro will not return any measures for people outside this age range. It will also potentially use imputed heights&ndash;be sure to inspect the days_diff variable to make sure that you are comfortable with the length of time that has passed between the height and weight measures (if any).</p>
+<h4 id="parameters_27">Parameters<a class="headerlink" href="#parameters_27" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>InSet</td>
+<td>The name of an input dataset of MRNs for the people on which you would like BMI percentile scores.</td>
+</tr>
+<tr>
+<td>OutSet</td>
+<td>The name you would like to give the output dataset containing the percentile scores.</td>
+</tr>
+<tr>
+<td>StartDt</td>
+<td>(Optional) The earliest measure date for which you would like the BMI percentile scores.</td>
+</tr>
+<tr>
+<td>EndDt</td>
+<td>(Optional) The latest measure_date for which you would like the BMI percentile scores.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_7">Sample Call<a class="headerlink" href="#sample-call_7" title="Permanent link"></a></h4>
+<div class="highlight"><pre>%GetKidBMIPercentiles(InSet  = s.test_kids
+                   , OutSet  = s.test_bmis
+                   , StartDt = 01jan2004
+                   , EndDt   = 31dec2007
+                   ) ;
+</pre></div>
+
+<h3 id="make_inclusion_table">%make_inclusion_table<a class="headerlink" href="#make_inclusion_table" title="Permanent link"></a></h3>
+<p>Creates a Dept. of Health &amp; Human Services Inclusion Enrollment Report (form PHS 398/2590) report for an input set of MRNs, with Race, Ethnicity and Gender information drawn from the local vdw demographics table. Unlike many other VDW macros, the output of this one just gets spewed into the .lst file (and any ODS destinations you open prior to calling the macro). There is no dataset output.</p>
+<p>Note that this output may also be of use for filling out PHS&rsquo; Targeted/Planned Enrollment form.</p>
+<h4 id="parameters_28">Parameters<a class="headerlink" href="#parameters_28" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cohort</td>
+<td>The name of the dataset containing the MRNs of the people who should go in your report.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_8">Sample Call<a class="headerlink" href="#sample-call_8" title="Permanent link"></a></h4>
+<div class="highlight"><pre>  ods rtf file =  &#39;\\server\share\project\programming\output\inclusion\_table.rtf&#39; ;
+
+    %make_inclusion_table(cohort = perm.my_mrns) ;
+
+  ods rtf close ;
+</pre></div>
+
+<h3 id="getadultbmi">%GetAdultBMI<a class="headerlink" href="#getadultbmi" title="Permanent link"></a></h3>
+<p>Wraps the Vital Signs workgroup&rsquo;s official %BMI_adult_macro macro (see below), allowing the user to specify a specific set of people and an optional timeframe over which they would like BMI measures for adults.</p>
+<h4 id="parameters_29">Parameters<a class="headerlink" href="#parameters_29" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>People</td>
+<td>The name of a dataset containing the MRNs of the people whose BMI measures you want.</td>
+</tr>
+<tr>
+<td>OutSet</td>
+<td>What would you like the output dataset of BMI measures to be called?</td>
+</tr>
+<tr>
+<td>StartDt</td>
+<td>An optional parameter specifying the <strong>beginning</strong> of the period over which you would like BMI measures.  This should be either a complete date literal (e.g., &lsquo;25dec2005&rsquo;d) OR the name of a date variable in &amp;People. Leave this blank to go back as far as the file goes.</td>
+</tr>
+<tr>
+<td>EndDt</td>
+<td>An optional parameter specifying the <strong>end</strong> of the period over which you would like BMI measures.  This should be either a complete date literal (e.g., &lsquo;25dec2005&rsquo;d) OR the name of a date variable in &amp;People. Leave this blank to go forward as far as the file goes.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_9">Sample Call<a class="headerlink" href="#sample-call_9" title="Permanent link"></a></h4>
+<div class="highlight"><pre>%GetAdultBMI(people = s.test_vitals
+           , outset = s.test_adult_bmi
+           , StartDt = &#39;01jan2006&#39;d
+           , EndDt = &#39;30jun2007&#39;d) ;
+</pre></div>
+
+<h3 id="bmi_adult_macro">%BMI_adult_macro<a class="headerlink" href="#bmi_adult_macro" title="Permanent link"></a></h3>
+<p>Calculates BMI for adults and include a flag for reason that a BMI was not calculated.  This flag can have values of:</p>
+<ul>
+<li>MISSING AGE</li>
+<li>UNDER AGE 18</li>
+<li>NO WT</li>
+<li>NO HT</li>
+<li>NO HT OR WT</li>
+<li>WT OUT OF RANGE</li>
+<li>BMI OUT OF RANGE</li>
+</ul>
+<p>The BMI algorithm and cut-off recommendations were reviewed by the Obesity special interest group. This is meant to flag only those extreme values or situations where there is reason to suspect a data entry error, and further review may be warranted.</p>
+<p>The macro assumes that the program is placed into the middle of a program. It assumes that libnames have been defined prior to the macro call, and indicates that the macro parameters have be fully qualified dataset names.</p>
+<p>Three variables are created:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Purpose</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BMI</td>
+<td>BMI FOR ADULTS</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td>HT_MEDIAN</td>
+<td>MEDIAN HT FOR ADULTS</td>
+<td>Numeric</td>
+</tr>
+<tr>
+<td>BMI_flag</td>
+<td>BMI QC FLAG</td>
+<td>$16.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="parameters_30">Parameters<a class="headerlink" href="#parameters_30" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VITALS_IN</td>
+<td>These needs to have the following variables: MRN, HT, WT, and measure_date. Feed in fully qualified name, i.e. use libname and dataset name together if reading a permanent dataset.</td>
+</tr>
+<tr>
+<td>DEMO_IN</td>
+<td>These needs to have the following variables: MRN, birth_date. Feed in fully qualified name, i.e. use libname and dataset name together if reading a permanent dataset.</td>
+</tr>
+<tr>
+<td>VITALS_OUT</td>
+<td>Feed in fully qualified name, i.e. use libname and dataset name together if writing to a permanent dataset.</td>
+</tr>
+<tr>
+<td>KEEPVARS</td>
+<td>Optional parameter indicating the values to keep in your quality checking dataset. May be left blank to simply attach the two new variables to an existing dataset.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_10">Sample Call<a class="headerlink" href="#sample-call_10" title="Permanent link"></a></h4>
+<div class="highlight"><pre>%BMI_adult_macro(vitals_in = perm.my_vitals
+               , demo_in = &amp;_vdw_demographic
+              , vitals_out = perm.with_bmi) ;
+</pre></div>
+
+<h3 id="bp_flag">%BP_FLAG<a class="headerlink" href="#bp_flag" title="Permanent link"></a></h3>
+<p>Creates flags that can be used to determine quality of systolic and diastolic blood pressure fields. Cut-off recommendations reviewed by CVRN HTN Registry site PIs on 5/12/2010. This is meant to flag only those extreme values or situations where there is reason to suspect a data entry error, and further review may be warranted.</p>
+<p>Three variables are created:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Possible Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SYSTOLIC_QUAL</td>
+<td>NULL, ABN_HIGH, ABN_LOW</td>
+</tr>
+<tr>
+<td>DIASTOLIC_QUAL</td>
+<td>NULL, ABN_HIGH</td>
+</tr>
+<tr>
+<td>SYS_DIA_QUAL</td>
+<td>SYSTOLIC &lt;= DIASTOLIC, DIFFERENCE &lt; 20, DIFFERENCE &gt; 100</td>
+</tr>
+</tbody>
+</table>
+<p>Note that NULL is only used when the other paired value for the blood pressure is not null.</p>
+<h4 id="parameters_31">Parameters<a class="headerlink" href="#parameters_31" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DSIN</td>
+<td>Feed in fully qualified name, i.e. use libname and dataset name together if reading a permanent dataset. This macro program assumes that desired libraries have been defined previously in the program. StandardVars macro variables can be used.</td>
+</tr>
+<tr>
+<td>DSOUT</td>
+<td>Feed in fully qualified name, i.e. use libname and dataset name together if writing to a permanent dataset.</td>
+</tr>
+<tr>
+<td>KEEPVARS</td>
+<td>Optional parameter indicating the values to keep in your quality checking dataset.  May be left blank to simply attach the three quality checking variables to an existing dataset.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_11">Sample Call<a class="headerlink" href="#sample-call_11" title="Permanent link"></a></h4>
+<div class="highlight"><pre>%bp_flag(dsin=&amp;_vdw_vitalsigns,
+         dsout=bp_qc,
+         keepvars= mrn measure_date systolic diastolic)
+
+%bp_flag(dsin=cohort_vitals,
+         dsout=cohort_vitals,
+         keepvars=)
+
+%bp_flag(dsin=&amp;_vdw_vitalsigns,
+         dsout=studylib.cohort_vitals,
+         keepvars=mrn measure_date systolic diastolic ht wt)
+</pre></div>
+
+<h3 id="pregnancy_periods">%pregnancy_periods<a class="headerlink" href="#pregnancy_periods" title="Permanent link"></a></h3>
+<p>Purpose: produces a dataset of probable periods of pregnancy for a cohort of women, as divined by the incidence of pregnancy-significant events found in Utilization data (procedures and diagnoses).</p>
+<p>Inputs: A dataset with the MRNs of the women whose pregnancies you are interested in.</p>
+<p>Output(s): A dataset of probable pregnancy periods. Optionally, the dataset of raw pregnancy-significant events.</p>
+<h4 id="parameters_32">Parameters<a class="headerlink" href="#parameters_32" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inset</td>
+<td>The name of the input dataset of MRNs whose utilization data you want to scan forPPPs</td>
+</tr>
+<tr>
+<td>out_periods</td>
+<td>What you want the output dataset of PPPs to be called.</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>Optional. The date limits over which you want to scan for PPPs. If not given, the range 1-jan-1966 through [current date] is used.</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>Optional.</td>
+</tr>
+<tr>
+<td>out_events</td>
+<td>Optional. A name to use for the dataset of pregnancy-signifying events that the macro generates prior to attempting to resolve those events into periods. Give a valid two-part name (e.g., my_lib.preg_events) to preserve the dataset for later inspection. Useful for debugging the macro and evaluating the code set used.</td>
+</tr>
+<tr>
+<td>max_pregnancy_length</td>
+<td>Optional. The number of days to use in figuring out when a new pregnancy must have started, in the absence of an intervening pregnancy-ending event (delivery, miscarriage, termination or stillbirth). Defaults to 270.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="details-caveats">Details &amp; Caveats<a class="headerlink" href="#details-caveats" title="Permanent link"></a></h4>
+<p>Resolving individual pregnancy-signifying-events into periods of probable pregnancy is a difficult task&ndash;particularly for women whose utilization data capture is not complete. For best results limit your input dataset to women/periods where enrollment.outside_utilization = N. In any event, the output of this macro should be closely scrutinized. At this writing it has passed basic sanity checks at Group Health (using the pharmacovigilance study cohort) but nothing more rigorous than that.</p>
+<p>Dirty data will of course confuse this macro. One common form of dirty data found in the course of development was multiple pregnancy-ending events found within a few days of one another (e.g., a &lsquo;missed abortion&rsquo; code on day 1, followed by a &lsquo;legal abortion with pelvic inflammation&rsquo; on day 3). This macro currently merges any such events together into a single pregnancy, so long as they occur within 3 days of one another. Anything found later than 3 days becomes its own episode.</p>
+<p>The diagnosis and procedure codes used to detect pregnancy events was developed at Harvard by Darren Toh. The code was written at Group Health by Roy Pardee.  You can see what codes are used to signify what by downloading <a href="/C:/Users/o578092/documents/vdw/macros/resolveuid/356229e5b6895e900cf07c141b3b3bdc">this access database</a>. Please report bugs and missing codes to Roy.</p>
+<p>The codeset provided by Harvard includes some codes that signify pregnancy testing. These are pulled and included in the out_events dataset, but not used in the process of actually divining periods of pregnancy because so many of these tests are negative. Incorporating that information would be an obvious next step to take.</p>
+<h4 id="out_periods-dataset">out_periods Dataset:<a class="headerlink" href="#out_periods-dataset" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>preg_episode</td>
+<td>An ordinal counter (1st, 2d, 3rd) for the probable pregnancy signified on this record during the date range given.</td>
+</tr>
+<tr>
+<td>probable_onset</td>
+<td>The date the pregnancy signified on this record probably began. This date is imputed from the type of outcome by counting back a variable number of days from the outcome. The number of days varies by the type of the outcome, according to the following scheme:<dl><dt>Delivery</dt><dd>270 days</dd><dt>Still Birth or Termination</dt><dd>112 days</dd><dt>Miscarriage</dt><dd>98 days</dd></dl><br>Because this variable is based on outcome_category, it will be missinging for all periods whose outcome_category = &lsquo;unknown&rsquo;.</td>
+</tr>
+<tr>
+<td>first_sign_date</td>
+<td>Date of the first &lsquo;prenatal&rsquo; type event attributable to the pregnancy signified on this record&ndash;possibly the date the pregnancy first became known to the health plan, or the date on which prenatal care began. For periods where there were no prenatal events (e.g., just a single &lsquo;delivered&rsquo; type event) this variable will be missing.</td>
+</tr>
+<tr>
+<td>first_sign_code</td>
+<td>A procedure or diagnosis code that was found on first_sign_date. It is common for a single prenatal care visit to bear &gt; of these codes&ndash;this is the first one the program ran across. Possibly useful for debugging the pregnancy code set.</td>
+</tr>
+<tr>
+<td>outcome_date</td>
+<td>The date the last event signifying this pregnancy was found. For PPPs where there is a definite pregnancy-ending event found (e.g., a delivery, miscarriage, etc.) this is interpretable as the end of the pregnancy period.</td>
+</tr>
+<tr>
+<td>outcome_code</td>
+<td>A procedure or diagnosis code that was found on outcome_date. It is common for a single pregnancy-ending visit to bear &gt; of these codes&ndash;this is the first one the program ran across.</td>
+</tr>
+<tr>
+<td>outcome_category</td>
+<td>The outcome of the pregnancy signified on this record. One of:<ul><li>delivered</li><li>miscarried</li><li>terminated</li><li>stillborn</li><li>unknown</li></ul></td>
+</tr>
+<tr>
+<td>preg_code_count</td>
+<td>The number of codes of type &lsquo;prenatal&rsquo; found during the period described on this record. Higher numbers indicate more capture of pregnancy events.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="make_denoms">%make_denoms<a class="headerlink" href="#make_denoms" title="Permanent link"></a></h3>
+<p>Purpose: Creates a dataset of yearly counts of enrollees by age, sex and race, for use as denominators in calculating rates in VDW programs. Written to support general QA efforts.</p>
+<p>Inputs: The start and end year over which you would like the denominators; the name of the output dataset.</p>
+<p>Output: A dataset of counts, described in detail below.</p>
+<h4 id="parameters_33">Parameters<a class="headerlink" href="#parameters_33" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>start_year</td>
+<td>The first year for which you would like enrollee counts.</td>
+</tr>
+<tr>
+<td>end_year</td>
+<td>The last year for which you would like enrollee counts.</td>
+</tr>
+<tr>
+<td>outset</td>
+<td>The name you want for the output dataset of counts.</td>
+</tr>
+<tr>
+<td>extra_wh</td>
+<td>An optional complete WHERE clause to limit the enrollment records to consider.  Useful for specifying that you e.g., only want to count people with Medicaid coverage, or those whose capture of lab results is not known to be incomplete.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="output-dataset">Output Dataset<a class="headerlink" href="#output-dataset" title="Permanent link"></a></h4>
+<p>Rows within a year can be summed without fear of double-counting.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Contains</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>year</td>
+<td>The year to which the data on this row pertain.</td>
+</tr>
+<tr>
+<td>agegroup</td>
+<td>Age group as of 1-January of [[year]].</td>
+</tr>
+<tr>
+<td>drugcov</td>
+<td>As defined in the enrollment file. Set to &lsquo;Y&rsquo; if <em>any</em> portion of a person&rsquo;s enrollment in [[year]] had drugcov = &lsquo;Y&rsquo;.</td>
+</tr>
+<tr>
+<td>race</td>
+<td>Display-ready (not coded) race.</td>
+</tr>
+<tr>
+<td>gender</td>
+<td>As defined in the demographics file.</td>
+</tr>
+<tr>
+<td>enrollment_basis</td>
+<td>What sort of relationship between person and implementing site does this record document?</td>
+</tr>
+<tr>
+<td>prorated_total</td>
+<td>Pro-rated number of people enrolled in [[year]] (accounts for partial enrollments by e.g., counting a person enrolled for half of [[year]] as .5).</td>
+</tr>
+<tr>
+<td>total</td>
+<td>The number of people enrolled at least one day in [[year]].</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_12">Sample Call<a class="headerlink" href="#sample-call_12" title="Permanent link"></a></h4>
+<div class="highlight"><pre>%make_denoms(start_year = 1998
+            , end_year  = 2015
+            , outset    = lab_res_denoms
+            , extra_wh  = %str(WHERE incomplete_lab ne &#39;K&#39;)
+          ) ;
+</pre></div>
+
+<h3 id="vdw_formats">%vdw_formats<a class="headerlink" href="#vdw_formats" title="Permanent link"></a></h3>
+<p>Purpose: Defines several useful formats that add descriptive text to coded values.</p>
+<p>Inputs: None</p>
+<p>Output: <a href="/C:/Users/o578092/documents/vdw/macros/resolveuid/4b88b08a31c3e4fc5897a633b373794b">The formats listed here</a> are defined in a format catalog in the current session.</p>
+<h4 id="parameters_34">Parameters<a class="headerlink" href="#parameters_34" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lib</td>
+<td>Optional.  The library in which you would like the format catalog defined.  By default this is WORK.</td>
+</tr>
+<tr>
+<td>tweaked_descriptions</td>
+<td>Optional.  If set to 1, then makes sure labels begin with the raw value, followed by a textual description in parentheses.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="detect_phi">%detect_phi<a class="headerlink" href="#detect_phi" title="Permanent link"></a></h3>
+<p>Purpose: Describes the datasets in a SAS library intended for transfer off-site, calling particular attention to any obvious elements of protected health information, to alert site staff to any possible unintentional disclosures.</p>
+<p>The macro checks for:</p>
+<ul>
+<li>Variable Names commonly given to sensitive data items:<ul>
+<li>MRN</li>
+<li>HRN</li>
+<li>birth_date/DOB/BirthDate/BDate</li>
+<li>SSN/SocialSecurityNumber/social_security_number/socsec
+   Variable names listed in a locally maintained macro var (which lives in <a href="/C:/Users/o578092/documents/vdw/macros/resolveuid/729705d1b28ad028b4b6287ddf3713d6">stdvars.sas</a>) called &amp;locally_forbidden_varnames</li>
+</ul>
+</li>
+<li>The contents of all character variables for matches to the local pattern of MRNs (given in another macro var in stdvars).</li>
+<li>The contents of all numeric variables formatted as dates for values that signify events older than &amp;eldest_age years ago. Variables are evaluated in this check only if they have a date format applied, or if they are numeric variables whose names containhe string &lsquo;dte&rsquo;.</li>
+</ul>
+<p>Inputs: The name of the SAS library containing the datasets to be sent off-site.</p>
+<p>Output: Warnings/CONTENTS/PROC PRINT output to the listing file (or ODS destination).</p>
+<h4 id="parameters_35">Parameters<a class="headerlink" href="#parameters_35" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>transfer_lib</td>
+<td>The name of the library containing the datasets to be sent off-site. Put all datasets to be sent (and only datasets to be sent) in a single location, named in this parameter.</td>
+</tr>
+<tr>
+<td>obs_lim</td>
+<td>Optional. The macro inspects the contents of character and date variables, looking for possibly sensitive data items (MRNs and dates more than &amp;eldest_age years ago). This parameter will limit the number of records so inspected, for applications where the volume of inspected data is so high as to make comprehensive checks prohibitively time-consuming. If not specified the macro will check every record.</td>
+</tr>
+<tr>
+<td>eldest_age</td>
+<td>Optional. The oldest number of years whose events you want to consider sensitive. By default dates older than 89 years ago are considered sensitive.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="output">Output:<a class="headerlink" href="#output" title="Permanent link"></a></h4>
+<p>A report for each dataset in &amp;transfer_lib, consisting of:</p>
+<ul>
+<li>A list of variable names and associated warnings, if there are any.</li>
+<li>PROC CONTENTS output</li>
+<li>A printout of the first 20 records.</li>
+</ul>
+<h4 id="instructions">Instructions:<a class="headerlink" href="#instructions" title="Permanent link"></a></h4>
+<ol>
+<li>Place all dataset files to be transferred off-site into a single folder/directory (better VDW programs will do this for ou, but if not, segregate the to-be-transferred datasets all by themselves in a single location, to minimize the chance of accidentally sending a dataset you don&rsquo;t mean to).</li>
+<li>In a new SAS program, define a libname against this location.</li>
+<li>(Recommended) Open a new ODS destination to enhance the readability of the output.</li>
+<li>Call %detect_phi, passing in the libname defined in step 2.</li>
+<li>Review the output with your local Project Manager to make sure the data elements are all in line with your understanding of what data is to move off-site, any applicable data sharing agreements, etc.</li>
+<li>In reviewing the output, pay particular attention to any Warnings, but <strong><em>carefully scrutinize the whole report</em></strong>. This macro should detect the most obvious sensitive data items, but <strong>no macro is a substitute for careful inspection and human thought.</strong></li>
+</ol>
+<h3 id="generate_counts_rates">%generate_counts_rates<a class="headerlink" href="#generate_counts_rates" title="Permanent link"></a></h3>
+<p>Purpose: Creates a dataset of counts and rates of the codes supplied in the &amp;incodeset parameter. Written to support general QA efforts.</p>
+<p>Inputs: A list of codes on which you&rsquo;d like counts/rates; the start and end dates over which you would like the counts; an optional set of MRNs of the people in whose counts you&rsquo;re interested; the path &amp; filename you want for the output dataset.</p>
+<p>Output: A dataset of counts and rates, described in detail below.</p>
+<h4 id="parameters_36">Parameters<a class="headerlink" href="#parameters_36" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>incodeset</td>
+<td>The name of the input dataset of codes-of-interest (described below).</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>A SAS date constant without delimiters (e.g., 01Jan2005) that marks off the beginning of the period during which you want the counts/rates.</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>A SAS date constant without delimiters (e.g., 01Jan2005) that marks off the end of the period during which you want the counts/rates.</td>
+</tr>
+<tr>
+<td>cohort</td>
+<td>The name of a SAS dataset containing the MRNs of a cohort of people that you would like the counts/rates limited to.</td>
+</tr>
+<tr>
+<td>outpath</td>
+<td>A directory specification naming the location where you would like the output dataset.</td>
+</tr>
+<tr>
+<td>outfile</td>
+<td>Base name of the output files (so&ndash;no extension). &lsquo;my_file&rsquo; will produce <code>&lt;&lt;siteabbrev&gt;&gt;_my_file.sas7bdat</code></td>
+</tr>
+<tr>
+<td>censor_low</td>
+<td>Optional.  If set to N, will leave lower-than-&amp;lowest_count counts in the data.  Useful for applications where IRB approvals are sufficient to transfer very low counts.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="incodeset-dataset">InCodeSet Dataset<a class="headerlink" href="#incodeset-dataset" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Valid Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data_type</td>
+<td>A code signifying what type of data we are after (e.g, rx fills; diagnoses).</td>
+<td><ul><li>PX</li><li>DX</li><li>LAB</li><li>NDC</li></ul></td>
+</tr>
+<tr>
+<td>code_type</td>
+<td>One of the valid values for px_codetype, dx_codetype, or null for NDCs/Labs</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>category</td>
+<td>A user-specified string that can be used to group codes into categories (e.g., &lsquo;Analgesics&rsquo;, &lsquo;Therapeutic Radiation&rsquo;). This should always have a value in it even if all your codes fall into a single category (e.g., you&rsquo;re only interested in analgesics &amp; don&rsquo;t care to make any finer distinctions) because the values in this var are used by the %report_counts_rates macro described below.</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>descrip</td>
+<td>a more fine-grained description of the particular code. You could think of this as a subcategory (since codes w/the same descrip value get rolled up at the reporting stage).</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>code</td>
+<td>The actual NDC, ICD-9, etc. code.</td>
+<td>n/a</td>
+</tr>
+</tbody>
+</table>
+<h4 id="output-dataset_1">Output Dataset<a class="headerlink" href="#output-dataset_1" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Contains</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>num_recs</td>
+<td>The raw number of records found w/the given code in the appropriate VDW dataset, during the period set out by &amp;start_date and &amp;end_date.</td>
+</tr>
+<tr>
+<td>num_ppl</td>
+<td>The number of distinct MRNs (people) found with this code in the appropriate VDW dataset, during the period desired.</td>
+</tr>
+<tr>
+<td>num_enrolled_ppl</td>
+<td>The number of distinct MRNs of enrolled people in the dataset/during the period. Enrollment here is enrolled at the time of the event (rx fill; diagnosis) in question. (This may be a different count than the old %VDWCountsAndRates1 macro.).</td>
+</tr>
+<tr>
+<td>rate_enrolled_ppl</td>
+<td>The per-10k-enrollees rate of this code in the enrolled population. (The denominator here is the count of people enrolled on &amp;start_date.)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_13">Sample Call<a class="headerlink" href="#sample-call_13" title="Permanent link"></a></h4>
+<p>Here is a sample input datastep that produces a valid &amp;InCodeSet dataset:
+<div class="highlight"><pre>data gnu ;
+  infile datalines truncover ;
+  input
+    @1    data_type   $char3.
+    @7    code_type   $char2.
+    @13   category    $char30.
+    @45   code        $char12.
+    @59   descrip     $char200.
+  ;
+  ** if data_type = &#39;DX&#39; ;
+datalines ;
+PX    C4    Pretend Category                99211         Evaluation/Maintenance of Existing Patient
+PX    C4    DEXA Scans                      3095F         Central dual-energy X-ray absorptiometry (DXA) results documented (OP)
+PX    C4    DEXA Scans                      3096F         Central dual-energy X-ray absorptiometry (DXA) ordered (OP)
+PX    C4    DEXA Scans                      76075         DXA BONE DENSITY,  AXIAL
+PX    C4    DEXA Scans                      76076         DXA BONE DENSITY/PERIPHERAL
+PX    C4    DEXA Scans                      76077         DXA BONE DENSITY/V-FRACTURE
+PX    C4    DEXA Scans                      77080         Dual-energy X-ray absorptiometry (DXA), bone density study, 1 or more site
+PX    C4    DEXA Scans                      77081         Dual-energy X-ray absorptiometry (DXA), bone density study, 1 or more site
+PX    C4    DEXA Scans                      77082         Dual-energy X-ray absorptiometry (DXA), bone density study, 1 or more site
+PX    H4    DEXA Scans                      G8399         PATIENT WITH CENTRAL DUAL-ENERGY X-RAY ABSORPTIOMETRY (DXA) RESULTS DOCUME
+PX    H4    DEXA Scans                      G8400         PATIENT WITH CENTRAL DUAL-ENERGY X-RAY ABSORPTIOMETRY (DXA) RESULTS NOT DO
+PX    C4    Radiology Exams                 78315         78315:Bone and/or joint imaging: 3 phase study
+PX    C4    Radiology Exams                 78306         78306:Bone and/or joint imaging: whole body
+PX    C4    Radiology Exams                 78305         78305:Bone and/or joint imaging: multiple areas
+PX    C4    Radiology Exams                 78300         78300:Bone and/or joint imaging: limited area
+PX    C4    Radiology Exams                 78320         78320:Bone and/or joint imaging: tomographic (SPECT)
+DX    09    Pretend Category                V82.81        Screening for osteoporosis
+DX    09    Pretend Category                V72.84        Pre-operative procedure, unspecified
+NDC         Pretend Category                00002323704   Fascinating NDC.
+LAB         Pretend Category                ALBUMIN       Lab tests I have known.
+;
+run ;
+</pre></div></p>
+<h3 id="report_counts_rates">%report_counts_rates<a class="headerlink" href="#report_counts_rates" title="Permanent link"></a></h3>
+<p>Purpose: Creates aggregate reports from the datasets produced by %generate_counts_rates. Written to support general QA efforts.</p>
+<p>Inputs: The libname containing the site-submitted datasets generated by runs of %generate_counts_rates; a libname giving the location where you would like the output dataset &amp; excel spreadsheet file(s).</p>
+<p>Output: An aggregate dataset of counts/rates, and one excel spreadsheet file per value of category found in the input datasets.</p>
+<h4 id="parameters_37">Parameters<a class="headerlink" href="#parameters_37" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inlib</td>
+<td>The library where the site-submitted datasets have been placed.</td>
+</tr>
+<tr>
+<td>dset_name</td>
+<td>The stub name of the datasets you want to aggregate for this report. This value should match the one you specified for &amp;outfile in your call to %generate_counts_rates.</td>
+</tr>
+<tr>
+<td>outlib</td>
+<td>The library where you would like the output to be placed (a single, aggregate dataset of counts/rates, plus one or more excel spreadsheet containing counts/rates of the codes by category).</td>
+</tr>
+<tr>
+<td>sitefmt</td>
+<td>Optional.  The name of a character format to use to format site values appearing in the columns of the spreadsheets.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="output-dataset_2">Output Dataset<a class="headerlink" href="#output-dataset_2" title="Permanent link"></a></h4>
+<p>The Output dataset contains everything from &amp;InCodeSet, plus a &lsquo;site&rsquo; variable giving the abbreviation of the site that supplied that row.</p>
+<h3 id="stack_datasets">%stack_datasets<a class="headerlink" href="#stack_datasets" title="Permanent link"></a></h3>
+<p>Purpose: Takes a set of site-submitted datasets and creates a single dataset with all data, and adds a &ldquo;site&rdquo; variable indicaing the source of the record. Useful for collating site-submitted data.</p>
+<p>Inputs: The libname containing the site-submitted datasets; the base name of the datasets you would like to aggregate; a libname giving the location where you would like the output dataset to be written.</p>
+<p>Output: A single aggregate dataset holding all the data in the set of input datasets, with an additional &ldquo;site&rdquo; variable.</p>
+<h4 id="parameters_38">Parameters<a class="headerlink" href="#parameters_38" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inlib</td>
+<td>The library where the site-submitted datasets have been placed.</td>
+</tr>
+<tr>
+<td>nom</td>
+<td>The stub name of the datasets you want aggregated in the output. This macro assumes that the datasets have all been named according to the following convention:<br><code>&lt;&lt;&amp;_SiteAbbr&gt;&gt;_&lt;&lt;base_name&gt;&gt;</code><br>That is, that any characters preceding the first underscore are a site abbreviation (probably a numeric code would also work), and all the datasets have the same base name.</td>
+</tr>
+<tr>
+<td>outlib</td>
+<td>The library where you would like the output dataset to be written.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="output-dataset_3">Output Dataset<a class="headerlink" href="#output-dataset_3" title="Permanent link"></a></h4>
+<p>The output dataset contains everything from the constituent site-submitted datasets, plus a &lsquo;site&rsquo; variable giving the abbreviation of the site that supplied that row.</p>
+<h3 id="getcombinedrace">%GetCombinedRace<a class="headerlink" href="#getcombinedrace" title="Permanent link"></a></h3>
+<p>Purpse: Fetches race data for an input set of MRNs and creates a single CombinedRace variable that summarizes the information available in RACE1 - RACE5, according to the following rules:</p>
+<ul>
+<li>If only one race is listed, set CombinedRace to that race.</li>
+<li>If person is WH and one other, set CombinedRace to that other (or to &ldquo;MU&rdquo; depending on the value given in the &amp;WHOther paraeter</li>
+<li>If there is more than one non-WH race, or one of the races is &ldquo;MU&rdquo;, set CombinedRace to &ldquo;MU&rdquo;.</li>
+<li>Otherwise, set CombinedRace to &ldquo;UN&rdquo;.</li>
+</ul>
+<p>Inputs: An input dataset of MRNs of the people on whom you would like race info.</p>
+<p>Output: A dataset containing MRN, CombinedRace, and RACE1 - RACE5.</p>
+<h4 id="parameters_39">Parameters<a class="headerlink" href="#parameters_39" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inset</td>
+<td>The list of MRNs whose race info you want.</td>
+</tr>
+<tr>
+<td>outset</td>
+<td>What you want the output dataset to be called.</td>
+</tr>
+<tr>
+<td>WHOther</td>
+<td>What to do for people with WHite and one other race value.<br>If set to &lsquo;other&rsquo;, CombinedRace is assigned whatever the non-WHite value is. This is the default.<br>If set to &lsquo;MU&rsquo;, CombinedRace is assigned the value &lsquo;MU&rsquo;.</td>
+</tr>
+<tr>
+<td>Freqs</td>
+<td>If set to &lsquo;Y&rsquo;, outputs frequency tables comparing CombinedRace to the native RACE<X> variables. The default is &lsquo;N&rsquo;.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="seer_site_recode">%SEER_SITE_RECODE<a class="headerlink" href="#seer_site_recode" title="Permanent link"></a></h3>
+<p>Developed by Rebecca Ziebell (<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#122;&#105;&#101;&#98;&#101;&#108;&#108;&#46;&#114;&#64;&#103;&#104;&#99;&#46;&#111;&#114;&#103;">&#122;&#105;&#101;&#98;&#101;&#108;&#108;&#46;&#114;&#64;&#103;&#104;&#99;&#46;&#111;&#114;&#103;</a>), this macro recodes VDW.TUMOR-formatted records into SEER site recode vales, which define the major cancer site/histology groups that are commonly used in reporting of cancer incidence data. Additional information about the SEER site recode can be found at <a href="/C:/Users/o578092/documents/vdw/macros/seer.cancer.gov/siterecode">seer.cancer.gov/siterecode</a>. As of 08/08/2015, this macro uses the Site Recode ICD-O-3/WHO 2008 definition, which is defined here: <a href="/C:/Users/o578092/documents/vdw/macros/seer.cancer.gov/siterecode/icdo3_dwhoheme">seer.cancer.gov/siterecode/icdo3_dwhoheme</a>.</p>
+<h4 id="parameters_40">Parameters<a class="headerlink" href="#parameters_40" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inds</td>
+<td>Name of an input dataset of tumor records. Must contain VDW Tumor-style variables ICDOSITE and MORPH.</td>
+</tr>
+<tr>
+<td>outds</td>
+<td>Name desired output data set, which will be a copy of inds plus the variable site_recode.</td>
+</tr>
+</tbody>
+</table>
+<p><em>Note:</em>
+<code>%ser_site_recode</code> also establishes two numeric formats to be used with the site_recode variable: simple format site_recode. and multilabel format recode_mlf.</p>
+<h4 id="sample-call_14">Sample Call<a class="headerlink" href="#sample-call_14" title="Permanent link"></a></h4>
+<div class="highlight"><pre>%seersite_recode(inds=all_tmr, outds=tmr_recoe) ;
+</pre></div>
+
+<h3 id="getlabforpeopleandlab">%GetLabForPeopleAndLab<a class="headerlink" href="#getlabforpeopleandlab" title="Permanent link"></a></h3>
+<p>Gets the results for a specified set of test_types, for a specified set of people (identified by MRNs) which occurred between the dates specified in StartDt and EndDt.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>People</td>
+<td>Name of an input dataset of MRNs representing the people whose lab results you want.</td>
+</tr>
+<tr>
+<td>LabLst</td>
+<td>Name of an input dataset of TEST_TYPEs representing the result types you want.</td>
+</tr>
+<tr>
+<td>StartDt</td>
+<td>The beginning of the period of interest.</td>
+</tr>
+<tr>
+<td>EndDt</td>
+<td>The end of the period of interest</td>
+</tr>
+<tr>
+<td>OutSet</td>
+<td>Name for the output dataset of lab results.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_15">Sample Call<a class="headerlink" href="#sample-call_15" title="Permanent link"></a></h4>
+<div class="highlight"><pre>%GetLabForPeopleAndLab(People  = perm.my_cohort
+                     , LabLst  = perm.my_test_types
+                     , StartDt = 01jan2005
+                     , EndDt   = 31dec2007
+                     , Outset  = perm.lab_results
+                      ) ;
+</pre></div>
+
+<h3 id="elixhauser">%elixhauser<a class="headerlink" href="#elixhauser" title="Permanent link"></a></h3>
+<p>Calculates the Elixhauser comorbidity score for an input cohort of people.</p>
+<p>Input: A dataset of MRNs &amp; index dates.</p>
+<p>Output: A dataset of MRNs, disease flags and final Elixhauser scores.  There are four scores reported:</p>
+<ol>
+<li>The summary score for all conditions detected over the period from (index_date - days_prior) to index_date (SumElixWCancer).</li>
+<li>The summary score for all conditions OTHER THAN CANCER detected over the period from (index_date - days_prior) to index_date (SumElixWoCancer).</li>
+<li>The vanWalRaven weighted score for all conditions detected over the period from (index_date - days_prior) to index_date (WghtElixWCancer).</li>
+<li>The vanWalRaven weighted score for all conditions OTHER THAN CANCER, detected over the period from (index_date - days_prior) to index_date (WghtElixWoCancer).
+In addition to these scores there are 31 0/1 flags signifying the component conditions (lymphoma, renal failure, etc.) for each period (&lsquo;index&rsquo; and &lsquo;prior&rsquo;).</li>
+</ol>
+<h4 id="background_1">Background<a class="headerlink" href="#background_1" title="Permanent link"></a></h4>
+<p>Developed at KPWA by Joey Eavey and Arvind Ramaprasan. Based on a macro written by Anne Elixhauser&rsquo;s team at AHRQ/HCUP. This macro calculates the summary Elixhauser score and also calculates the weighted score using vanWalRaven comorbidity weights. The current version of the macro generates one score per patient-index_date combination. So, if a patient has multiple visits within the input dataset, separate Elixhauser scores will be generated for each index date. This code includes both ICD9 and ICD10 diagnoses, as developed by HCUP and updated using FY2018 ICD-10 codes.</p>
+<p>ICD10 codes were added to the macro by ARHQ/HCUP. Joey made some comments about ICD code considerations. Joey made some comments about her code validation process <a href="https://www.hcsrn.org/share/page/site/VDW/wiki-page?title=Elixhauser_Macro_Code_Mapping_Validation">on this page</a>.</p>
+<h5 id="references">References<a class="headerlink" href="#references" title="Permanent link"></a></h5>
+<p><a href="https://www.hcup-us.ahrq.gov/toolssoftware/comorbidityicd10/comorbidity_icd10.jsp">HCP website. Beta Elixhauser Comorbidity Software for ICD10-CM</a>. Retrieved 1-dec-2017.</p>
+<p><a href="https://www.hcup-us.ahrq.gov/toolssoftware/comorbidity/|comorbidity.jsp">HCUP website. Elixhauser Comoribidity Software, Version 3.7</a> Retrieved 1-dec-2017.
+A Modification of the Elixhauser comorbidity Measures Into a Point System for Hospital Death Using Administrative Data. Med Care 2009;47:626-633.</p>
+<p>Identifying Increased Risk of Readmission and In-hospital Mortality Using Hospital Administrative Data: The AHRQ Elixhauser Comorbidity Index. Med Care 2017;55: 698–705</p>
+<h4 id="parameters_41">Parameters<a class="headerlink" href="#parameters_41" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inputds</td>
+<td>Name of a dataset containing MRNs and index dates for a cohort of people. It is permissible to have &gt; 1 index date per MRN.</td>
+</tr>
+<tr>
+<td>mrn</td>
+<td>The name of a variable in &amp;inputds that holds MRN values.  Default is &lsquo;mrn&rsquo;.</td>
+</tr>
+<tr>
+<td>index_date</td>
+<td>The name of a variable in &amp;inputds that holds the index date values. Default is &lsquo;index_date&rsquo;.</td>
+</tr>
+<tr>
+<td>outputds</td>
+<td>The name of the output dataset with scores and flags to write.</td>
+</tr>
+<tr>
+<td>days_lookback</td>
+<td>The number of days to look back from index_date for defining the period over which to find diagnoses. Default is 365.</td>
+</tr>
+<tr>
+<td>inpatonly</td>
+<td>Specifies the types of encounters to include (I= inpatient only, B= inpatient and ambulatory only, A = all encounters, C = specify a custom encounter type list using &amp;enctype_list)</td>
+</tr>
+<tr>
+<td>enctype_list</td>
+<td>For use with inpatonly = C, use to specify a custom encounter type list</td>
+</tr>
+<tr>
+<td>DRG_restriction</td>
+<td>Y/N that specifies whether the DRG restriction should be applied to inpatient encounter diagnoses. Default is Y.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_16">Sample Call<a class="headerlink" href="#sample-call_16" title="Permanent link"></a></h4>
+<div class="highlight"><pre>%elixhauser(inputds       = perm.my_cohort
+          , mrn           = chsid
+          , index_date    = index_dt
+          , outputds      = perm.elixhauser_scores
+          , inpatonly     = C
+          , enctype_list  = %str(&#39;AV&#39;, &#39;IP&#39;, &#39;UC&#39;)
+          , days_lookback = 365
+         ) ;
+</pre></div>
+
+<h3 id="gagne">%gagne<a class="headerlink" href="#gagne" title="Permanent link"></a></h3>
+<p>Purpose: Calculates Gagne&rsquo;s combined comorbidity score, using Elixhauser&rsquo;s ICD-9 diagnosis codes.</p>
+<p>Inputs: A dataset of MRNs and index dates.</p>
+<p>Outputs: A dataset with MRN, index date, and a var called combined_score which holds the Gagne score.</p>
+<p><strong>Note that this macro will only process ICD-9 diagnosis codes, and so it is not suitable for index dates that fall on or after 1-october-2015.</strong></p>
+<h4 id="parameters_42">Parameters<a class="headerlink" href="#parameters_42" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inputds</td>
+<td>Name of the input dataset of MRNs and index dates.</td>
+</tr>
+<tr>
+<td>IndexDateVarName</td>
+<td>Name of the variable in &amp;inputds that holds the index date. Must not fall after 1-october-2015.</td>
+</tr>
+<tr>
+<td>outputds</td>
+<td>Name you want to give the output dataset.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_17">Sample Call<a class="headerlink" href="#sample-call_17" title="Permanent link"></a></h4>
+<div class="highlight"><pre>%gagne(Inputds           = s.test_gagne
+      , IndexDateVarName = index_date
+      , outputds         = s.test_gagne_out
+      );
+</pre></div>
+
+<h3 id="gagnequan">%GagneQuan<a class="headerlink" href="#gagnequan" title="Permanent link"></a></h3>
+<p>Purpose: Calculates Gagne&rsquo;s Combined Comorbidity Score based on Quan&rsquo;s &ldquo;Enhanced&rdquo; ICD-9-CM Codes &amp; ICD-10 diagnoses codes and original weightings per Gagne et. al.</p>
+<p>Inputs: A dataset of MRNs and index dates.</p>
+<p>Outputs: A dataset with MRN, index date, and a var called CombinedScore which holds the enhanced Gagne score.</p>
+<blockquote>
+<p>NOTE:  ICD 9 &amp;10 codes used by Quan et. al.  in developing the combined score were based on administrative hospital discharge data for patients aged 18+ year and older from Canadian health region. It might be worth noting that Canadian and US coding practices may differ slightly, affecting the combined score. As a result,  the final score for the US region might not be equivalent to the combined score used when developing the index.</p>
+</blockquote>
+<h4 id="references_1">References<a class="headerlink" href="#references_1" title="Permanent link"></a></h4>
+<p>Hude Quan, Vijaya Sundararajan, Patricia Halfon, Andrew Fong, Bernard Burnand, Jean-Christophe Luthi, L. Duncan Saunders, Cynthia A. Beck, Thomas E. Feasby and William A. Ghali; Coding Algorithms for Defining Comorbidities in ICD-9-CM and ICD-10 Administrative Data; <a href="https://www.jstor.org/stable/3768193">Medical Care , Nov., 2005, Vol. 43, No. 11 (Nov., 2005), pp. 1130-1139</a></p>
+<p>Gagne JJ, Glynn RJ, Avorn J, Levin R, Schneeweiss S. A combined, comorbidity score predicted mortality in elderly patients better than existing scores. Journal of Clinical Epidemiology 2011 Jan, 3</p>
+<h4 id="parameters_43">Parameters<a class="headerlink" href="#parameters_43" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inputds</td>
+<td>Name of the input dataset of MRNs and index dates.</td>
+</tr>
+<tr>
+<td>IndexDateVarName</td>
+<td>Name of the variable in &amp;inputds that holds the index date.</td>
+</tr>
+<tr>
+<td>outputds</td>
+<td>Name you want to give the output dataset.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_18">Sample Call<a class="headerlink" href="#sample-call_18" title="Permanent link"></a></h4>
+<div class="highlight"><pre>%GagneQuan(Inputds          = s.test_gagne
+         , IndexDateVarName = index_date
+         , outputds         = s.test_gagne_quan_out
+         );
+</pre></div>
+
+<h3 id="frailtyindex">%FrailtyIndex<a class="headerlink" href="#frailtyindex" title="Permanent link"></a></h3>
+<p>Calculates Segal&rsquo;s Frailty Probability Estimate</p>
+<p>Inputs: A dataset of MRNs and index dates.</p>
+<p>tputs: A dataset with MRN, a series of flags for various comorbid conditions (e.g., stroke, falls, etc.) a var called p_frailty which holds the Segal probability of frailness score and a var call frail which is a flag for values of p_frailty &gt;=.2.</p>
+<p><strong>Note that this macro will only process ICD-9 diagnosis codes, and so it is not suitable for index dates that fall on or after 1-october-2015.</strong></p>
+<h4 id="parameters_44">Parameters<a class="headerlink" href="#parameters_44" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inputds</td>
+<td>Name of the input dataset of MRNs and index dates.</td>
+</tr>
+<tr>
+<td>IndexDateVarName</td>
+<td>Name of the variable in &amp;inputds that holds the index date. Must not fall after 1-october-2015.</td>
+</tr>
+<tr>
+<td>outputds</td>
+<td>Name you want to give the output dataset.</td>
+</tr>
+<tr>
+<td>worklib</td>
+<td>Optional. Name of the libname to write interim datasets to. Default is &lsquo;work&rsquo;.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="faurot">%faurot<a class="headerlink" href="#faurot" title="Permanent link"></a></h3>
+<p>Calculates the Faurot frailty score for an input cohort of people.</p>
+<p>Input: A dataset of MRNs &amp; index dates.</p>
+<p>Output: A dataset of MRNs, disease and demographic flags and final Faurot frailty score.</p>
+<h4 id="background_2">Background<a class="headerlink" href="#background_2" title="Permanent link"></a></h4>
+<p>Developed at KPWA by Joey Eavey. Based on Dr. Faurot&rsquo;s published code and ICD9 formats. This macro calculates the Faurot frailty index using diagnosis and procedure codes to generate the predicted probability of an individual being &lsquo;frail&rsquo; as of the index date. The current version of the macro generates one score per patient-index date combination. So, if a patient has multiple visits within the input dataset, separate frailty scores will be generated for each index date. This code includes both ICD9 and ICD10 diagnoses.</p>
+<p>ICD10 codes were added to the macro by Joey Eavey using the 2018 CMS GEMS file to map ICD9 codes to ICD10. These codes have not yet been validated in a large cohort and programmers should examine trends in frailty scores across years for consistency.</p>
+<h4 id="references_2">References<a class="headerlink" href="#references_2" title="Permanent link"></a></h4>
+<p>Using Claims Data to Predict Dependency in Activities of Daily Living as a Proxy for Frailty. Pharmacoepidemiol Drug Saf 2015; 24(1):59-66.</p>
+<p><strong>Note that there are errata to this article that are not readily apparent on PubMed — see updated supplemental information on UNC website below for more info.</strong></p>
+<p>Harry Guess Research Community at University of North Carolina Gillings School of Global Public Health website. <a href="http://sph.unc.edu/epid/harry-guess-research-community/">SAS macro for predicting frailty using claims data</a>. Accessed 1/2/2018.</p>
+<h4 id="sample-call_19">Sample Call<a class="headerlink" href="#sample-call_19" title="Permanent link"></a></h4>
+<div class="highlight"><pre>%faurot(inputds        = perm.my_cohort
+     , mrn             = chsid
+     , index_date      = index_dt
+     , days_lookback   = 238) ;
+</pre></div>
+
+<h3 id="reprioritizerace">%ReprioritizeRace<a class="headerlink" href="#reprioritizerace" title="Permanent link"></a></h3>
+<p>The <code>race1-race5</code> variables in &amp;_vdw_demographic are set according to a specific preference hierarchy, as described in the spec.  <code>%ReprioritizeRace</code> allows users to shuffle the values in those variables according to their own preference hierarchy.  Users define their hierarchy in a format that translates the 8 allowable race values (AS, BA, WH, etc.) into a numeric rank that expresses the preferred rank order (lower numbers are more-favored, higher numbers are less-favored).</p>
+<p>Input: A dataset of MRNs, and a preference-ranking format.</p>
+<p>Output: A dataset of MRNs and <code>race1-race5</code> variables, whose values are set according to the input hierarchy.</p>
+<h4 id="parameters_45">Parameters<a class="headerlink" href="#parameters_45" title="Permanent link"></a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Parameter Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inset</td>
+<td>Name of a dataset containing the MRNs of the people whose race values you want to shuffle.</td>
+</tr>
+<tr>
+<td>pref_format</td>
+<td>Name of a format you have defined, which converts the 8 allowable race values (AS, BA, WH, etc.) into a numeric rank that constitutes your preferred rank order (lower numbers are more-favored, higher numbers are less-favored).</td>
+</tr>
+<tr>
+<td>outset</td>
+<td>Name of the dataset the macro should write, with its shuffled race variables</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-call_20">Sample Call<a class="headerlink" href="#sample-call_20" title="Permanent link"></a></h4>
+<div class="highlight"><pre>proc format ;
+  * Make Black/African-American the most-preferred value. Demote White under Multi-racial and Other ;
+  value $prior
+    &#39;BA&#39; = 1
+    &#39;HP&#39; = 2
+    &#39;IN&#39; = 3
+    &#39;AS&#39; = 4
+    &#39;MU&#39; = 5
+    &#39;OT&#39; = 6
+    &#39;WH&#39; = 7
+    &#39;UN&#39; = 8
+  ;
+quit ;
+
+%ReprioritizeRace(inset = s.test_race_reshuffle
+              , pref_format = $prior
+              , outset = s.reshuffled) ;
+</pre></div></article></body></html>
