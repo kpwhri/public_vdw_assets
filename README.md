@@ -2,7 +2,7 @@
 
 ## Background
 
-The VDW standard macros are stored in a single file, the authoritative version of which is stored on the web server at kpwhri.github.io. You can browse this code by [clicking this link](http://kpwhri.github.io/public_vdw_assets/standard_macros.sas) (kpwhr.github.io).
+The VDW standard macros are stored in a single file, the authoritative version of which is stored on the web server at kpwhri.github.io. You can browse this code by [clicking this link](https://kpwhri.github.io/public_vdw_assets/standard_macros.sas) (kpwhr.github.io).
 
 The easiest way to bring these macros into your SAS session is to first %include the StdVars.sas file for your site into your program, and then write this into your program:
 ```sas
