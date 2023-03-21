@@ -1,7 +1,5 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>body {
   max-width: 980px;
-  border: 1px solid #ddd;
-  outline: 1300px solid #fff;
   margin: 16px auto;
 }
 
@@ -899,6 +897,10 @@ body .markdown-body
   vertical-align: middle;
 }
 
+.markdown-body diagram-div, .markdown-body div.uml-sequence-diagram, .markdown-body, div.uml-flowchart {
+  overflow: auto;
+}
+
 /* Media */
 @media only screen and (min-width: 480px) {
   .markdown-body {
@@ -1065,7 +1067,7 @@ body .markdown-body
 .highlight .gc{color:#999;background-color:#EAF2F5}
 </style><title>README</title></head><body><article class="markdown-body"><h1 id="hcsrn-virtual-data-warehouse-standard-macros">HCSRN Virtual Data Warehouse Standard Macros<a class="headerlink" href="#hcsrn-virtual-data-warehouse-standard-macros" title="Permanent link"></a></h1>
 <h2 id="background">Background<a class="headerlink" href="#background" title="Permanent link"></a></h2>
-<p>The VDW standard macros are stored in a single file, the authoritative version of which is stored on the web server at HCSRN.org. You can browse this code by <a href="http://hcsrn.org/sas/standard_macros.sas">clicking this link</a> (hcsrn.org).</p>
+<p>The VDW standard macros are stored in a single file, the authoritative version of which is stored on the web server at kpwhri.github.io. You can browse this code by <a href="http://kpwhri.github.io/public_vdw_assets/standard_macros.sas">clicking this link</a> (kpwhr.github.io).</p>
 <p>The easiest way to bring these macros into your SAS session is to first %include the StdVars.sas file for your site into your program, and then write this into your program:
 <div class="highlight"><pre>  %include vdw_macs ;
 </pre></div>
@@ -1073,7 +1075,7 @@ The reason that works is because of this standard FILENAME statement, which is c
 <div class="highlight"><pre>   filename vdw_macs &amp;_vdw_asset_engine &quot;&amp;_vdw_asset_loc/standard_macros.sas&quot; ; 
 </pre></div>
 Depending on how your site has configured that &amp;_vdw_asset_loc variable, using this method should always get you the most recent version of these macros.</p>
-<p>If you have written a macro you would like included please send to <a href="https://www.hcsrn.org/share/page/user/pardee.r@ghc.org/profile">Roy Pardee</a>.</p>
+<p>If you have written a macro you would like included please send to <a href="https://www.hcsrnalfresco.org/share/page/user/pardee.r@ghc.org/profile">Roy Pardee</a>.</p>
 <h2 id="macros">Macros<a class="headerlink" href="#macros" title="Permanent link"></a></h2>
 <h3 id="pmca">%PMCA<a class="headerlink" href="#pmca" title="Permanent link"></a></h3>
 <p>Adapted for VDW use from <a href="https://www.kpwashingtonresearch.org/our-research/our-scientists/rita-mangione-smith-md-mph/measurement-tools-research-dr-rita-mangione-smith">the v3.1 code posted to KPWHRI&rsquo;s web site</a> by Phil Crawford.</p>
@@ -1495,7 +1497,7 @@ Output: A dataset of MRNs, Dx dates, Estrogen Receptor Mark er statuses, and sta
 </tbody>
 </table>
 <h3 id="breastcancerdefinition02">%BreastCancerDefinition02<a class="headerlink" href="#breastcancerdefinition02" title="Permanent link"></a></h3>
-<p>Purpose: Pulls the set of &ldquo;incident&rdquo; (that is, first-ocurring, over the whole range of the tumor file) invasive breast tumors (so no DCIS, unlike the 01 definition). These criteria are based on the ones used for the <a href="/C:/Users/o578092/documents/vdw/macros/resolveuid/f1658048c59d2ac094d4dc267b574acb">Pharmacovigilance Study</a>.
+<p>Purpose: Pulls the set of &ldquo;incident&rdquo; (that is, first-ocurring, over the whole range of the tumor file) invasive breast tumors (so no DCIS, unlike the 01 definition). These criteria are based on the ones used for the <a href="/C:/users/o578092/documents/vdw/public_vdw_assets/resolveuid/f1658048c59d2ac094d4dc267b574acb">Pharmacovigilance Study</a>.
 Inputs: Endpoints of the time period of interest, a name for the output dataset of tumors, optionally, a name for another dataset of tumor records for women who have &gt; 1 qualifying tumor on the very same day.
 Output: A dataset of <strong>tumors</strong> (not women, as with the 01 definition), all variables in the local file.</p>
 <h4 id="parameters_11">Parameters<a class="headerlink" href="#parameters_11" title="Permanent link"></a></h4>
@@ -1849,7 +1851,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <p>It also relies on a hard-coded list of names whose fourth characters should be upcased (e.g., the Mac names—MacDougall, MacDonald, etc.).</p>
 <p>Please let <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#114;&#111;&#121;&#46;&#101;&#46;&#112;&#97;&#114;&#100;&#101;&#101;&#64;&#107;&#112;&#46;&#111;&#114;&#103;">&#114;&#111;&#121;&#46;&#101;&#46;&#112;&#97;&#114;&#100;&#101;&#101;&#64;&#107;&#112;&#46;&#111;&#114;&#103;</a> know about any improvements that could be made.</p>
 <h3 id="getcensusforpeople">%GetCensusForPeople<a class="headerlink" href="#getcensusforpeople" title="Permanent link"></a></h3>
-<p>Purpose: Adds <a href="/C:/Users/o578092/documents/vdw/macros/resolveuid/298755bd417dadd1067f1eb60140461c">Census</a> variables to an input dataset of MRNs</p>
+<p>Purpose: Adds <a href="/C:/users/o578092/documents/vdw/public_vdw_assets/resolveuid/298755bd417dadd1067f1eb60140461c">Census</a> variables to an input dataset of MRNs</p>
 <p>Inputs: A dataset containing a variable called MRN.</p>
 <p>Output: A dataset containing everything from the input dataset, plus all of the variables in the [[Census]] file.</p>
 <h4 id="parameters_18">Parameters<a class="headerlink" href="#parameters_18" title="Permanent link"></a></h4>
@@ -2442,7 +2444,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <h4 id="details-caveats">Details &amp; Caveats<a class="headerlink" href="#details-caveats" title="Permanent link"></a></h4>
 <p>Resolving individual pregnancy-signifying-events into periods of probable pregnancy is a difficult task&ndash;particularly for women whose utilization data capture is not complete. For best results limit your input dataset to women/periods where enrollment.outside_utilization = N. In any event, the output of this macro should be closely scrutinized. At this writing it has passed basic sanity checks at Group Health (using the pharmacovigilance study cohort) but nothing more rigorous than that.</p>
 <p>Dirty data will of course confuse this macro. One common form of dirty data found in the course of development was multiple pregnancy-ending events found within a few days of one another (e.g., a &lsquo;missed abortion&rsquo; code on day 1, followed by a &lsquo;legal abortion with pelvic inflammation&rsquo; on day 3). This macro currently merges any such events together into a single pregnancy, so long as they occur within 3 days of one another. Anything found later than 3 days becomes its own episode.</p>
-<p>The diagnosis and procedure codes used to detect pregnancy events was developed at Harvard by Darren Toh. The code was written at Group Health by Roy Pardee.  You can see what codes are used to signify what by downloading <a href="/C:/Users/o578092/documents/vdw/macros/resolveuid/356229e5b6895e900cf07c141b3b3bdc">this access database</a>. Please report bugs and missing codes to Roy.</p>
+<p>The diagnosis and procedure codes used to detect pregnancy events was developed at Harvard by Darren Toh. The code was written at Group Health by Roy Pardee.  You can see what codes are used to signify what by downloading <a href="/C:/users/o578092/documents/vdw/public_vdw_assets/resolveuid/356229e5b6895e900cf07c141b3b3bdc">this access database</a>. Please report bugs and missing codes to Roy.</p>
 <p>The codeset provided by Harvard includes some codes that signify pregnancy testing. These are pulled and included in the out_events dataset, but not used in the process of actually divining periods of pregnancy because so many of these tests are negative. Incorporating that information would be an obvious next step to take.</p>
 <h4 id="out_periods-dataset">out_periods Dataset:<a class="headerlink" href="#out_periods-dataset" title="Permanent link"></a></h4>
 <table>
@@ -2573,7 +2575,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <h3 id="vdw_formats">%vdw_formats<a class="headerlink" href="#vdw_formats" title="Permanent link"></a></h3>
 <p>Purpose: Defines several useful formats that add descriptive text to coded values.</p>
 <p>Inputs: None</p>
-<p>Output: <a href="/C:/Users/o578092/documents/vdw/macros/resolveuid/4b88b08a31c3e4fc5897a633b373794b">The formats listed here</a> are defined in a format catalog in the current session.</p>
+<p>Output: <a href="/C:/users/o578092/documents/vdw/public_vdw_assets/resolveuid/4b88b08a31c3e4fc5897a633b373794b">The formats listed here</a> are defined in a format catalog in the current session.</p>
 <h4 id="parameters_34">Parameters<a class="headerlink" href="#parameters_34" title="Permanent link"></a></h4>
 <table>
 <thead>
@@ -2602,7 +2604,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <li>HRN</li>
 <li>birth_date/DOB/BirthDate/BDate</li>
 <li>SSN/SocialSecurityNumber/social_security_number/socsec
-   Variable names listed in a locally maintained macro var (which lives in <a href="/C:/Users/o578092/documents/vdw/macros/resolveuid/729705d1b28ad028b4b6287ddf3713d6">stdvars.sas</a>) called &amp;locally_forbidden_varnames</li>
+   Variable names listed in a locally maintained macro var (which lives in <a href="/C:/users/o578092/documents/vdw/public_vdw_assets/resolveuid/729705d1b28ad028b4b6287ddf3713d6">stdvars.sas</a>) called &amp;locally_forbidden_varnames</li>
 </ul>
 </li>
 <li>The contents of all character variables for matches to the local pattern of MRNs (given in another macro var in stdvars).</li>
@@ -2892,7 +2894,7 @@ run ;
 </tbody>
 </table>
 <h3 id="seer_site_recode">%SEER_SITE_RECODE<a class="headerlink" href="#seer_site_recode" title="Permanent link"></a></h3>
-<p>Developed by Rebecca Ziebell (<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#122;&#105;&#101;&#98;&#101;&#108;&#108;&#46;&#114;&#64;&#103;&#104;&#99;&#46;&#111;&#114;&#103;">&#122;&#105;&#101;&#98;&#101;&#108;&#108;&#46;&#114;&#64;&#103;&#104;&#99;&#46;&#111;&#114;&#103;</a>), this macro recodes VDW.TUMOR-formatted records into SEER site recode vales, which define the major cancer site/histology groups that are commonly used in reporting of cancer incidence data. Additional information about the SEER site recode can be found at <a href="/C:/Users/o578092/documents/vdw/macros/seer.cancer.gov/siterecode">seer.cancer.gov/siterecode</a>. As of 08/08/2015, this macro uses the Site Recode ICD-O-3/WHO 2008 definition, which is defined here: <a href="/C:/Users/o578092/documents/vdw/macros/seer.cancer.gov/siterecode/icdo3_dwhoheme">seer.cancer.gov/siterecode/icdo3_dwhoheme</a>.</p>
+<p>Developed by Rebecca Ziebell (<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#122;&#105;&#101;&#98;&#101;&#108;&#108;&#46;&#114;&#64;&#103;&#104;&#99;&#46;&#111;&#114;&#103;">&#122;&#105;&#101;&#98;&#101;&#108;&#108;&#46;&#114;&#64;&#103;&#104;&#99;&#46;&#111;&#114;&#103;</a>), this macro recodes VDW.TUMOR-formatted records into SEER site recode vales, which define the major cancer site/histology groups that are commonly used in reporting of cancer incidence data. Additional information about the SEER site recode can be found at <a href="/C:/users/o578092/documents/vdw/public_vdw_assets/seer.cancer.gov/siterecode">seer.cancer.gov/siterecode</a>. As of 08/08/2015, this macro uses the Site Recode ICD-O-3/WHO 2008 definition, which is defined here: <a href="/C:/users/o578092/documents/vdw/public_vdw_assets/seer.cancer.gov/siterecode/icdo3_dwhoheme">seer.cancer.gov/siterecode/icdo3_dwhoheme</a>.</p>
 <h4 id="parameters_40">Parameters<a class="headerlink" href="#parameters_40" title="Permanent link"></a></h4>
 <table>
 <thead>
