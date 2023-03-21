@@ -56,8 +56,8 @@ One other crucial bit of environment for VDW users is access to the VDW standard
 2. You want your users to have the benefit of any updates (e.g., fixes, new macros) as soon as they are released, without having to wait for you to update your local copy.
 3. You don't have the time or inclination to scrutinize updates to ensure their safety.
 4. You trust that those empowered to change this code (currently [the KPWHRI organization owners](https://github.com/orgs/kpwhri/people?query=role%3Aowner)) will not do nefarious things to it.
-5. You trust that Roy will keep his ssh private key private.
-6. You trust that github will not be compromised (or if it is, that this code is not disturbed).
+5. You trust that the people w/edit access to this repo will keep their passwords/ssh keys & second-factor authorization means private, so that no one else will get this access.
+6. You trust that github.com will not be compromised (or if it is, that this code is not disturbed).
 
 ### Why you might want to maintain your own copies of this code/data
 
