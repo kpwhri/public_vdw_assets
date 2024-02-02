@@ -2,7 +2,7 @@
 
 ## Background
 
-The VDW standard macros are stored in a single file, the authoritative version of which is stored on the web server at kpwhri.github.io. You can browse this code by [clicking this link](https://kpwhri.github.io/public_vdw_assets/standard_macros.sas) (kpwhr.github.io).
+The VDW standard macros are stored in a single file, the authoritative version of which is stored on the web server at HCSRN.org. You can browse this code by [clicking this link](http://hcsrn.org/sas/standard_macros.sas) (hcsrn.org).
 
 The easiest way to bring these macros into your SAS session is to first %include the StdVars.sas file for your site into your program, and then write this into your program:
 ```sas
@@ -14,7 +14,7 @@ The reason that works is because of this standard FILENAME statement, which is c
 ```
 Depending on how your site has configured that &\_vdw\_asset\_loc variable, using this method should always get you the most recent version of these macros.
 
-If you have written a macro you would like included please send to [Roy Pardee](https://www.hcsrnalfresco.org/share/page/user/pardee.r@ghc.org/profile).
+If you have written a macro you would like included please send to [Roy Pardee](https://www.hcsrn.org/share/page/user/pardee.r@ghc.org/profile).
 
 ## Macros
 
@@ -320,6 +320,43 @@ Output(s): A new dataset identical to the one named in the People parameter, but
 |EnrollDset|  Optional.The name of the dataset from which the macro should draw Enroll records.If left off, the macro will use the dataset indicated in the local StdVars.sas file. This can be useful if for example, you only want to consider particular types of enrollment (e.g., enrollment w/Medicaid coverage) for your application.Simply draw out your own subset of the standard Enroll file for the people in People, subset it as you like, and pass the name of your custom Enroll file into the macro.|
 |Reverse| Optional. A value of 0 (default) will run the macro going forward in time from IndexDate until EndDate as described in the purpose. Specifying a value of 1 instead answers the question "at what point before index date did the person's continuous enrollment start, if it started after EndDate?"|
 
+### %GetRiskSetExit
+
+Purpose: Takes an input dataset of MRNs and index dates representing a set of people entering a risk set (as for a survival analysis, say) and returns a dataset with information on when and how each person/index date left the set due to disenrollment or death, or if they were censored before either event occurred.
+
+Both IndexDate and CensorDate can vary from person to person (in which case these parameters should name variables in the People dataset) or can be date constants that apply to everyone.
+
+Inputs: A dataset of MRNs and index and censoring dates. MRNs can be repeated, so long as each record has a different index date.
+
+Outputs: A new dataset containing MRN, index date, risk set exit date, exit reason, enrollment dates and death information.
+
+#### Parameters
+
+|Parameter Name|Parameter Purpose|
+|--------------|-----------------|
+|People|  The name of the dataset containing the MRNs of the people whose followup time you want. **must be different from the `OutSet`**.|
+|IndexDate| The start of the period over which you want followup time evaluated.This can be either the name of a variable in the People dataset, or a complete sas date literal (e.g., '25dec2004'd).|
+|CensorDate| The overall backstop end of the risk period. This can be either the name of a variable in the People dataset, or a complete sas date literal (e.g., '25dec2004'd).|
+|GapTolerance| The largest number of days of non-enrollment in between enrolled periods to ignore in determining the end of continuous enrollment.|
+|CallExitDateVar| The name you want for the variable that will hold the date the person left the risk set.|
+|CallExitReasonVar| The name you want for the variable that will hold the reason the person left the risk set.|
+|OutSet|  The name you want for the output dataset.|
+
+
+#### Output Dataset
+|Variable|Details|
+|--------|-------|
+|MRN     |VDW person identifier|
+|`&CallExitReasonDateVar`|The date the person exited the risk set due to death, disenrollment, or censoring. If the person was not enrolled within `&GapTolerance` days of their index date, then this will be their index date|
+|`&CallExitReasonVar`|One of 'Died', 'Disenrolled', 'Censored', or if the person was not enrolled within `&GapTolerance` days of their index date, 'Not enrolled'.|
+|CensorDate|The value of the &CensorDate parameter.|
+|`&IndexDate`|The person's index date|
+|earliest_enroll_start|The beginning of the period of continuous enrollment (having smoothed out any gaps of `&GapTolerance` days or fewer) that embraces the index date.|
+|latest_enroll_end|The end of the continuous enrollment period embracing index date.|
+|deathdt|Date of death, as available in `&_vdw_death`.|
+|dtimpute|From `&_vdw_death`.|
+|source_list|From `&_vdw_death`.|
+|confidence|From `&_vdw_death`.|
 
 ### %CollapsePeriods
 
@@ -1097,9 +1134,20 @@ Output: A dataset of MRNs, disease flags and final Elixhauser scores.  There are
 In addition to these scores there are 31 0/1 flags signifying the component conditions (lymphoma, renal failure, etc.) for each period ('index' and 'prior').
 
 #### Background
-Developed at KPWA by Joey Eavey and Arvind Ramaprasan. Based on a macro written by Anne Elixhauser's team at AHRQ/HCUP. This macro calculates the summary Elixhauser score and also calculates the weighted score using vanWalRaven comorbidity weights. The current version of the macro generates one score per patient-index_date combination. So, if a patient has multiple visits within the input dataset, separate Elixhauser scores will be generated for each index date. This code includes both ICD9 and ICD10 diagnoses, as developed by HCUP and updated using FY2018 ICD-10 codes.
+Developed at KPWA by Joey Eavey and Arvind Ramaprasan. Based on a macro written by Anne Elixhauser's team at AHRQ/HCUP. This macro calculates the summary Elixhauser score and also calculates the weighted score using vanWalRaven comorbidity weights. The current version of the macro generates one score per patient-index_date combination. So, if a patient has multiple `index_date`s within the input dataset, separate Elixhauser scores will be generated for each one. This code includes both ICD9 and ICD10 diagnoses, as developed by HCUP and updated using FY2018 ICD-10 codes.
 
 ICD10 codes were added to the macro by ARHQ/HCUP. Joey made some comments about ICD code considerations. Joey made some comments about her code validation process [on this page](https://www.hcsrn.org/share/page/site/VDW/wiki-page?title=Elixhauser_Macro_Code_Mapping_Validation).
+
+##### Caveats
+
+Elixhauser's original algorithm was developed on *inpatient* data only, and conceives of *comorbidity* as illness **over and above the condition that brought the patient to the hospital**--that's what the `drg_restriction` parameter is for--the default algorithm ignores any comorbidity flags that would correspond to the DRG assigned to the inpatient stay.  This puts some tension on the typical VDW use in that:
+
+* we usually can't bear to ignore the wealth of ambulatory data that we have, and
+* we typically want a score expressing the total disease burden on a given patient.
+
+For that reason, this VDW macro includes parameters affecting what sorts of encounter diagnoses go into the development of the individual disease flags (`inpatonly`, `enctype_list`) and whether the DRG-implied diagnoses are ignored (`DRG_restriction`).
+
+Users can take advantage of those parameters to come up with scores/flags that are almost certainly going to be more useful for VDW-based research than "orthodox" Elixhauser scores, but note that those results have thus far *not been formally validated in a published paper*. The question has come up several times now "what reference can we cite for the (VDW version of the) Elixhauser macro?" and the answer thus far is that there really isn't one. If anyone reading this knows differently, do please get in touch with someone from @kpwrhi so that we can correct this note.
 
 ##### References
 
@@ -1272,5 +1320,3 @@ quit ;
               , outset = s.reshuffled) ;
 
 ```
-
-Hi VIG meeting!
