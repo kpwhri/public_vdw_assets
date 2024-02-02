@@ -19,12 +19,6 @@
 *
 *********************************************/
 
-%macro new_macro_for_testing(say_this) ;
-  %do i = 1 %to 12 ;
-    %put INFO: &say_this ;
-  %end ;
-%mend new_macro_for_testing ;
-
 ** Utility macro for fairly precisely calculating age. ;
 %macro CalcAge(BDtVar, RefDate) ;
   floor ((intck('month',&BDTVar,&RefDate) - (day(&RefDate) < min (day(&BDTVar),
@@ -9324,36 +9318,36 @@ Published:  02/2013
     if a_PSYCH              = 0  and PSYCH    = 1 then a_PSYCH    = 1 ;
 
     LABEL
-      b_HTNCX    = 'Hypertension w/chronic complications'
-      b_HTN      = 'Hypertension w/o chronic complications'
-      a_CHF      = 'Congestive heart failure'
-      a_VALVE    = 'Valvular disease'
-      a_PULMCIRC = 'Pulmonary circulation disease'
-      a_PERIVASC = 'Peripheral vascular disease'
-      a_PARA     = 'Paralysis'
-      a_NEURO    = 'Other neurological disorders'
-      a_CHRNLUNG = 'Chronic pulmonary disease'
-      a_DM       = 'Diabetes w/o chronic complications'
-      a_DMCX     = 'Diabetes w/ chronic complications'
-      a_HYPOTHY  = 'Hypothyroidism'
-      a_RENLFAIL = 'Renal failure'
-      a_LIVER    = 'Liver disease'
-      a_ULCER    = 'Peptic ulcer Disease x bleeding'
-      a_AIDS     = 'Acquired immune deficiency syndrome'
-      a_LYMPH    = 'Lymphoma'
-      a_METS     = 'Metastatic cancer'
-      a_TUMOR    = 'Solid tumor w/out metastasis'
-      a_ARTH     = 'Rheumatoid arthritis/collagen vas'
-      a_COAG     = 'Coagulopthy'
-      a_OBESE    = 'Obesity'
-      a_WGHTLOSS = 'Weight loss'
-      a_LYTES    = 'Fluid and electrolyte disorders'
-      a_BLDLOSS  = 'Chronic blood loss anemia'
-      a_ANEMDEF  = 'Deficiency Anemias'
-      a_ALCOHOL  = 'Alcohol abuse'
-      a_DRUG     = 'Drug abuse'
-      a_PSYCH    = 'Psychoses'
-      a_DEPRESS  = 'Depression'
+      b_HTNCX    = 'Elixhauser flag: Hypertension w/chronic complications'
+      b_HTN      = 'Elixhauser flag: Hypertension w/o chronic complications'
+      a_CHF      = 'Elixhauser flag: Congestive heart failure'
+      a_VALVE    = 'Elixhauser flag: Valvular disease'
+      a_PULMCIRC = 'Elixhauser flag: Pulmonary circulation disease'
+      a_PERIVASC = 'Elixhauser flag: Peripheral vascular disease'
+      a_PARA     = 'Elixhauser flag: Paralysis'
+      a_NEURO    = 'Elixhauser flag: Other neurological disorders'
+      a_CHRNLUNG = 'Elixhauser flag: Chronic pulmonary disease'
+      a_DM       = 'Elixhauser flag: Diabetes w/o chronic complications'
+      a_DMCX     = 'Elixhauser flag: Diabetes w/ chronic complications'
+      a_HYPOTHY  = 'Elixhauser flag: Hypothyroidism'
+      a_RENLFAIL = 'Elixhauser flag: Renal failure'
+      a_LIVER    = 'Elixhauser flag: Liver disease'
+      a_ULCER    = 'Elixhauser flag: Peptic ulcer Disease x bleeding'
+      a_AIDS     = 'Elixhauser flag: Acquired immune deficiency syndrome'
+      a_LYMPH    = 'Elixhauser flag: Lymphoma'
+      a_METS     = 'Elixhauser flag: Metastatic cancer'
+      a_TUMOR    = 'Elixhauser flag: Solid tumor w/out metastasis'
+      a_ARTH     = 'Elixhauser flag: Rheumatoid arthritis/collagen vas'
+      a_COAG     = 'Elixhauser flag: Coagulopthy'
+      a_OBESE    = 'Elixhauser flag: Obesity'
+      a_WGHTLOSS = 'Elixhauser flag: Weight loss'
+      a_LYTES    = 'Elixhauser flag: Fluid and electrolyte disorders'
+      a_BLDLOSS  = 'Elixhauser flag: Chronic blood loss anemia'
+      a_ANEMDEF  = 'Elixhauser flag: Deficiency Anemias'
+      a_ALCOHOL  = 'Elixhauser flag: Alcohol abuse'
+      a_DRUG     = 'Elixhauser flag: Drug abuse'
+      a_PSYCH    = 'Elixhauser flag: Psychoses'
+      a_DEPRESS  = 'Elixhauser flag: Depression'
     ;
 
     /*********************************************************/
@@ -13587,3 +13581,147 @@ Citation    :
   %removedset(dset = __grist) ;
 
 %mend ReprioritizeRace ;
+
+%macro GetRiskSetExit(people =
+    , IndexDate =
+    , CensorDate =
+    , GapTolerance = 31
+    , CallExitDateVar =
+    , CallExitReasonVar =
+    , outset = ) ;
+
+  * Patterned after GetFollowUpTime--just adds death information ;
+
+  %if %lowcase(&people) = %lowcase(&outset) %then %do i = 1 %to 5 ;
+    %put ERROR: This macro does not output all vars found on the &people dset--call it with different datasets named in the `people` and `outset` parameters. ;
+  %end ;
+
+  %else %do ;
+
+    proc sql noprint ;
+      select max(enr_end) as calc_fmt format = 8.0, max(enr_end) as disp_fmt format = mmddyy10.
+      into :enroll_update, :enroll_updated
+      from &_vdw_enroll
+      ;
+
+      select max(&CensorDate) as calc_fmt format = 8.0, max(&CensorDate) as disp_fmt format = mmddyy10.
+      into :last_end_date, :last_end_dated
+      from &people
+      ;
+    quit ;
+
+    %put INFO: Looks like your enrollment data runs through &enroll_updated ;
+    %put INFO: The maximum value of CensorDate is &last_end_dated ;
+
+    %if &last_end_date > &enroll_update %then %do i = 1 %to 5 ;
+      %put ERROR: Your enrollment data only goes to &enroll_updated which falls short of some or all of your CensorDate values (&CensorDate) ;
+      %put Try again once your enrollment data goes further in time. ;
+      %goto exit ;
+    %end ;
+
+    proc sql noprint ;
+      create table __candidates as
+      select distinct e.mrn
+      from &_vdw_enroll as e
+        inner join &people as i on e.mrn = i.mrn
+        and i.&IndexDate between intnx('day', e.enr_start, -&GapTolerance, 'sameday') and
+                                 intnx('day', e.enr_end  ,  &GapTolerance, 'sameday')
+      ;
+      create table __raw_enroll as
+      select e.mrn
+          , e.enr_start length = 4 format = mmddyy10.
+          , e.enr_end length = 4 format = mmddyy10.
+      from &_vdw_enroll as e
+        inner join __candidates as c on e.mrn = c.mrn
+      ;
+
+      * Note we ignore deaths that precede index date. ;
+      create table __raw_death as
+      select d.mrn
+          , p.&IndexDate
+          , d.deathdt length = 4 format = mmddyy10.
+          , d.dtimpute
+          , d.source_list
+          , d.confidence
+      from &_vdw_death as d
+        inner join &people as p on d.mrn = p.mrn and d.deathdt ge p.&IndexDate
+      order by d.mrn, p.&IndexDate
+      ;
+
+      * assertion ;
+      alter table __raw_death add primary key (mrn, &IndexDate) ;
+    quit ;
+
+    %CollapsePeriods(Lib        = work  /* Name of the library containing the dset you want collapsed */
+                   , DSet       = __raw_enroll  /* Name of the dset you want collapsed. */
+                   , RecStart   = enr_start  /* Name of the var that contains the period start dates. */
+                   , RecEnd     = enr_end  /* Name of the var that contains the period end dates. */
+                   , PersonID   = MRN /* Name of the var that contains a unique person identifier. */
+                   , OutSet     = work.__collapsed_enroll /* In case you dont want this to overwrite your input dataset, specify another. */
+                   , DaysTol    = &GapTolerance   /* The number of days gap to tolerate in evaluating whether one period is contiguous w/another. */
+                   ) ;
+
+    proc sql noprint ;
+      drop table __raw_enroll ;
+      drop table __candidates ;
+
+      create table __index_periods as
+      select &CensorDate as CensorDate length = 4 format = mmddyy10., p.mrn, p.&IndexDate, e.enr_start as earliest_enroll_start, e.enr_end as latest_enroll_end
+      from &people as p
+        left join __collapsed_enroll as e on p.mrn = e.mrn
+          and p.&IndexDate between intnx('day', e.enr_start, -&GapTolerance, 'sameday') and
+                                   intnx('day', e.enr_end  ,  &GapTolerance, 'sameday')
+      order by p.mrn, p.&IndexDate
+      ;
+
+      alter table __index_periods add primary key (mrn, &IndexDate) ;
+
+    quit ;
+
+    data &outset ;
+      length
+        &CallExitDateVar 4
+        &CallExitReasonVar $ 12
+      ;
+      merge
+        __index_periods
+        __raw_death
+      ;
+      by mrn &IndexDate ;
+      /*
+        there are 3 dates vying for the end date.
+          disenrollment
+          death
+          &CensorDate
+      */
+
+      if n(earliest_enroll_start) ne 1 then do ;
+        &CallExitReasonVar = "Not enrolled" ;
+        &CallExitDateVar = &IndexDate ;
+      end ;
+      else do ;
+
+        &CallExitDateVar = min(CensorDate, latest_enroll_end, coalesce(deathdt, '25-dec-9999'd)) ;
+
+        select(&CallExitDateVar) ;
+           when(deathdt)            &CallExitReasonVar = "Died" ;
+           when(latest_enroll_end)  &CallExitReasonVar = "Disenrolled" ;
+           when(CensorDate)         &CallExitReasonVar = "Censored" ;
+           otherwise                &CallExitReasonVar = "zah?" ;
+         end ;
+      end ;
+
+      format &CallExitDateVar CensorDate mmddyy10. ;
+      label
+        &CallExitDateVar       = "The earliest of disenrollment, death, or &CensorDate"
+        &CallExitReasonVar       = "What happened on &CallExitDateVar.?"
+        earliest_enroll_start = "Beginning of the contiguous enrollment period embracing &IndexDate +/- &GapTolerance days"
+        latest_enroll_end     = "End of the contiguous enrollment period embracing &IndexDate +/- &GapTolerance days"
+      ;
+    run ;
+  %end ;
+
+  %exit:
+
+%mend GetRiskSetExit ;
+
