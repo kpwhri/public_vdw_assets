@@ -1078,15 +1078,15 @@ body .markdown-body
 .highlight .gc{color:#999;background-color:#EAF2F5}
 </style><title>README</title></head><body><article class="markdown-body"><h1 id="hcsrn-virtual-data-warehouse-standard-macros">HCSRN Virtual Data Warehouse Standard Macros<a class="headerlink" href="#hcsrn-virtual-data-warehouse-standard-macros" title="Permanent link"></a></h1>
 <h2 id="background">Background<a class="headerlink" href="#background" title="Permanent link"></a></h2>
-<p>The VDW standard macros are stored in a single file, the authoritative version of which is stored on the web server at HCSRN.org. You can browse this code by <a href="http://hcsrn.org/sas/standard_macros.sas">clicking this link</a> (hcsrn.org).</p>
+<p>The VDW standard macros are stored in a single file, the authoritative version of which is stored on github.com. You can browse this code by <a href="https://github.com/kpwhri/public_vdw_assets/blob/main/standard_macros.sas">clicking this link</a> (github.com).</p>
 <p>The easiest way to bring these macros into your SAS session is to first %include the StdVars.sas file for your site into your program, and then write this into your program:
-<div class="highlight"><pre>  %include vdw_macs ;
+<div class="highlight"><pre>  %include vdw_macs ;
 </pre></div>
 The reason that works is because of this standard FILENAME statement, which is contained in StdVars.sas at all the sites:
-<div class="highlight"><pre>   filename vdw_macs &amp;_vdw_asset_engine &quot;&amp;_vdw_asset_loc/standard_macros.sas&quot; ; 
+<div class="highlight"><pre>  filename vdw_macs &amp;_vdw_asset_engine &quot;&amp;_vdw_asset_loc/standard_macros.sas&quot; ;
 </pre></div>
 Depending on how your site has configured that &amp;_vdw_asset_loc variable, using this method should always get you the most recent version of these macros.</p>
-<p>If you have written a macro you would like included please send to <a href="https://www.hcsrn.org/share/page/user/pardee.r@ghc.org/profile">Roy Pardee</a>.</p>
+<p>If you have written a macro you would like included please send to <a class="magiclink magiclink-github magiclink-mention" href="https://github.com/kaiser-roy" title="GitHub User: kaiser-roy">@kaiser-roy</a>.</p>
 <h2 id="macros">Macros<a class="headerlink" href="#macros" title="Permanent link"></a></h2>
 <h3 id="pmca">%PMCA<a class="headerlink" href="#pmca" title="Permanent link"></a></h3>
 <p>Adapted for VDW use from <a href="https://www.kpwashingtonresearch.org/our-research/our-scientists/rita-mangione-smith-md-mph/measurement-tools-research-dr-rita-mangione-smith">the v3.1 code posted to KPWHRI&rsquo;s web site</a> by Phil Crawford.</p>
@@ -1147,7 +1147,7 @@ Depending on how your site has configured that &amp;_vdw_asset_loc variable, usi
 <tbody>
 <tr>
 <td>BDtVar</td>
-<td>The name of a variable containing a date of birth.  If not specified, defaults to birth_date, which is what that var is called in the VDW demographics file.</td>
+<td>The name of a variable containing a date of birth. If not specified, defaults to birth_date, which is what that var is called in the VDW demographics file.</td>
 </tr>
 <tr>
 <td>RefDate</td>
@@ -1156,7 +1156,7 @@ Depending on how your site has configured that &amp;_vdw_asset_loc variable, usi
 </tbody>
 </table>
 <p>Caveat:The current version of this macro produces an error when used on dates of birth that fall on leap days.</p>
-<p>This macro returns an expression usable from both datastep and SQL code.  For example:
+<p>This macro returns an expression usable from both datastep and SQL code. For example:
 <div class="highlight"><pre>data gnu ;
   set old ;
   my_age = %CalcAge(RefDate = &quot;&amp;sysdate&quot;d) ;
@@ -1456,7 +1456,7 @@ quit ;
 <h3 id="cancerschema">%CancerSchema<a class="headerlink" href="#cancerschema" title="Permanent link"></a></h3>
 <p>Purpose: Allocates tumors int CancerSchema according to AJCC 6 and 7 definitions.
 Inputs: The VDW Tumor file, start dates, and end dates.
-Output(s): The ouput dataset contains the tumor table for time period of interest with 2 additional variables CancerSchemaAjcc7thEdition, and CancerSchemaAjcc6thEdition.</p>
+Output(s):The ouput dataset contains the tumor table for time period of interest with 2 additional variables CancerSchemaAjcc7thEdition, and CancerSchemaAjcc6thEdition.</p>
 <h4 id="parameters_9">Parameters<a class="headerlink" href="#parameters_9" title="Permanent link"></a></h4>
 <table>
 <thead>
@@ -1508,7 +1508,7 @@ Output: A dataset of MRNs, Dx dates, Estrogen Receptor Mark er statuses, and sta
 </tbody>
 </table>
 <h3 id="breastcancerdefinition02">%BreastCancerDefinition02<a class="headerlink" href="#breastcancerdefinition02" title="Permanent link"></a></h3>
-<p>Purpose: Pulls the set of &ldquo;incident&rdquo; (that is, first-ocurring, over the whole range of the tumor file) invasive breast tumors (so no DCIS, unlike the 01 definition). These criteria are based on the ones used for the <a href="/C:/Users/O578092/Documents/vdw/public_vdw_assets/resolveuid/f1658048c59d2ac094d4dc267b574acb">Pharmacovigilance Study</a>.
+<p>Purpose: Pulls the set of &ldquo;incident&rdquo; (that is, first-ocurring, over the whole range of the tumor file) invasive breast tumors (so no DCIS, unlike the 01 definition). These criteria are based on the ones used for the <a href="/C:/Users/o578092/documents/vdw/macros/resolveuid/f1658048c59d2ac094d4dc267b574acb">Pharmacovigilance Study</a>.
 Inputs: Endpoints of the time period of interest, a name for the output dataset of tumors, optionally, a name for another dataset of tumor records for women who have &gt; 1 qualifying tumor on the very same day.
 Output: A dataset of <strong>tumors</strong> (not women, as with the 01 definition), all variables in the local file.</p>
 <h4 id="parameters_11">Parameters<a class="headerlink" href="#parameters_11" title="Permanent link"></a></h4>
@@ -1889,11 +1889,11 @@ Output: A dataset matching the structure and contents of the input dataset, but 
 </tr>
 <tr>
 <td>NoEncounterGetsMissing</td>
-<td>Optional. Controls whether people for whom no dx/px data is found get a charlson score of 0 (default) or a missing value.<br/>Y = Yes&ndash;give a 0 value to ppl w/out any dx/px data<br/>N = No&ndash;make the score missing.<br/>For cohorts whose year-pre-index-date data capture is assured (usually via enrollment data), having no encounters should legitimately indicate a lack of any comorbidities &amp; therefore a legit score of 0. Cohorts <strong>not</strong> previously vetted in this way may not support that inference, and users should specify a Y for this parameter to prevent unwarranted interpretation of the Charlson score.</td>
+<td>Optional. Controls whether people for whom no dx/px data is found get a charlson score of 0 (default) or a missing value.<br/>Y = Yes&ndash;give a 0 value to ppl w/out any dx/px data<br/>N = No&ndash;make the score missing.<br/>For cohorts whose year-pre-index-date data capture is assured (usually via enrollment data), having no encounters should legitimately indicate a lack of any comorbidities &amp; therefore a legit score of 0. Cohorts<strong>not</strong>previously vetted in this way may not support that inference, and users should specify a Y for this parameter to prevent unwarranted interpretation of the Charlson score.</td>
 </tr>
 <tr>
 <td>enctype_list</td>
-<td>A quote-and-comma-delimited list of the encounter types you want the macro to use.  Used in conjunction with InpatOnly, described above.</td>
+<td>A quote-and-comma-delimited list of the encounter types you want the macro to use. Used in conjunction with InpatOnly, described above.</td>
 </tr>
 <tr>
 <td>days_lookback</td>
@@ -1913,7 +1913,7 @@ Output: A dataset matching the structure and contents of the input dataset, but 
          , days_lookback          = 365
          ) ;
 </pre></div>
-For further details, see the comments at the beginning of the macro and check out <a href="https://www.hcsrn.org/share/page/site/VDW/document-details?nodeRef=workspace://SpacesStore/d919ae80-2f93-473d-ad4c-40a12390720c">this documentation</a> to learn about the Charlson macro.</p>
+For further details, see the comments at the beginning of the macro and check out <a href="https://hcsrnvdw.sharepoint.com/:w:/r/sites/hcsrn-vdw/_layouts/15/Doc.aspx?sourcedoc=%7B76B6577E-B45D-512B-8CAB-9D70E1733CC2%7D&amp;file=Charleston-Commorbitiy-Index.doc">this documentation</a> to learn about the Charlson macro.</p>
 <h3 id="pretty-case">%Pretty Case<a class="headerlink" href="#pretty-case" title="Permanent link"></a></h3>
 <p>Purpose: Corrects the case of names and addresses fields for use in mailings. That is, it will change values in the old column (below) to the values in the new column.</p>
 <table>
@@ -1959,9 +1959,9 @@ For further details, see the comments at the beginning of the macro and check ou
 Notes: This macro is not intended to replace human judgment&ndash;it should significantly improve the formatting of all-caps variables, and will likely be good enough for many purposes, but it is not as good as having an actual person making these corrections.</p>
 <p>The macro uses some version-9-only functions&ndash;to wit: propcase, prxparse and prxmatch. So it will not be usable on versions of sas earlier than 9.</p>
 <p>It also relies on a hard-coded list of names whose fourth characters should be upcased (e.g., the Mac names—MacDougall, MacDonald, etc.).</p>
-<p>Please let <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#114;&#111;&#121;&#46;&#101;&#46;&#112;&#97;&#114;&#100;&#101;&#101;&#64;&#107;&#112;&#46;&#111;&#114;&#103;">&#114;&#111;&#121;&#46;&#101;&#46;&#112;&#97;&#114;&#100;&#101;&#101;&#64;&#107;&#112;&#46;&#111;&#114;&#103;</a> know about any improvements that could be made.</p>
+<p>Please let <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#114;&#111;&#121;&#46;&#101;&#46;&#112;&#97;&#114;&#100;&#101;&#101;&#64;&#107;&#112;&#46;&#111;&#114;&#103;&#107;&#110;&#111;&#119;">&#114;&#111;&#121;&#46;&#101;&#46;&#112;&#97;&#114;&#100;&#101;&#101;&#64;&#107;&#112;&#46;&#111;&#114;&#103;&#107;&#110;&#111;&#119;</a> about any improvements that could be made.</p>
 <h3 id="getcensusforpeople">%GetCensusForPeople<a class="headerlink" href="#getcensusforpeople" title="Permanent link"></a></h3>
-<p>Purpose: Adds <a href="/C:/Users/O578092/Documents/vdw/public_vdw_assets/resolveuid/298755bd417dadd1067f1eb60140461c">Census</a> variables to an input dataset of MRNs</p>
+<p>Purpose: Adds<a href="/C:/Users/o578092/documents/vdw/macros/resolveuid/298755bd417dadd1067f1eb60140461c">Census</a>variables to an input dataset of MRNs</p>
 <p>Inputs: A dataset containing a variable called MRN.</p>
 <p>Output: A dataset containing everything from the input dataset, plus all of the variables in the [[Census]] file.</p>
 <h4 id="parameters_19">Parameters<a class="headerlink" href="#parameters_19" title="Permanent link"></a></h4>
@@ -2361,11 +2361,11 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 </tr>
 <tr>
 <td>StartDt</td>
-<td>An optional parameter specifying the <strong>beginning</strong> of the period over which you would like BMI measures.  This should be either a complete date literal (e.g., &lsquo;25dec2005&rsquo;d) OR the name of a date variable in &amp;People. Leave this blank to go back as far as the file goes.</td>
+<td>An optional parameter specifying the<strong>beginning</strong>of the period over which you would like BMI measures. This should be either a complete date literal (e.g., &lsquo;25dec2005&rsquo;d) OR the name of a date variable in &amp;People. Leave this blank to go back as far as the file goes.</td>
 </tr>
 <tr>
 <td>EndDt</td>
-<td>An optional parameter specifying the <strong>end</strong> of the period over which you would like BMI measures.  This should be either a complete date literal (e.g., &lsquo;25dec2005&rsquo;d) OR the name of a date variable in &amp;People. Leave this blank to go forward as far as the file goes.</td>
+<td>An optional parameter specifying the<strong>end</strong>of the period over which you would like BMI measures. This should be either a complete date literal (e.g., &lsquo;25dec2005&rsquo;d) OR the name of a date variable in &amp;People. Leave this blank to go forward as far as the file goes.</td>
 </tr>
 </tbody>
 </table>
@@ -2377,7 +2377,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 </pre></div>
 
 <h3 id="bmi_adult_macro">%BMI_adult_macro<a class="headerlink" href="#bmi_adult_macro" title="Permanent link"></a></h3>
-<p>Calculates BMI for adults and include a flag for reason that a BMI was not calculated.  This flag can have values of:</p>
+<p>Calculates BMI for adults and include a flag for reason that a BMI was not calculated. This flag can have values of:</p>
 <ul>
 <li>MISSING AGE</li>
 <li>UNDER AGE 18</li>
@@ -2494,7 +2494,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 </tr>
 <tr>
 <td>KEEPVARS</td>
-<td>Optional parameter indicating the values to keep in your quality checking dataset.  May be left blank to simply attach the three quality checking variables to an existing dataset.</td>
+<td>Optional parameter indicating the values to keep in your quality checking dataset. May be left blank to simply attach the three quality checking variables to an existing dataset.</td>
 </tr>
 </tbody>
 </table>
@@ -2554,7 +2554,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <h4 id="details-caveats">Details &amp; Caveats<a class="headerlink" href="#details-caveats" title="Permanent link"></a></h4>
 <p>Resolving individual pregnancy-signifying-events into periods of probable pregnancy is a difficult task&ndash;particularly for women whose utilization data capture is not complete. For best results limit your input dataset to women/periods where enrollment.outside_utilization = N. In any event, the output of this macro should be closely scrutinized. At this writing it has passed basic sanity checks at Group Health (using the pharmacovigilance study cohort) but nothing more rigorous than that.</p>
 <p>Dirty data will of course confuse this macro. One common form of dirty data found in the course of development was multiple pregnancy-ending events found within a few days of one another (e.g., a &lsquo;missed abortion&rsquo; code on day 1, followed by a &lsquo;legal abortion with pelvic inflammation&rsquo; on day 3). This macro currently merges any such events together into a single pregnancy, so long as they occur within 3 days of one another. Anything found later than 3 days becomes its own episode.</p>
-<p>The diagnosis and procedure codes used to detect pregnancy events was developed at Harvard by Darren Toh. The code was written at Group Health by Roy Pardee.  You can see what codes are used to signify what by downloading <a href="/C:/Users/O578092/Documents/vdw/public_vdw_assets/resolveuid/356229e5b6895e900cf07c141b3b3bdc">this access database</a>. Please report bugs and missing codes to Roy.</p>
+<p>The diagnosis and procedure codes used to detect pregnancy events was developed at Harvard by Darren Toh. The code was written at Group Health by Roy Pardee. You can see what codes are used to signify what by downloading<a href="/C:/Users/o578092/documents/vdw/macros/resolveuid/356229e5b6895e900cf07c141b3b3bdc">this access database</a>. Please report bugs and missing codes to Roy.</p>
 <p>The codeset provided by Harvard includes some codes that signify pregnancy testing. These are pulled and included in the out_events dataset, but not used in the process of actually divining periods of pregnancy because so many of these tests are negative. Incorporating that information would be an obvious next step to take.</p>
 <h4 id="out_periods-dataset">out_periods Dataset:<a class="headerlink" href="#out_periods-dataset" title="Permanent link"></a></h4>
 <table>
@@ -2685,7 +2685,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <h3 id="vdw_formats">%vdw_formats<a class="headerlink" href="#vdw_formats" title="Permanent link"></a></h3>
 <p>Purpose: Defines several useful formats that add descriptive text to coded values.</p>
 <p>Inputs: None</p>
-<p>Output: <a href="/C:/Users/O578092/Documents/vdw/public_vdw_assets/resolveuid/4b88b08a31c3e4fc5897a633b373794b">The formats listed here</a> are defined in a format catalog in the current session.</p>
+<p>Output:<a href="/C:/Users/o578092/documents/vdw/macros/resolveuid/4b88b08a31c3e4fc5897a633b373794b">The formats listed here</a>are defined in a format catalog in the current session.</p>
 <h4 id="parameters_35">Parameters<a class="headerlink" href="#parameters_35" title="Permanent link"></a></h4>
 <table>
 <thead>
@@ -2714,7 +2714,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <li>HRN</li>
 <li>birth_date/DOB/BirthDate/BDate</li>
 <li>SSN/SocialSecurityNumber/social_security_number/socsec
-   Variable names listed in a locally maintained macro var (which lives in <a href="/C:/Users/O578092/Documents/vdw/public_vdw_assets/resolveuid/729705d1b28ad028b4b6287ddf3713d6">stdvars.sas</a>) called &amp;locally_forbidden_varnames</li>
+   Variable names listed in a locally maintained macro var (which lives in<a href="/C:/Users/o578092/documents/vdw/macros/resolveuid/729705d1b28ad028b4b6287ddf3713d6">stdvars.sas</a>) called &amp;locally_forbidden_varnames</li>
 </ul>
 </li>
 <li>The contents of all character variables for matches to the local pattern of MRNs (given in another macro var in stdvars).</li>
@@ -2931,7 +2931,7 @@ run ;
 </tr>
 <tr>
 <td>sitefmt</td>
-<td>Optional.  The name of a character format to use to format site values appearing in the columns of the spreadsheets.</td>
+<td>Optional. The name of a character format to use to format site values appearing in the columns of the spreadsheets.</td>
 </tr>
 </tbody>
 </table>
@@ -3004,7 +3004,7 @@ run ;
 </tbody>
 </table>
 <h3 id="seer_site_recode">%SEER_SITE_RECODE<a class="headerlink" href="#seer_site_recode" title="Permanent link"></a></h3>
-<p>Developed by Rebecca Ziebell (<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#122;&#105;&#101;&#98;&#101;&#108;&#108;&#46;&#114;&#64;&#103;&#104;&#99;&#46;&#111;&#114;&#103;">&#122;&#105;&#101;&#98;&#101;&#108;&#108;&#46;&#114;&#64;&#103;&#104;&#99;&#46;&#111;&#114;&#103;</a>), this macro recodes VDW.TUMOR-formatted records into SEER site recode vales, which define the major cancer site/histology groups that are commonly used in reporting of cancer incidence data. Additional information about the SEER site recode can be found at <a href="/C:/Users/O578092/Documents/vdw/public_vdw_assets/seer.cancer.gov/siterecode">seer.cancer.gov/siterecode</a>. As of 08/08/2015, this macro uses the Site Recode ICD-O-3/WHO 2008 definition, which is defined here: <a href="/C:/Users/O578092/Documents/vdw/public_vdw_assets/seer.cancer.gov/siterecode/icdo3_dwhoheme">seer.cancer.gov/siterecode/icdo3_dwhoheme</a>.</p>
+<p>Developed by Rebecca Ziebell (<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#122;&#105;&#101;&#98;&#101;&#108;&#108;&#46;&#114;&#64;&#103;&#104;&#99;&#46;&#111;&#114;&#103;">&#122;&#105;&#101;&#98;&#101;&#108;&#108;&#46;&#114;&#64;&#103;&#104;&#99;&#46;&#111;&#114;&#103;</a>), this macro recodes VDW.TUMOR-formatted records into SEER site recode vales, which define the major cancer site/histology groups that are commonly used in reporting of cancer incidence data. Additional information about the SEER site recode can be found at <a href="/C:/Users/o578092/documents/vdw/macros/seer.cancer.gov/siterecode">seer.cancer.gov/siterecode</a>. As of 08/08/2015, this macro uses the Site Recode ICD-O-3/WHO 2008 definition, which is defined here: <a href="/C:/Users/o578092/documents/vdw/macros/seer.cancer.gov/siterecode/icdo3_dwhoheme">seer.cancer.gov/siterecode/icdo3_dwhoheme</a>.</p>
 <h4 id="parameters_41">Parameters<a class="headerlink" href="#parameters_41" title="Permanent link"></a></h4>
 <table>
 <thead>
@@ -3084,7 +3084,7 @@ In addition to these scores there are 31 0/1 flags signifying the component cond
 </ol>
 <h4 id="background_1">Background<a class="headerlink" href="#background_1" title="Permanent link"></a></h4>
 <p>Developed at KPWA by Joey Eavey and Arvind Ramaprasan. Based on a macro written by Anne Elixhauser&rsquo;s team at AHRQ/HCUP. This macro calculates the summary Elixhauser score and also calculates the weighted score using vanWalRaven comorbidity weights. The current version of the macro generates one score per patient-index_date combination. So, if a patient has multiple <code>index_date</code>s within the input dataset, separate Elixhauser scores will be generated for each one. This code includes both ICD9 and ICD10 diagnoses, as developed by HCUP and updated using FY2018 ICD-10 codes.</p>
-<p>ICD10 codes were added to the macro by ARHQ/HCUP. Joey made some comments about ICD code considerations. Joey made some comments about her code validation process <a href="https://www.hcsrn.org/share/page/site/VDW/wiki-page?title=Elixhauser_Macro_Code_Mapping_Validation">on this page</a>.</p>
+<p>ICD10 codes were added to the macro by ARHQ/HCUP. Joey made some comments about ICD code considerations. Joey made some comments about her code validation process <a href="https://hcsrnvdw.sharepoint.com/sites/hcsrn-vdw/Shared%20Documents/VOC/WebDav-HCSRNAlfresco/hcsrnalfresco.org/alfresco/webdav/Sites/VDW/wiki/Elixhauser_Macro_Code_Mapping_Validation.html">on this page</a>.</p>
 <h5 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link"></a></h5>
 <p>Elixhauser&rsquo;s original algorithm was developed on <em>inpatient</em> data only, and conceives of <em>comorbidity</em> as illness <strong>over and above the condition that brought the patient to the hospital</strong>&ndash;that&rsquo;s what the <code>drg_restriction</code> parameter is for&ndash;the default algorithm ignores any comorbidity flags that would correspond to the DRG assigned to the inpatient stay.  This puts some tension on the typical VDW use in that:</p>
 <ul>

@@ -2,19 +2,19 @@
 
 ## Background
 
-The VDW standard macros are stored in a single file, the authoritative version of which is stored on the web server at HCSRN.org. You can browse this code by [clicking this link](http://hcsrn.org/sas/standard_macros.sas) (hcsrn.org).
+The VDW standard macros are stored in a single file, the authoritative version of which is stored on github.com. You can browse this code by [clicking this link](https://github.com/kpwhri/public_vdw_assets/blob/main/standard_macros.sas) (github.com).
 
 The easiest way to bring these macros into your SAS session is to first %include the StdVars.sas file for your site into your program, and then write this into your program:
 ```sas
-  %include vdw_macs ;
+  %include vdw_macs ;
 ```
 The reason that works is because of this standard FILENAME statement, which is contained in StdVars.sas at all the sites:
 ```sas
-   filename vdw_macs &_vdw_asset_engine "&_vdw_asset_loc/standard_macros.sas" ; 
+  filename vdw_macs &_vdw_asset_engine "&_vdw_asset_loc/standard_macros.sas" ;
 ```
 Depending on how your site has configured that &\_vdw\_asset\_loc variable, using this method should always get you the most recent version of these macros.
 
-If you have written a macro you would like included please send to [Roy Pardee](https://www.hcsrn.org/share/page/user/pardee.r@ghc.org/profile).
+If you have written a macro you would like included please send to @kaiser-roy.
 
 ## Macros
 
@@ -64,12 +64,12 @@ Outputs: Age in whole years.
 
 |Parameter Name|Parameter Purpose|
 |--------------|-----------------|
-|BDtVar|The name of a variable containing a date of birth.  If not specified, defaults to birth\_date, which is what that var is called in the VDW demographics file.|
+|BDtVar|The name of a variable containing a date of birth. If not specified, defaults to birth\_date, which is what that var is called in the VDW demographics file.|
 |RefDate|The date on which you want to calculate the person's age.|
 
 Caveat:The current version of this macro produces an error when used on dates of birth that fall on leap days.
 
-This macro returns an expression usable from both datastep and SQL code.  For example:
+This macro returns an expression usable from both datastep and SQL code. For example:
 ```sas
 data gnu ;
   set old ;
@@ -235,7 +235,7 @@ Output(s): The portion of the DX dataset that describes diagnoses of interest fo
 
 Purpose: Allocates tumors int CancerSchema according to AJCC 6 and 7 definitions.
 Inputs: The VDW Tumor file, start dates, and end dates.
-Output(s): The ouput dataset contains the tumor table for time period of interest with 2 additional variables CancerSchemaAjcc7thEdition, and CancerSchemaAjcc6thEdition.
+Output(s):The ouput dataset contains the tumor table for time period of interest with 2 additional variables CancerSchemaAjcc7thEdition, and CancerSchemaAjcc6thEdition.
 
 #### Parameters
 
@@ -442,8 +442,8 @@ Output(s): A dataset containing the MRNs, index dates, the charlson score and a 
 |IndexVarName|The name of the variable on the output data set that contains the Charlson score.|
 |InpatOnly|Lets you choose which types of utilization records you want to use to calculate the score.<br/>I=inpatient only (enctype = 'IP')<br/>B=both inpatient and ambulatory (enctype in ('IP', 'AV'))<br/>A=all types of encounters<br/>C=custom list of encounter types given in enctype\_list parameter|
 |Malig|Allows you to remove malignancies and metastasis as weights in the charlson score (commonly desired for cohorts of cancer patients).<br/>Y = Zero-weight the cancer flags (useful for cancer studies where everyone will have cancer)<br/>N = Let the cancer flags contribute to the overall score as normal.|
-|NoEncounterGetsMissing|Optional. Controls whether people for whom no dx/px data is found get a charlson score of 0 (default) or a missing value.<br/>Y = Yes--give a 0 value to ppl w/out any dx/px data<br/>N = No--make the score missing.<br/>For cohorts whose year-pre-index-date data capture is assured (usually via enrollment data), having no encounters should legitimately indicate a lack of any comorbidities & therefore a legit score of 0. Cohorts **not** previously vetted in this way may not support that inference, and users should specify a Y for this parameter to prevent unwarranted interpretation of the Charlson score.|
-|enctype\_list|A quote-and-comma-delimited list of the encounter types you want the macro to use.  Used in conjunction with InpatOnly, described above.|
+|NoEncounterGetsMissing|Optional. Controls whether people for whom no dx/px data is found get a charlson score of 0 (default) or a missing value.<br/>Y = Yes--give a 0 value to ppl w/out any dx/px data<br/>N = No--make the score missing.<br/>For cohorts whose year-pre-index-date data capture is assured (usually via enrollment data), having no encounters should legitimately indicate a lack of any comorbidities & therefore a legit score of 0. Cohorts**not**previously vetted in this way may not support that inference, and users should specify a Y for this parameter to prevent unwarranted interpretation of the Charlson score.|
+|enctype\_list|A quote-and-comma-delimited list of the encounter types you want the macro to use. Used in conjunction with InpatOnly, described above.|
 |days\_lookback|Optional. Number of days to go back from index date to look for diagnoses and procedures for the score. Defaults to 365, which is standard for Charlson|
 
 #### Sample Call
@@ -459,7 +459,7 @@ Output(s): A dataset containing the MRNs, index dates, the charlson score and a 
          , days_lookback          = 365
          ) ;
 ```
-For further details, see the comments at the beginning of the macro and check out [this documentation](https://www.hcsrn.org/share/page/site/VDW/document-details?nodeRef=workspace://SpacesStore/d919ae80-2f93-473d-ad4c-40a12390720c) to learn about the Charlson macro.
+For further details, see the comments at the beginning of the macro and check out [this documentation](https://hcsrnvdw.sharepoint.com/:w:/r/sites/hcsrn-vdw/_layouts/15/Doc.aspx?sourcedoc=%7B76B6577E-B45D-512B-8CAB-9D70E1733CC2%7D&file=Charleston-Commorbitiy-Index.doc) to learn about the Charlson macro.
 
 ### %Pretty Case
 
@@ -487,11 +487,11 @@ The macro uses some version-9-only functions--to wit: propcase, prxparse and prx
 
 It also relies on a hard-coded list of names whose fourth characters should be upcased (e.g., the Mac names—MacDougall, MacDonald, etc.).
 
-Please let roy.e.pardee@kp.org know about any improvements that could be made.
+Please let roy.e.pardee@kp.orgknow about any improvements that could be made.
 
 ### %GetCensusForPeople
 
-Purpose: Adds [Census](resolveuid/298755bd417dadd1067f1eb60140461c) variables to an input dataset of MRNs
+Purpose: Adds[Census](resolveuid/298755bd417dadd1067f1eb60140461c)variables to an input dataset of MRNs
 
 Inputs: A dataset containing a variable called MRN.
 
@@ -718,8 +718,8 @@ Wraps the Vital Signs workgroup's official %BMI\_adult\_macro macro (see below),
 |--------------|-----------------|
 |People|The name of a dataset containing the MRNs of the people whose BMI measures you want.|
 |OutSet|What would you like the output dataset of BMI measures to be called?|
-|StartDt|An optional parameter specifying the **beginning** of the period over which you would like BMI measures.  This should be either a complete date literal (e.g., '25dec2005'd) OR the name of a date variable in &People. Leave this blank to go back as far as the file goes.|
-|EndDt|An optional parameter specifying the **end** of the period over which you would like BMI measures.  This should be either a complete date literal (e.g., '25dec2005'd) OR the name of a date variable in &People. Leave this blank to go forward as far as the file goes.|
+|StartDt|An optional parameter specifying the**beginning**of the period over which you would like BMI measures. This should be either a complete date literal (e.g., '25dec2005'd) OR the name of a date variable in &People. Leave this blank to go back as far as the file goes.|
+|EndDt|An optional parameter specifying the**end**of the period over which you would like BMI measures. This should be either a complete date literal (e.g., '25dec2005'd) OR the name of a date variable in &People. Leave this blank to go forward as far as the file goes.|
 
 #### Sample Call
 ```sas
@@ -730,7 +730,7 @@ Wraps the Vital Signs workgroup's official %BMI\_adult\_macro macro (see below),
 ```
 ### %BMI\_adult\_macro
 
-Calculates BMI for adults and include a flag for reason that a BMI was not calculated.  This flag can have values of:
+Calculates BMI for adults and include a flag for reason that a BMI was not calculated. This flag can have values of:
 
 *   MISSING AGE
 *   UNDER AGE 18
@@ -785,7 +785,7 @@ Note that NULL is only used when the other paired value for the blood pressure i
 |--------------|-----------------|
 |DSIN|Feed in fully qualified name, i.e. use libname and dataset name together if reading a permanent dataset. This macro program assumes that desired libraries have been defined previously in the program. StandardVars macro variables can be used.|
 |DSOUT|Feed in fully qualified name, i.e. use libname and dataset name together if writing to a permanent dataset.|
-|KEEPVARS|Optional parameter indicating the values to keep in your quality checking dataset.  May be left blank to simply attach the three quality checking variables to an existing dataset.|
+|KEEPVARS|Optional parameter indicating the values to keep in your quality checking dataset. May be left blank to simply attach the three quality checking variables to an existing dataset.|
 
 #### Sample Call
 ```sas
@@ -825,7 +825,7 @@ Resolving individual pregnancy-signifying-events into periods of probable pregna
 
 Dirty data will of course confuse this macro. One common form of dirty data found in the course of development was multiple pregnancy-ending events found within a few days of one another (e.g., a 'missed abortion' code on day 1, followed by a 'legal abortion with pelvic inflammation' on day 3). This macro currently merges any such events together into a single pregnancy, so long as they occur within 3 days of one another. Anything found later than 3 days becomes its own episode.
 
-The diagnosis and procedure codes used to detect pregnancy events was developed at Harvard by Darren Toh. The code was written at Group Health by Roy Pardee.  You can see what codes are used to signify what by downloading [this access database](resolveuid/356229e5b6895e900cf07c141b3b3bdc). Please report bugs and missing codes to Roy.
+The diagnosis and procedure codes used to detect pregnancy events was developed at Harvard by Darren Toh. The code was written at Group Health by Roy Pardee. You can see what codes are used to signify what by downloading[this access database](resolveuid/356229e5b6895e900cf07c141b3b3bdc). Please report bugs and missing codes to Roy.
 
 The codeset provided by Harvard includes some codes that signify pregnancy testing. These are pulled and included in the out\_events dataset, but not used in the process of actually divining periods of pregnancy because so many of these tests are negative. Incorporating that information would be an obvious next step to take.
 
@@ -889,7 +889,7 @@ Purpose: Defines several useful formats that add descriptive text to coded value
 
 Inputs: None
 
-Output: [The formats listed here](resolveuid/4b88b08a31c3e4fc5897a633b373794b) are defined in a format catalog in the current session.
+Output:[The formats listed here](resolveuid/4b88b08a31c3e4fc5897a633b373794b)are defined in a format catalog in the current session.
 
 #### Parameters
 |Parameter Name|Parameter Purpose|
@@ -909,7 +909,7 @@ The macro checks for:
     *   HRN
     *   birth\_date/DOB/BirthDate/BDate
     *   SSN/SocialSecurityNumber/social\_security\_number/socsec
-       Variable names listed in a locally maintained macro var (which lives in [stdvars.sas](resolveuid/729705d1b28ad028b4b6287ddf3713d6)) called &locally\_forbidden\_varnames
+       Variable names listed in a locally maintained macro var (which lives in[stdvars.sas](resolveuid/729705d1b28ad028b4b6287ddf3713d6)) called &locally\_forbidden\_varnames
 *   The contents of all character variables for matches to the local pattern of MRNs (given in another macro var in stdvars).
 *   The contents of all numeric variables formatted as dates for values that signify events older than &eldest\_age years ago. Variables are evaluated in this check only if they have a date format applied, or if they are numeric variables whose names containhe string 'dte'.
 
@@ -1031,7 +1031,7 @@ Output: An aggregate dataset of counts/rates, and one excel spreadsheet file per
 |inlib|The library where the site-submitted datasets have been placed.|
 |dset\_name|The stub name of the datasets you want to aggregate for this report. This value should match the one you specified for &outfile in your call to %generate\_counts\_rates.|
 |outlib|The library where you would like the output to be placed (a single, aggregate dataset of counts/rates, plus one or more excel spreadsheet containing counts/rates of the codes by category).|
-|sitefmt|Optional.  The name of a character format to use to format site values appearing in the columns of the spreadsheets.|
+|sitefmt|Optional. The name of a character format to use to format site values appearing in the columns of the spreadsheets.|
 
 #### Output Dataset
 
@@ -1136,7 +1136,7 @@ In addition to these scores there are 31 0/1 flags signifying the component cond
 #### Background
 Developed at KPWA by Joey Eavey and Arvind Ramaprasan. Based on a macro written by Anne Elixhauser's team at AHRQ/HCUP. This macro calculates the summary Elixhauser score and also calculates the weighted score using vanWalRaven comorbidity weights. The current version of the macro generates one score per patient-index_date combination. So, if a patient has multiple `index_date`s within the input dataset, separate Elixhauser scores will be generated for each one. This code includes both ICD9 and ICD10 diagnoses, as developed by HCUP and updated using FY2018 ICD-10 codes.
 
-ICD10 codes were added to the macro by ARHQ/HCUP. Joey made some comments about ICD code considerations. Joey made some comments about her code validation process [on this page](https://www.hcsrn.org/share/page/site/VDW/wiki-page?title=Elixhauser_Macro_Code_Mapping_Validation).
+ICD10 codes were added to the macro by ARHQ/HCUP. Joey made some comments about ICD code considerations. Joey made some comments about her code validation process [on this page](https://hcsrnvdw.sharepoint.com/sites/hcsrn-vdw/Shared%20Documents/VOC/WebDav-HCSRNAlfresco/hcsrnalfresco.org/alfresco/webdav/Sites/VDW/wiki/Elixhauser_Macro_Code_Mapping_Validation.html).
 
 ##### Caveats
 
