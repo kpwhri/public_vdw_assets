@@ -7250,6 +7250,7 @@ Published:  02/2013
       run;
     %end;
 %mend seer_site_recode;
+
 /*********************************************
 
 * Charlson comorbidity macro.sas
@@ -7369,17 +7370,35 @@ Published:  02/2013
                , NoEncounterGetsMissing = N
                , enctype_list =
                , days_lookback = 365
+               , DxDset =
+               , PxDset =
+               , UseAllPx = N
                );
+
+  %local use_dx use_px ;
+
+  %if &DxDset = %then %do ;
+    %let use_dx = &_vdw_dx ;
+  %end ;
+  %else %do ;
+    %let use_dx = &DxDset ;
+  %end ;
+  %if &PxDset = %then %do ;
+    %let use_px = &_vdw_px ;
+  %end ;
+  %else %do ;
+    %let use_px = &PxDset ;
+  %end ;
 
    /**********************************************/
    /*Define and format diagnosis codes*/
    /**********************************************/
 
-   ** TODO:  Come up with an ICD-10 version of this format!!! ;
+
    ** C001: Adding ICD-10 version format below****************;
     PROC FORMAT;
       VALUE $ICD10CF
-       /* Myocardial infraction */
+       /* Myocardial infarction */
         "I21  "-"I22.9",
         "I25.2"  = "MI"
        /* Congestive heart disease */
@@ -7571,8 +7590,8 @@ Published:  02/2013
 
    ** For debugging. ;
    %local sqlopts ;
-   %let sqlopts = feedback sortmsg stimer ;
-   %**let sqlopts = ;
+   * %let sqlopts = feedback sortmsg stimer ;
+   %let sqlopts = ;
 
    *******************************************************************************;
    ** subset to the utilization data of interest (add the people with no visits  *;
@@ -7611,22 +7630,18 @@ Published:  02/2013
     , case dx_codetype when '09' then put(dx, $icd9cf.)
                  when '10' then put (dx, $ICD10CF.)
                else '???' end as CodedDx  /*C001*/
-     from &_vdw_dx as d INNER JOIN _ppl as sample
+     from &use_dx as d INNER JOIN _ppl as sample
      ON    d.mrn = sample.mrn
      where  adate between sample.&IndexDateVarName-1
                      and sample.&IndexDateVarName-&days_lookback
                &inpatout.
      ;
-
-      * select count(distinct MRN) as DxPeople format = comma.
-        label = "No. people having any Dxs w/in a year prior to &IndexDateVarName"
-            , (CALCULATED DxPeople / &TotPeople) as PercentWithDx
-               format = percent6.2 label = "Percent of total"
-      from _DxSubset ;
-
-     create table _PxAssign as
-     select distinct p.mrn, 1 as PVD
-     from &_vdw_px (where = ( "35355" <= PX <= "35381" or
+    %local px_wh ;
+    %let px_wh = ;
+    %if %upcase(&UseAllPx) = N %then %do ;
+      %let px_wh = %str((where = (
+                          px_codetype in ('C4', 'H4', '09', '10')
+                        and ("35355" <= PX <= "35381" or
             PX in ("34201","34203","35454","35456","35459","35470", "38.48", "93668"
                    "35473","35474","35482","35483","35485","35492","35493",
                    "35495","75962","75992"
@@ -7648,12 +7663,16 @@ Published:  02/2013
                   '04RU4KZ', '04RV07Z', '04RV0JZ', '04RV0KZ', '04RV47Z', '04RV4JZ',
                   '04RV4KZ', '04RW07Z', '04RW0JZ', '04RW0KZ', '04RW47Z', '04RW4JZ',
                   '04RW4KZ', '04RY07Z', '04RY0JZ', '04RY0KZ', '04RY47Z', '04RY4JZ',
-                  '04RY4KZ'))) as p INNER JOIN
+                  '04RY4KZ'))))
+              ) ;
+    %end ;
+     create table _PxAssign as
+     select distinct p.mrn, 1 as PVD
+     from &use_px &px_wh as p INNER JOIN
           _ppl as sample
      on   p.mrn = sample.mrn
-           where px_codetype in ('C4', 'H4', '09', '10')
-           and adate between sample.&IndexDateVarName-1
-                         and sample.&IndexDateVarName-&days_lookback
+     where adate between sample.&IndexDateVarName-1
+                   and   sample.&IndexDateVarName-&days_lookback
            &inpatout.
      ;
 
@@ -7863,7 +7882,6 @@ Published:  02/2013
            ;
   quit ;
 %mend charlson;
-
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

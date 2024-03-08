@@ -445,6 +445,10 @@ Output(s): A dataset containing the MRNs, index dates, the charlson score and a 
 |NoEncounterGetsMissing|Optional. Controls whether people for whom no dx/px data is found get a charlson score of 0 (default) or a missing value.<br/>Y = Yes--give a 0 value to ppl w/out any dx/px data<br/>N = No--make the score missing.<br/>For cohorts whose year-pre-index-date data capture is assured (usually via enrollment data), having no encounters should legitimately indicate a lack of any comorbidities & therefore a legit score of 0. Cohorts**not**previously vetted in this way may not support that inference, and users should specify a Y for this parameter to prevent unwarranted interpretation of the Charlson score.|
 |enctype\_list|A quote-and-comma-delimited list of the encounter types you want the macro to use. Used in conjunction with InpatOnly, described above.|
 |days\_lookback|Optional. Number of days to go back from index date to look for diagnoses and procedures for the score. Defaults to 365, which is standard for Charlson|
+|DxDset|Optional. A `_vdw_dx`-shaped dataset to use in place of `_vdw_dx`. This is to allow users to do custom filtering of dx records that the above parameters don't allow (e.g., on `encounter_subtype`). If not specified the macro just uses `_vdw_dx`.|
+|PxDset|Optional. Same idea as DxDset above, but for procedures.|
+|UseAllPx|Optional. Set this to `Y` if you have already filtered the records in PxDset down to those that signify Peripheral Vascular Disorder (PVD) and don't want the macro to do its own filtering. This is to accomodate sites that may have nonstandard, local-only px codes that signify PVD. **If you set this to Y, every person whose MRN appears in PxDset will have their PVD flag set to 1.**|
+
 
 #### Sample Call
 ```sas
