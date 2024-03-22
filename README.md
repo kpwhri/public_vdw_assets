@@ -303,6 +303,8 @@ Purpose: Evaluates enrollment data for an input dataset of people from a user-sp
 
 Both IndexDate and EndDate can vary from person to person (in which case these parameters should name variables in the People dataset) or can be date constants that apply to everyone.
 
+> Note that this macro relies on `%CollapsePeriods`, which imposes no limits on the number of gaps or total unenrolled days each person has. It will collapse across any number of gaps, so long as none are longer than `GapTolerance` days.
+
 Inputs: A dataset of unduplicated MRNs
 
 Output(s): A new dataset identical to the one named in the People parameter, but with an additional variable that answers the question 'at what point after index date did this person's continuous enrollment end, if it ended before EndDate?'
@@ -323,6 +325,8 @@ Output(s): A new dataset identical to the one named in the People parameter, but
 ### %GetRiskSetExit
 
 Purpose: Takes an input dataset of MRNs and index dates representing a set of people entering a risk set (as for a survival analysis, say) and returns a dataset with information on when and how each person/index date left the set due to disenrollment or death, or if they were censored before either event occurred.
+
+> Note that this macro relies on `%CollapsePeriods`, which imposes no limits on the number of gaps or total unenrolled days each person has. It will collapse across any number of gaps, so long as none are longer than `GapTolerance` days.
 
 Both IndexDate and CensorDate can vary from person to person (in which case these parameters should name variables in the People dataset) or can be date constants that apply to everyone.
 
@@ -364,6 +368,8 @@ Purpose: Takes an input dataset of start/stop periods and collapses contiguous, 
 
 This macro is useful for determining the extent of continuous enrollment. Just draw out a set of enrollment records, drop any variables whose changes are not of interest (e.g., if you don't care about the type of coverage, drop all the ins\_: vars) and run it through this macro.
 
+> Note that this macro will collapse across any number of gaps, so long as no single gap is longer than `&DaysTol` days. If you care about how many gaps appear in your data, or the total number of gap days, this is not the tool for you.
+
 Inputs: A dataset with a period-start variable (e.g., enr\_start), and a period-end variable (e.g., enr\_end), and any number of additional variables (e.g., mrn, primary care physician indicator, etc.)
 
 Output(s): If the &OutSet parameter is given, a new dataset of collapsed periods. If not, the input dataset is modified in-place.
@@ -378,7 +384,7 @@ Output(s): If the &OutSet parameter is given, a new dataset of collapsed periods
 |RecEnd|  The name of the date variable in Dset holding the end of a period.|
 |PersonID|  The name of the variable in Dset that uniquely identifies a person.  Defaults to MRN.|
 |OutSet|  (Optional) The name of a dataset to put the collapsed records in.  If not given, the dataset specified in &Lib..&DSet is replaced.|
-|DaysTol| The number of days gap to ignore between otherwise contiguous periods of no change.|
+|DaysTol| The maxium number of days gap between records that you want the macro to ignore. Note that the macro will collapse across **any number of gaps** shorter than `DaysTol`.|
 
 #### Sample Call
 ```sas
@@ -641,7 +647,7 @@ Output(s): All output is optional - A report of problem data, a table of problem
 
 ### %SimpleContinuous
 
-Purpose: Motivated by a desire for a simpler version of the %PullContinuous macro (which is hard to explain now that Enroll is a start/stop structure, since it purports to evaluate months of enrollment). This one evaluates enrollment over a single period of interest, allowing any number of gaps of at most &DaysTol days. It returns a dset with a flag var called ContinuouslyEnrolled that signifies whether or not the person was continuously enrolled over the period of interest.
+Purpose: Motivated by a desire for a simpler version of the %PullContinuous macro (which is hard to explain now that Enroll is a start/stop structure, since it purports to evaluate months of enrollment). This one evaluates enrollment over a single period of interest, allowing **any number of gaps** of at most &DaysTol days. It returns a dset with a flag var called ContinuouslyEnrolled that signifies whether or not the person was continuously enrolled over the period of interest.
 
 Like PullContinuous, this macro takes an optional input dataset of Enroll records, allowing users to apply constraints to which types of enrollment records are considered.
 

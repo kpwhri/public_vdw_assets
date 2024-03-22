@@ -1589,6 +1589,9 @@ Output: A dataset matching the structure and contents of the input dataset, but 
 <h3 id="getfollowuptime">%GetFollowUpTime<a class="headerlink" href="#getfollowuptime" title="Permanent link"></a></h3>
 <p>Purpose: Evaluates enrollment data for an input dataset of people from a user-specified IndexDate, up until a user specified EndDate, adding a variable to the input dataset giving the earlier of EndDate or the end of each person&rsquo;s continuous enrollment. People with no enrollment during the period between IndexDate and EndDate will have a missing value in the added variable.</p>
 <p>Both IndexDate and EndDate can vary from person to person (in which case these parameters should name variables in the People dataset) or can be date constants that apply to everyone.</p>
+<blockquote>
+<p>Note that this macro relies on <code>%CollapsePeriods</code>, which imposes no limits on the number of gaps or total unenrolled days each person has. It will collapse across any number of gaps, so long as none are longer than <code>GapTolerance</code> days.</p>
+</blockquote>
 <p>Inputs: A dataset of unduplicated MRNs</p>
 <p>Output(s): A new dataset identical to the one named in the People parameter, but with an additional variable that answers the question &lsquo;at what point after index date did this person&rsquo;s continuous enrollment end, if it ended before EndDate?&rsquo;</p>
 <h4 id="parameters_13">Parameter|s|<a class="headerlink" href="#parameters_13" title="Permanent link"></a></h4>
@@ -1636,6 +1639,9 @@ Output: A dataset matching the structure and contents of the input dataset, but 
 </table>
 <h3 id="getrisksetexit">%GetRiskSetExit<a class="headerlink" href="#getrisksetexit" title="Permanent link"></a></h3>
 <p>Purpose: Takes an input dataset of MRNs and index dates representing a set of people entering a risk set (as for a survival analysis, say) and returns a dataset with information on when and how each person/index date left the set due to disenrollment or death, or if they were censored before either event occurred.</p>
+<blockquote>
+<p>Note that this macro relies on <code>%CollapsePeriods</code>, which imposes no limits on the number of gaps or total unenrolled days each person has. It will collapse across any number of gaps, so long as none are longer than <code>GapTolerance</code> days.</p>
+</blockquote>
 <p>Both IndexDate and CensorDate can vary from person to person (in which case these parameters should name variables in the People dataset) or can be date constants that apply to everyone.</p>
 <p>Inputs: A dataset of MRNs and index and censoring dates. MRNs can be repeated, so long as each record has a different index date.</p>
 <p>Outputs: A new dataset containing MRN, index date, risk set exit date, exit reason, enrollment dates and death information.</p>
@@ -1736,6 +1742,9 @@ Output: A dataset matching the structure and contents of the input dataset, but 
 <h3 id="collapseperiods">%CollapsePeriods<a class="headerlink" href="#collapseperiods" title="Permanent link"></a></h3>
 <p>Purpose: Takes an input dataset of start/stop periods and collapses contiguous, overlapping, or |near-contiguous (e.g., w/in ||tolerance) periods over which none of the variables on the dataset change.</p>
 <p>This macro is useful for determining the extent of continuous enrollment. Just draw out a set of enrollment records, drop any variables whose changes are not of interest (e.g., if you don&rsquo;t care about the type of coverage, drop all the ins_: vars) and run it through this macro.</p>
+<blockquote>
+<p>Note that this macro will collapse across any number of gaps, so long as no single gap is longer than <code>&amp;DaysTol</code> days. If you care about how many gaps appear in your data, or the total number of gap days, this is not the tool for you.</p>
+</blockquote>
 <p>Inputs: A dataset with a period-start variable (e.g., enr_start), and a period-end variable (e.g., enr_end), and any number of additional variables (e.g., mrn, primary care physician indicator, etc.)</p>
 <p>Output(s): If the &amp;OutSet parameter is given, a new dataset of collapsed periods. If not, the input dataset is modified in-place.</p>
 <h4 id="parameters_15">Parameters<a class="headerlink" href="#parameters_15" title="Permanent link"></a></h4>
@@ -1773,7 +1782,7 @@ Output: A dataset matching the structure and contents of the input dataset, but 
 </tr>
 <tr>
 <td>DaysTol</td>
-<td>The number of days gap to ignore between otherwise contiguous periods of no change.</td>
+<td>The maxium number of days gap between records that you want the macro to ignore. Note that the macro will collapse across <strong>any number of gaps</strong> shorter than <code>DaysTol</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -2238,7 +2247,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 </tbody>
 </table>
 <h3 id="simplecontinuous">%SimpleContinuous<a class="headerlink" href="#simplecontinuous" title="Permanent link"></a></h3>
-<p>Purpose: Motivated by a desire for a simpler version of the %PullContinuous macro (which is hard to explain now that Enroll is a start/stop structure, since it purports to evaluate months of enrollment). This one evaluates enrollment over a single period of interest, allowing any number of gaps of at most &amp;DaysTol days. It returns a dset with a flag var called ContinuouslyEnrolled that signifies whether or not the person was continuously enrolled over the period of interest.</p>
+<p>Purpose: Motivated by a desire for a simpler version of the %PullContinuous macro (which is hard to explain now that Enroll is a start/stop structure, since it purports to evaluate months of enrollment). This one evaluates enrollment over a single period of interest, allowing <strong>any number of gaps</strong> of at most &amp;DaysTol days. It returns a dset with a flag var called ContinuouslyEnrolled that signifies whether or not the person was continuously enrolled over the period of interest.</p>
 <p>Like PullContinuous, this macro takes an optional input dataset of Enroll records, allowing users to apply constraints to which types of enrollment records are considered.</p>
 <p>Inputs: A dataset of MRNs, dates defining the period of interest, a tolerance parameter signifying the number of days disenrollment to close up, and optionally, a dset of Enroll records to use</p>
 <p>Output(s): A dataset bearing the MRNs input, a 0/1 ContinuouslyEnrolled variable, and a CoveredDays variable reporting the total number of days during the period of interest that the person was enrolled.</p>
