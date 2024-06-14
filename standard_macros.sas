@@ -6879,7 +6879,7 @@ Published:  02/2013
           33042       = '        NHL ^{unicode 2013} Extranodal'
           34000       = 'Myeloma'
           35011-35043 = 'Leukemia'
-          35011-35013 = '    Lymphocytic Leukemia'
+          35011-35013 = '    Lymphocytic Lymphoma'
           35011       = '        Acute Lymphocytic Leukemia'
           35012       = '        Chronic Lymphocytic Leukemia'
           35013       = '        Other Lymphocytic Leukemia'
@@ -6900,8 +6900,8 @@ Published:  02/2013
 
       data &outds;
         set &inds;
-        site = input(substr(icdosite, 2), 3.);
-        hist = input(morph, 4.);
+        site = input(substr(primarySite, 2), 3.);
+        hist = input(histologictypeicdo3, 4.);
         if site in (000:009)
           and hist not in (9050:9055, 9140, 9590:9992)
           then site_recode = 20010
@@ -7250,6 +7250,7 @@ Published:  02/2013
       run;
     %end;
 %mend seer_site_recode;
+
 
 /*********************************************
 
