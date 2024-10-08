@@ -34,7 +34,7 @@ The intention here is that the below table holds a complete and accurate list of
 | |`&_vdw_census_demog_dec`|" for the Census: Decennial Geo-Demographics dataset|\_my\_vdw\_lib.census_demog|
 | |`&_vdw_lab`| " for the Lab Results dataset|\_my\_vdw\_lib.lab_results|
 | |`&_vdw_lab_notes`|" for the Lab Result Notes dataset|\_my\_vdw\_lib.lab_long_char|
-| |`&_vdw_social_hx`|" for the Socialy History dataset|\_my\_vdw\_lib.SocialHx|
+| |`&_vdw_social_hx`|" for the Social History dataset|\_my\_vdw\_lib.SocialHx|
 | |`&_vdw_pro_types`|" for the Patient Reported Outcome Types dataset|\_my\_vdw\_lib.pro\_types|
 | |`&_vdw_pro_surveys`|" for the Patient Reported Outcome Surveys dataset|\_my\_vdw\_lib.pro\_survs|
 | |`&_vdw_pro_responses`|" for the Patient Reported Outcome Responses dataset|\_my\_vdw\_lib.pro\_resps|
