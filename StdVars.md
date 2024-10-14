@@ -52,7 +52,7 @@ From time to time we may define additional variables to refer to prior or future
 Note that sites are free to store their VDW data in a variety of places--they can keep them all as flat SAS datasets in a single directory, or can put each file in its own directory, or they can put some or all of their VDW data in tables on a server database. Wherever the data ultimately lie, sites define /whatever libraries are necessary to populate the dataset reference variables, but there is no standard library that users should count on existing. ***VDW users should not assume that any particular library is defined in their code unless they define it themselves.***
 
 ## For Site Data Managers
-One other crucial bit of environment for VDW users is access to the VDW standard macros. These are acheived by way of the FILENAME vdw_macs blah blah blah statement in StdVars.sas. Depending on your local firewall and other policies, you may have a choice for how your local users get at these macros (and, in cases where macros load data (e.g., %vdw_formats() how they get at that data)). Those choices are:
+One other crucial bit of environment for VDW users is access to the VDW standard macros. These are achieved by way of the FILENAME vdw_macs blah blah blah statement in StdVars.sas. Depending on your local firewall and other policies, you may have a choice for how your local users get at these macros (and, in cases where macros load data (e.g., %vdw_formats() how they get at that data)). Those choices are:
 
 1. Point your vdw_macs reference directly at the files on kpwhri.github.io.
 2. Maintain local copies of those files, and point your users at those instead.
