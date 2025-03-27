@@ -1417,20 +1417,6 @@ run;
    run ;
 %mend PrettyCase ;
 
-%macro GetCensusForPeople(InSet  , OutSet  ) ;
- /*Removed the year parameter so that vdw_census will always point
-at the standard vars reference. DLK 08-19-2010 */
-   proc sql ;
-      create table &OutSet (drop = _mrn) as
-      select *
-      from  &InSet as i LEFT JOIN
-            &_vdw_census (rename = (mrn = _mrn)) as c
-      on    i.mrn = c._mrn
-      ;
-   quit ;
-
-%mend GetCensusForPeople ;
-
 %macro CleanRx(OutLib, Clean=N, Dirty=N, Report=Y);
 /***************************************************************************
 * Parameters:
@@ -2085,12 +2071,10 @@ quit;
 proc sql;
  create table &outfile. as
    select mrn
-        , max(Diastolic) as Max_Diastolic
- label = "Person's highest diastolic reading between &StartDate. and &EndDate."
-        , max(Systolic)  as Max_Systolic
- label = "Person's highest systolic reading between &StartDate. and &EndDate."
-   from &_vdw_vitalsigns (where=(Measure_Date between "&StartDate"d
-                                                 AND "&EndDate"d  ))
+        , max(Diastolic) as Max_Diastolic label = "Person's highest diastolic reading between &StartDate. and &EndDate."
+        , max(Systolic)  as Max_Systolic label = "Person's highest systolic reading between &StartDate. and &EndDate."
+   from &_vdw_vitalsigns
+   where Measure_Date between "&StartDate"d AND "&EndDate"d
    group by mrn
    having &Conditional.
  ;
@@ -6879,7 +6863,7 @@ Published:  02/2013
           33042       = '        NHL ^{unicode 2013} Extranodal'
           34000       = 'Myeloma'
           35011-35043 = 'Leukemia'
-          35011-35013 = '    Lymphocytic Lymphoma'
+          35011-35013 = '    Lymphocytic Leukemia'
           35011       = '        Acute Lymphocytic Leukemia'
           35012       = '        Chronic Lymphocytic Leukemia'
           35013       = '        Other Lymphocytic Leukemia'

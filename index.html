@@ -1981,42 +1981,11 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <p>The macro uses some version-9-only functions&ndash;to wit: propcase, prxparse and prxmatch. So it will not be usable on versions of sas earlier than 9.</p>
 <p>It also relies on a hard-coded list of names whose fourth characters should be upcased (e.g., the Mac names—MacDougall, MacDonald, etc.).</p>
 <p>Please let <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#114;&#111;&#121;&#46;&#101;&#46;&#112;&#97;&#114;&#100;&#101;&#101;&#64;&#107;&#112;&#46;&#111;&#114;&#103;&#107;&#110;&#111;&#119;">&#114;&#111;&#121;&#46;&#101;&#46;&#112;&#97;&#114;&#100;&#101;&#101;&#64;&#107;&#112;&#46;&#111;&#114;&#103;&#107;&#110;&#111;&#119;</a> about any improvements that could be made.</p>
-<h3 id="getcensusforpeople">%GetCensusForPeople<a class="headerlink" href="#getcensusforpeople" title="Permanent link"></a></h3>
-<p>Purpose: Adds<a href="/C:/Users/O578092/Documents/vdw/public_vdw_assets/resolveuid/298755bd417dadd1067f1eb60140461c">Census</a>variables to an input dataset of MRNs</p>
-<p>Inputs: A dataset containing a variable called MRN.</p>
-<p>Output: A dataset containing everything from the input dataset, plus all of the variables in the [[Census]] file.</p>
-<h4 id="parameters_19">Parameters<a class="headerlink" href="#parameters_19" title="Permanent link"></a></h4>
-<table>
-<thead>
-<tr>
-<th>Parameter Name</th>
-<th>Parameter Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>InSet</td>
-<td>The name of the input dataset of MRNs. If this dset contains other variables, they should appear in the output dataset as well.</td>
-</tr>
-<tr>
-<td>Outds</td>
-<td>The original dataset, along with all variables from [[Census]] as well. You should get the same number of observations</td>
-</tr>
-<tr>
-<td>CensusYear (optional—defaults to 2000)</td>
-<td>The census files are named after the year during which the demographic data was collected. All sites should have 2000 data at least, other sites may have data from other years.</td>
-</tr>
-</tbody>
-</table>
-<h4 id="sample-call_4">Sample Call:<a class="headerlink" href="#sample-call_4" title="Permanent link"></a></h4>
-<div class="highlight"><pre>%GetCensusForPeople(InSet = s.drop_me , OutSet = s.drop_me_census , CensusYear = 2010) ;
-</pre></div>
-
 <h3 id="cleanrx">%CleanRx<a class="headerlink" href="#cleanrx" title="Permanent link"></a></h3>
 <p>Purpose: Performs a quality check on the pharmacy data reporting problem obs and variables and optionally producing datasets with problem and non-problem data.</p>
 <p>Inputs: The Rx file, a declared library for output, and user options.</p>
 <p>Output(s): All output is optional - A report of problem data, a table of problem data, and a table of non-problem data.</p>
-<h4 id="parameters_20">Parameters<a class="headerlink" href="#parameters_20" title="Permanent link"></a></h4>
+<h4 id="parameters_19">Parameters<a class="headerlink" href="#parameters_19" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2047,7 +2016,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <p>Purpose: Pulls all vital signs between the supplied dates for the people listed in the user-supplied People dataset.</p>
 <p>Inputs: A dataset containing a list of unduplicated MRNs belonging to the people whose vitals you want. Dates over which you want the vitals.</p>
 <p>Output(s): The portion of the Vital Signs dataset that describes vitals for the people listed in the People dataset.</p>
-<h4 id="parameters_21">Parameters<a class="headerlink" href="#parameters_21" title="Permanent link"></a></h4>
+<h4 id="parameters_20">Parameters<a class="headerlink" href="#parameters_20" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2078,7 +2047,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <p>Purpose: Pulls all people with diabetes as defined by the Charlson score. Creates a dataset in the work directory called Diabetes_Charlson of the diagnoses along with descriptions of each. Creates a format called Diabetes_Charlson for the diagnoses as well.</p>
 <p>Inputs: Dates over which you want to pull diabetics, optional variable of allowed encounter types.</p>
 <p>Output(s): A table with one record per person meeting the Charlson defintion of diabetics over the dates specified.</p>
-<h4 id="parameters_22">Parameters<a class="headerlink" href="#parameters_22" title="Permanent link"></a></h4>
+<h4 id="parameters_21">Parameters<a class="headerlink" href="#parameters_21" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2109,7 +2078,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <p>Purpose: Creates global variables holding the minimum and maximum values of all date variables in a dataset.</p>
 <p>Inputs: The path and filename of a SAS dataset.</p>
 <p>Output: Global variables in the form of DateVariable_Max and DateVariable_Min containing the max and min dates in the dataset (see example)</p>
-<h4 id="parameters_23">Parameters<a class="headerlink" href="#parameters_23" title="Permanent link"></a></h4>
+<h4 id="parameters_22">Parameters<a class="headerlink" href="#parameters_22" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2132,7 +2101,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 </tr>
 </tbody>
 </table>
-<h4 id="sample-call_5">Sample Call<a class="headerlink" href="#sample-call_5" title="Permanent link"></a></h4>
+<h4 id="sample-call_4">Sample Call<a class="headerlink" href="#sample-call_4" title="Permanent link"></a></h4>
 <div class="highlight"><pre>%GetDateRange(&amp;_TumorLib., &amp;_TumorData.);
 </pre></div>
 
@@ -2141,7 +2110,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <p>Purpose: Pulls all people with a systolic and-or diastolic BP reading above specified threasholds over specified dates along with their highest systolic and diastolic readings in that period. Can be used to defined hypertension.</p>
 <p>Requirements: %include your standard vars file</p>
 <p>Output: A list of MRN with max values of systolic and diastolic measurements over the date range that meet the defined threashold.</p>
-<h4 id="parameters_24">Parameters<a class="headerlink" href="#parameters_24" title="Permanent link"></a></h4>
+<h4 id="parameters_23">Parameters<a class="headerlink" href="#parameters_23" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2184,7 +2153,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <p>Purpose: Performs a quality check on enrollment data reporting problem obs and variables and optionally producing datasets with problem and non-problem data.</p>
 <p>Inputs: The Enroll file, a declared library for output, and user options.</p>
 <p>Output(s): All output is optional - A report of problem data, a table of problem data, and a table of non-problem data.</p>
-<h4 id="parameters_25">Parameters<a class="headerlink" href="#parameters_25" title="Permanent link"></a></h4>
+<h4 id="parameters_24">Parameters<a class="headerlink" href="#parameters_24" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2215,7 +2184,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <p>Purpose: Performs a quality check on vital signs data reporting problem obs and variables and optionally producing datasets with problem and non-problem data.</p>
 <p>Inputs: The Vital Signs file, a declared library for output, and user options.</p>
 <p>Output(s): All output is optional - A report of problem data, a table of problem data, and a table of non-problem data.</p>
-<h4 id="parameters_26">Parameters<a class="headerlink" href="#parameters_26" title="Permanent link"></a></h4>
+<h4 id="parameters_25">Parameters<a class="headerlink" href="#parameters_25" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2251,7 +2220,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <p>Like PullContinuous, this macro takes an optional input dataset of Enroll records, allowing users to apply constraints to which types of enrollment records are considered.</p>
 <p>Inputs: A dataset of MRNs, dates defining the period of interest, a tolerance parameter signifying the number of days disenrollment to close up, and optionally, a dset of Enroll records to use</p>
 <p>Output(s): A dataset bearing the MRNs input, a 0/1 ContinuouslyEnrolled variable, and a CoveredDays variable reporting the total number of days during the period of interest that the person was enrolled.</p>
-<h4 id="parameters_27">Parameters<a class="headerlink" href="#parameters_27" title="Permanent link"></a></h4>
+<h4 id="parameters_26">Parameters<a class="headerlink" href="#parameters_26" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2286,7 +2255,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 </tr>
 </tbody>
 </table>
-<h4 id="sample-call_6">Sample Call<a class="headerlink" href="#sample-call_6" title="Permanent link"></a></h4>
+<h4 id="sample-call_5">Sample Call<a class="headerlink" href="#sample-call_5" title="Permanent link"></a></h4>
 <div class="highlight"><pre>%SimpleContinuous(People = TestPeople
                , StartDt = 01jan2006
                , EndDt   = 31dec2006
@@ -2300,7 +2269,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <p>To make these calculations easier, the CDC released<a href="http://www.cdc.gov/nccdphp/dnpao/growthcharts/resources/sas.htm">this SAS code for calculating the proper percentile scores</a>. The %GetKidBMIPercentiles VDW macro is a thin wrapper around the CDC&rsquo;s code.</p>
 <p>Note: This macro uses the VDW Vital Signs Variable Head_Cir_Raw, which should be in centimeters.</p>
 <p>Note that the CDC&rsquo;s code is valid only for people between the ages of 2 and 17, and the macro will not return any measures for people outside this age range. It will also potentially use imputed heights&ndash;be sure to inspect the days_diff variable to make sure that you are comfortable with the length of time that has passed between the height and weight measures (if any).</p>
-<h4 id="parameters_28">Parameters<a class="headerlink" href="#parameters_28" title="Permanent link"></a></h4>
+<h4 id="parameters_27">Parameters<a class="headerlink" href="#parameters_27" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2327,7 +2296,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 </tr>
 </tbody>
 </table>
-<h4 id="sample-call_7">Sample Call<a class="headerlink" href="#sample-call_7" title="Permanent link"></a></h4>
+<h4 id="sample-call_6">Sample Call<a class="headerlink" href="#sample-call_6" title="Permanent link"></a></h4>
 <div class="highlight"><pre>%GetKidBMIPercentiles(InSet  = s.test_kids
                    , OutSet  = s.test_bmis
                    , StartDt = 01jan2004
@@ -2338,7 +2307,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <h3 id="make_inclusion_table">%make_inclusion_table<a class="headerlink" href="#make_inclusion_table" title="Permanent link"></a></h3>
 <p>Creates a Dept. of Health &amp; Human Services Inclusion Enrollment Report (form PHS 398/2590) report for an input set of MRNs, with Race, Ethnicity and Gender information drawn from the local vdw demographics table. Unlike many other VDW macros, the output of this one just gets spewed into the .lst file (and any ODS destinations you open prior to calling the macro). There is no dataset output.</p>
 <p>Note that this output may also be of use for filling out PHS&rsquo; Targeted/Planned Enrollment form.</p>
-<h4 id="parameters_29">Parameters<a class="headerlink" href="#parameters_29" title="Permanent link"></a></h4>
+<h4 id="parameters_28">Parameters<a class="headerlink" href="#parameters_28" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2353,7 +2322,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 </tr>
 </tbody>
 </table>
-<h4 id="sample-call_8">Sample Call<a class="headerlink" href="#sample-call_8" title="Permanent link"></a></h4>
+<h4 id="sample-call_7">Sample Call<a class="headerlink" href="#sample-call_7" title="Permanent link"></a></h4>
 <div class="highlight"><pre>  ods rtf file =  &#39;\\server\share\project\programming\output\inclusion\_table.rtf&#39; ;
 
     %make_inclusion_table(cohort = perm.my_mrns) ;
@@ -2363,7 +2332,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 
 <h3 id="getadultbmi">%GetAdultBMI<a class="headerlink" href="#getadultbmi" title="Permanent link"></a></h3>
 <p>Wraps the Vital Signs workgroup&rsquo;s official %BMI_adult_macro macro (see below), allowing the user to specify a specific set of people and an optional timeframe over which they would like BMI measures for adults.</p>
-<h4 id="parameters_30">Parameters<a class="headerlink" href="#parameters_30" title="Permanent link"></a></h4>
+<h4 id="parameters_29">Parameters<a class="headerlink" href="#parameters_29" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2390,7 +2359,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 </tr>
 </tbody>
 </table>
-<h4 id="sample-call_9">Sample Call<a class="headerlink" href="#sample-call_9" title="Permanent link"></a></h4>
+<h4 id="sample-call_8">Sample Call<a class="headerlink" href="#sample-call_8" title="Permanent link"></a></h4>
 <div class="highlight"><pre>%GetAdultBMI(people = s.test_vitals
            , outset = s.test_adult_bmi
            , StartDt = &#39;01jan2006&#39;d
@@ -2437,7 +2406,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 </tr>
 </tbody>
 </table>
-<h4 id="parameters_31">Parameters<a class="headerlink" href="#parameters_31" title="Permanent link"></a></h4>
+<h4 id="parameters_30">Parameters<a class="headerlink" href="#parameters_30" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2464,7 +2433,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 </tr>
 </tbody>
 </table>
-<h4 id="sample-call_10">Sample Call<a class="headerlink" href="#sample-call_10" title="Permanent link"></a></h4>
+<h4 id="sample-call_9">Sample Call<a class="headerlink" href="#sample-call_9" title="Permanent link"></a></h4>
 <div class="highlight"><pre>%BMI_adult_macro(vitals_in = perm.my_vitals
                , demo_in = &amp;_vdw_demographic
               , vitals_out = perm.with_bmi) ;
@@ -2496,7 +2465,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 </tbody>
 </table>
 <p>Note that NULL is only used when the other paired value for the blood pressure is not null.</p>
-<h4 id="parameters_32">Parameters<a class="headerlink" href="#parameters_32" title="Permanent link"></a></h4>
+<h4 id="parameters_31">Parameters<a class="headerlink" href="#parameters_31" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2519,7 +2488,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 </tr>
 </tbody>
 </table>
-<h4 id="sample-call_11">Sample Call<a class="headerlink" href="#sample-call_11" title="Permanent link"></a></h4>
+<h4 id="sample-call_10">Sample Call<a class="headerlink" href="#sample-call_10" title="Permanent link"></a></h4>
 <div class="highlight"><pre>%bp_flag(dsin=&amp;_vdw_vitalsigns,
          dsout=bp_qc,
          keepvars= mrn measure_date systolic diastolic)
@@ -2537,7 +2506,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <p>Purpose: produces a dataset of probable periods of pregnancy for a cohort of women, as divined by the incidence of pregnancy-significant events found in Utilization data (procedures and diagnoses).</p>
 <p>Inputs: A dataset with the MRNs of the women whose pregnancies you are interested in.</p>
 <p>Output(s): A dataset of probable pregnancy periods. Optionally, the dataset of raw pregnancy-significant events.</p>
-<h4 id="parameters_33">Parameters<a class="headerlink" href="#parameters_33" title="Permanent link"></a></h4>
+<h4 id="parameters_32">Parameters<a class="headerlink" href="#parameters_32" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2624,7 +2593,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <p>Purpose: Creates a dataset of yearly counts of enrollees by age, sex and race, for use as denominators in calculating rates in VDW programs. Written to support general QA efforts.</p>
 <p>Inputs: The start and end year over which you would like the denominators; the name of the output dataset.</p>
 <p>Output: A dataset of counts, described in detail below.</p>
-<h4 id="parameters_34">Parameters<a class="headerlink" href="#parameters_34" title="Permanent link"></a></h4>
+<h4 id="parameters_33">Parameters<a class="headerlink" href="#parameters_33" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2695,7 +2664,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 </tr>
 </tbody>
 </table>
-<h4 id="sample-call_12">Sample Call<a class="headerlink" href="#sample-call_12" title="Permanent link"></a></h4>
+<h4 id="sample-call_11">Sample Call<a class="headerlink" href="#sample-call_11" title="Permanent link"></a></h4>
 <div class="highlight"><pre>%make_denoms(start_year = 1998
             , end_year  = 2015
             , outset    = lab_res_denoms
@@ -2707,7 +2676,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <p>Purpose: Defines several useful formats that add descriptive text to coded values.</p>
 <p>Inputs: None</p>
 <p>Output:<a href="/C:/Users/O578092/Documents/vdw/public_vdw_assets/resolveuid/4b88b08a31c3e4fc5897a633b373794b">The formats listed here</a>are defined in a format catalog in the current session.</p>
-<h4 id="parameters_35">Parameters<a class="headerlink" href="#parameters_35" title="Permanent link"></a></h4>
+<h4 id="parameters_34">Parameters<a class="headerlink" href="#parameters_34" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2743,7 +2712,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 </ul>
 <p>Inputs: The name of the SAS library containing the datasets to be sent off-site.</p>
 <p>Output: Warnings/CONTENTS/PROC PRINT output to the listing file (or ODS destination).</p>
-<h4 id="parameters_36">Parameters<a class="headerlink" href="#parameters_36" title="Permanent link"></a></h4>
+<h4 id="parameters_35">Parameters<a class="headerlink" href="#parameters_35" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2786,7 +2755,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 <p>Purpose: Creates a dataset of counts and rates of the codes supplied in the &amp;incodeset parameter. Written to support general QA efforts.</p>
 <p>Inputs: A list of codes on which you&rsquo;d like counts/rates; the start and end dates over which you would like the counts; an optional set of MRNs of the people in whose counts you&rsquo;re interested; the path &amp; filename you want for the output dataset.</p>
 <p>Output: A dataset of counts and rates, described in detail below.</p>
-<h4 id="parameters_37">Parameters<a class="headerlink" href="#parameters_37" title="Permanent link"></a></h4>
+<h4 id="parameters_36">Parameters<a class="headerlink" href="#parameters_36" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2889,7 +2858,7 @@ Notes: This macro is not intended to replace human judgment&ndash;it should sign
 </tr>
 </tbody>
 </table>
-<h4 id="sample-call_13">Sample Call<a class="headerlink" href="#sample-call_13" title="Permanent link"></a></h4>
+<h4 id="sample-call_12">Sample Call<a class="headerlink" href="#sample-call_12" title="Permanent link"></a></h4>
 <p>Here is a sample input datastep that produces a valid &amp;InCodeSet dataset:
 <div class="highlight"><pre>data gnu ;
   infile datalines truncover ;
@@ -2929,7 +2898,7 @@ run ;
 <p>Purpose: Creates aggregate reports from the datasets produced by %generate_counts_rates. Written to support general QA efforts.</p>
 <p>Inputs: The libname containing the site-submitted datasets generated by runs of %generate_counts_rates; a libname giving the location where you would like the output dataset &amp; excel spreadsheet file(s).</p>
 <p>Output: An aggregate dataset of counts/rates, and one excel spreadsheet file per value of category found in the input datasets.</p>
-<h4 id="parameters_38">Parameters<a class="headerlink" href="#parameters_38" title="Permanent link"></a></h4>
+<h4 id="parameters_37">Parameters<a class="headerlink" href="#parameters_37" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2962,7 +2931,7 @@ run ;
 <p>Purpose: Takes a set of site-submitted datasets and creates a single dataset with all data, and adds a &ldquo;site&rdquo; variable indicaing the source of the record. Useful for collating site-submitted data.</p>
 <p>Inputs: The libname containing the site-submitted datasets; the base name of the datasets you would like to aggregate; a libname giving the location where you would like the output dataset to be written.</p>
 <p>Output: A single aggregate dataset holding all the data in the set of input datasets, with an additional &ldquo;site&rdquo; variable.</p>
-<h4 id="parameters_39">Parameters<a class="headerlink" href="#parameters_39" title="Permanent link"></a></h4>
+<h4 id="parameters_38">Parameters<a class="headerlink" href="#parameters_38" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -2997,7 +2966,7 @@ run ;
 </ul>
 <p>Inputs: An input dataset of MRNs of the people on whom you would like race info.</p>
 <p>Output: A dataset containing MRN, CombinedRace, and RACE1 - RACE5.</p>
-<h4 id="parameters_40">Parameters<a class="headerlink" href="#parameters_40" title="Permanent link"></a></h4>
+<h4 id="parameters_39">Parameters<a class="headerlink" href="#parameters_39" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -3026,7 +2995,7 @@ run ;
 </table>
 <h3 id="seer_site_recode">%SEER_SITE_RECODE<a class="headerlink" href="#seer_site_recode" title="Permanent link"></a></h3>
 <p>Developed by Rebecca Ziebell (<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#122;&#105;&#101;&#98;&#101;&#108;&#108;&#46;&#114;&#64;&#103;&#104;&#99;&#46;&#111;&#114;&#103;">&#122;&#105;&#101;&#98;&#101;&#108;&#108;&#46;&#114;&#64;&#103;&#104;&#99;&#46;&#111;&#114;&#103;</a>), this macro recodes VDW.TUMOR-formatted records into SEER site recode vales, which define the major cancer site/histology groups that are commonly used in reporting of cancer incidence data. Additional information about the SEER site recode can be found at <a href="/C:/Users/O578092/Documents/vdw/public_vdw_assets/seer.cancer.gov/siterecode">seer.cancer.gov/siterecode</a>. As of 08/08/2015, this macro uses the Site Recode ICD-O-3/WHO 2008 definition, which is defined here: <a href="/C:/Users/O578092/Documents/vdw/public_vdw_assets/seer.cancer.gov/siterecode/icdo3_dwhoheme">seer.cancer.gov/siterecode/icdo3_dwhoheme</a>.</p>
-<h4 id="parameters_41">Parameters<a class="headerlink" href="#parameters_41" title="Permanent link"></a></h4>
+<h4 id="parameters_40">Parameters<a class="headerlink" href="#parameters_40" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -3047,7 +3016,7 @@ run ;
 </table>
 <p><em>Note:</em>
 <code>%ser_site_recode</code> also establishes two numeric formats to be used with the site_recode variable: simple format site_recode. and multilabel format recode_mlf.</p>
-<h4 id="sample-call_14">Sample Call<a class="headerlink" href="#sample-call_14" title="Permanent link"></a></h4>
+<h4 id="sample-call_13">Sample Call<a class="headerlink" href="#sample-call_13" title="Permanent link"></a></h4>
 <div class="highlight"><pre>%seersite_recode(inds=all_tmr, outds=tmr_recoe) ;
 </pre></div>
 
@@ -3083,7 +3052,7 @@ run ;
 </tr>
 </tbody>
 </table>
-<h4 id="sample-call_15">Sample Call<a class="headerlink" href="#sample-call_15" title="Permanent link"></a></h4>
+<h4 id="sample-call_14">Sample Call<a class="headerlink" href="#sample-call_14" title="Permanent link"></a></h4>
 <div class="highlight"><pre>%GetLabForPeopleAndLab(People  = perm.my_cohort
                      , LabLst  = perm.my_test_types
                      , StartDt = 01jan2005
@@ -3119,7 +3088,7 @@ In addition to these scores there are 31 0/1 flags signifying the component cond
 <p><a href="https://www.hcup-us.ahrq.gov/toolssoftware/comorbidity/|comorbidity.jsp">HCUP website. Elixhauser Comoribidity Software, Version 3.7</a> Retrieved 1-dec-2017.
 A Modification of the Elixhauser comorbidity Measures Into a Point System for Hospital Death Using Administrative Data. Med Care 2009;47:626-633.</p>
 <p>Identifying Increased Risk of Readmission and In-hospital Mortality Using Hospital Administrative Data: The AHRQ Elixhauser Comorbidity Index. Med Care 2017;55: 698–705</p>
-<h4 id="parameters_42">Parameters<a class="headerlink" href="#parameters_42" title="Permanent link"></a></h4>
+<h4 id="parameters_41">Parameters<a class="headerlink" href="#parameters_41" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -3162,7 +3131,7 @@ A Modification of the Elixhauser comorbidity Measures Into a Point System for Ho
 </tr>
 </tbody>
 </table>
-<h4 id="sample-call_16">Sample Call<a class="headerlink" href="#sample-call_16" title="Permanent link"></a></h4>
+<h4 id="sample-call_15">Sample Call<a class="headerlink" href="#sample-call_15" title="Permanent link"></a></h4>
 <div class="highlight"><pre>%elixhauser(inputds       = perm.my_cohort
           , mrn           = chsid
           , index_date    = index_dt
@@ -3178,7 +3147,7 @@ A Modification of the Elixhauser comorbidity Measures Into a Point System for Ho
 <p>Inputs: A dataset of MRNs and index dates.</p>
 <p>Outputs: A dataset with MRN, index date, and a var called combined_score which holds the Gagne score.</p>
 <p><strong>Note that this macro will only process ICD-9 diagnosis codes, and so it is not suitable for index dates that fall on or after 1-october-2015.</strong></p>
-<h4 id="parameters_43">Parameters<a class="headerlink" href="#parameters_43" title="Permanent link"></a></h4>
+<h4 id="parameters_42">Parameters<a class="headerlink" href="#parameters_42" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -3201,7 +3170,7 @@ A Modification of the Elixhauser comorbidity Measures Into a Point System for Ho
 </tr>
 </tbody>
 </table>
-<h4 id="sample-call_17">Sample Call<a class="headerlink" href="#sample-call_17" title="Permanent link"></a></h4>
+<h4 id="sample-call_16">Sample Call<a class="headerlink" href="#sample-call_16" title="Permanent link"></a></h4>
 <div class="highlight"><pre>%gagne(Inputds           = s.test_gagne
       , IndexDateVarName = index_date
       , outputds         = s.test_gagne_out
@@ -3218,7 +3187,7 @@ A Modification of the Elixhauser comorbidity Measures Into a Point System for Ho
 <h4 id="references_1">References<a class="headerlink" href="#references_1" title="Permanent link"></a></h4>
 <p>Hude Quan, Vijaya Sundararajan, Patricia Halfon, Andrew Fong, Bernard Burnand, Jean-Christophe Luthi, L. Duncan Saunders, Cynthia A. Beck, Thomas E. Feasby and William A. Ghali; Coding Algorithms for Defining Comorbidities in ICD-9-CM and ICD-10 Administrative Data; <a href="https://www.jstor.org/stable/3768193">Medical Care , Nov., 2005, Vol. 43, No. 11 (Nov., 2005), pp. 1130-1139</a></p>
 <p>Gagne JJ, Glynn RJ, Avorn J, Levin R, Schneeweiss S. A combined, comorbidity score predicted mortality in elderly patients better than existing scores. Journal of Clinical Epidemiology 2011 Jan, 3</p>
-<h4 id="parameters_44">Parameters<a class="headerlink" href="#parameters_44" title="Permanent link"></a></h4>
+<h4 id="parameters_43">Parameters<a class="headerlink" href="#parameters_43" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -3241,7 +3210,7 @@ A Modification of the Elixhauser comorbidity Measures Into a Point System for Ho
 </tr>
 </tbody>
 </table>
-<h4 id="sample-call_18">Sample Call<a class="headerlink" href="#sample-call_18" title="Permanent link"></a></h4>
+<h4 id="sample-call_17">Sample Call<a class="headerlink" href="#sample-call_17" title="Permanent link"></a></h4>
 <div class="highlight"><pre>%GagneQuan(Inputds          = s.test_gagne
          , IndexDateVarName = index_date
          , outputds         = s.test_gagne_quan_out
@@ -3253,7 +3222,7 @@ A Modification of the Elixhauser comorbidity Measures Into a Point System for Ho
 <p>Inputs: A dataset of MRNs and index dates.</p>
 <p>tputs: A dataset with MRN, a series of flags for various comorbid conditions (e.g., stroke, falls, etc.) a var called p_frailty which holds the Segal probability of frailness score and a var call frail which is a flag for values of p_frailty &gt;=.2.</p>
 <p><strong>Note that this macro will only process ICD-9 diagnosis codes, and so it is not suitable for index dates that fall on or after 1-october-2015.</strong></p>
-<h4 id="parameters_45">Parameters<a class="headerlink" href="#parameters_45" title="Permanent link"></a></h4>
+<h4 id="parameters_44">Parameters<a class="headerlink" href="#parameters_44" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -3291,7 +3260,7 @@ A Modification of the Elixhauser comorbidity Measures Into a Point System for Ho
 <p>Using Claims Data to Predict Dependency in Activities of Daily Living as a Proxy for Frailty. Pharmacoepidemiol Drug Saf 2015; 24(1):59-66.</p>
 <p><strong>Note that there are errata to this article that are not readily apparent on PubMed — see updated supplemental information on UNC website below for more info.</strong></p>
 <p>Harry Guess Research Community at University of North Carolina Gillings School of Global Public Health website. <a href="http://sph.unc.edu/epid/harry-guess-research-community/">SAS macro for predicting frailty using claims data</a>. Accessed 1/2/2018.</p>
-<h4 id="sample-call_19">Sample Call<a class="headerlink" href="#sample-call_19" title="Permanent link"></a></h4>
+<h4 id="sample-call_18">Sample Call<a class="headerlink" href="#sample-call_18" title="Permanent link"></a></h4>
 <div class="highlight"><pre>%faurot(inputds        = perm.my_cohort
      , mrn             = chsid
      , index_date      = index_dt
@@ -3302,7 +3271,7 @@ A Modification of the Elixhauser comorbidity Measures Into a Point System for Ho
 <p>The <code>race1-race5</code> variables in &amp;_vdw_demographic are set according to a specific preference hierarchy, as described in the spec.  <code>%ReprioritizeRace</code> allows users to shuffle the values in those variables according to their own preference hierarchy.  Users define their hierarchy in a format that translates the 8 allowable race values (AS, BA, WH, etc.) into a numeric rank that expresses the preferred rank order (lower numbers are more-favored, higher numbers are less-favored).</p>
 <p>Input: A dataset of MRNs, and a preference-ranking format.</p>
 <p>Output: A dataset of MRNs and <code>race1-race5</code> variables, whose values are set according to the input hierarchy.</p>
-<h4 id="parameters_46">Parameters<a class="headerlink" href="#parameters_46" title="Permanent link"></a></h4>
+<h4 id="parameters_45">Parameters<a class="headerlink" href="#parameters_45" title="Permanent link"></a></h4>
 <table>
 <thead>
 <tr>
@@ -3325,7 +3294,7 @@ A Modification of the Elixhauser comorbidity Measures Into a Point System for Ho
 </tr>
 </tbody>
 </table>
-<h4 id="sample-call_20">Sample Call<a class="headerlink" href="#sample-call_20" title="Permanent link"></a></h4>
+<h4 id="sample-call_19">Sample Call<a class="headerlink" href="#sample-call_19" title="Permanent link"></a></h4>
 <div class="highlight"><pre>proc format ;
   * Make Black/African-American the most-preferred value. Demote White under Multi-racial and Other ;
   value $prior

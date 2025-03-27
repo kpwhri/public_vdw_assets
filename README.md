@@ -499,28 +499,6 @@ It also relies on a hard-coded list of names whose fourth characters should be u
 
 Please let roy.e.pardee@kp.orgknow about any improvements that could be made.
 
-### %GetCensusForPeople
-
-Purpose: Adds[Census](resolveuid/298755bd417dadd1067f1eb60140461c)variables to an input dataset of MRNs
-
-Inputs: A dataset containing a variable called MRN.
-
-Output: A dataset containing everything from the input dataset, plus all of the variables in the \[\[Census\]\] file.
-
-#### Parameters
-
-|Parameter Name|Parameter Purpose|
-|--------------|-----------------|
-|InSet|The name of the input dataset of MRNs. If this dset contains other variables, they should appear in the output dataset as well.|
-|Outds|The original dataset, along with all variables from \[\[Census\]\] as well. You should get the same number of observations|
-|CensusYear (optional—defaults to 2000)|The census files are named after the year during which the demographic data was collected. All sites should have 2000 data at least, other sites may have data from other years.|
-
-#### Sample Call:
-
-```sas
-%GetCensusForPeople(InSet = s.drop_me , OutSet = s.drop_me_census , CensusYear = 2010) ;
-```
-
 ### %CleanRx
 
 Purpose: Performs a quality check on the pharmacy data reporting problem obs and variables and optionally producing datasets with problem and non-problem data.
