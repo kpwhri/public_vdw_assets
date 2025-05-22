@@ -13728,3 +13728,123 @@ Citation    :
 
 %mend GetRiskSetExit ;
 
+%macro summary_race_variants(inset = , outset =) ;
+
+  %put ======================================================== ;
+  %put INFO: This macro computes several ;
+  %put INFO: variations of VDW demogs summary_race variable, each ;
+  %put INFO: with different methods for dealing with the ;
+  %put INFO: uncertainties introduced by the recent inclusion of ;
+  %put INFO: Hispanic and Middle-Eastern/North African values of race.;
+  %put ;
+  %put INFO: See https://github.com/kpwhri/public_vdw_assets?tab=readme-ov-file#summary_race_variants ;
+  %put INFO: and the variable labels for details/descriptions. ;
+  %put ;
+  %put INFO: Consult with the relevant Site Dta Manager(s) to ;
+  %put INFO: see if you really need to use this--their implementation ;
+  %put INFO: of summary_race may well be optimal. And always remember ;
+  %put INFO: you can create your own summary based on the raw flags. ;
+
+  %put ======================================================== ;
+
+  data &outset ;
+    length
+      all_race_flags $ 9
+      smpl_summary_race $ 2
+      hspp_summary_race $ 2
+      noth_summary_race $ 2
+      num_flags_set 3
+    ;
+    set &inset ;
+
+    * original recipe (mostly) ;
+    * Create a string of all flags with different letters standing for Y values, and _ for N/U);
+    * Order is important here--the KPNW code ignores the last 3 flags in spots. ;
+    all_race_flags = cats(
+      ifc(r_hisp  = 'Y', 'H', '_'),
+      ifc(r_nhpi  = 'Y', 'P', '_'),
+      ifc(r_indig = 'Y', 'I', '_'),
+      ifc(r_asian = 'Y', 'A', '_'),
+      ifc(r_black = 'Y', 'B', '_'),
+      ifc(r_mena  = 'Y', 'M', '_'),
+      ifc(r_mult  = 'Y', '2', '_'),
+      ifc(r_white = 'Y', 'W', '_'),
+      ifc(r_other = 'Y', 'O', '_'))
+    ;
+
+    * Any non-underscore is a set value of race. (the 'v' modifier counts everything except the specified char) ;
+    num_flags_set = countc(all_race_flags, '_', 'v') ;
+
+    * the original code was this simple. ;
+    select(num_flags_set) ;
+      when(0) smpl_summary_race = 'UN' ; * no flags set--unknown ;
+      when(1) select('Y') ; * just one flag--which one? ;
+        when(r_nhpi)    smpl_summary_race = 'HP' ;
+        when(r_mena)    smpl_summary_race = 'MN' ;
+        when(r_indig)   smpl_summary_race = 'IN' ;
+        when(r_asian)   smpl_summary_race = 'AS' ;
+        when(r_black)   smpl_summary_race = 'BA' ;
+        when(r_hisp)    smpl_summary_race = 'HS' ;
+        when(r_white)   smpl_summary_race = 'WH' ;
+        when(r_mult)    smpl_summary_race = 'MU' ;
+        when(r_other)   smpl_summary_race = 'OT' ;
+        otherwise       smpl_summary_race = 'UN' ;
+      end ;
+      otherwise         smpl_summary_race = 'MU' ; * multiple flags are set ;
+    end ;
+
+    * KPNW style ;
+    *If Hispanic and nothing other than potentially White/Other/Multi;
+    if all_race_flags=:'H_____' then hspp_summary_race='HS';
+    *If Hispanic and some other race;
+    else if all_race_flags=:'H' then hspp_summary_race='MU';
+    *If not Hispanic:;
+    *If multi=Y or more than 1 flag;
+    else if r_mult='Y' or countc(substr(all_race_flags,2,8),'_','v')>1 then hspp_summary_race='MU';
+    *Otherwise single races;
+    else if r_nhpi  ='Y' then hspp_summary_race='HP';
+    else if r_indig ='Y' then hspp_summary_race='IN';
+    else if r_asian ='Y' then hspp_summary_race='AS';
+    else if r_black ='Y' then hspp_summary_race='BA';
+    else if r_mena  ='Y' then hspp_summary_race='MN';
+    else if r_white ='Y' then hspp_summary_race='WH';
+    else if r_other ='Y' then hspp_summary_race='OT';
+    else hspp_summary_race='UN';
+
+    * new style--special treatment for the 2-flag case. ;
+    select(num_flags_set) ;
+      when(0) noth_summary_race = 'UN' ; * no flags set--unknown ;
+      when(1) select('Y') ; * just one flag--which one? ;
+        when(r_nhpi)    noth_summary_race = 'HP' ;
+        when(r_mena)    noth_summary_race = 'MN' ;
+        when(r_indig)   noth_summary_race = 'IN' ;
+        when(r_asian)   noth_summary_race = 'AS' ;
+        when(r_black)   noth_summary_race = 'BA' ;
+        when(r_hisp)    noth_summary_race = 'HS' ;
+        when(r_white)   noth_summary_race = 'WH' ;
+        when(r_mult)    noth_summary_race = 'MU' ;
+        when(r_other)   noth_summary_race = 'OT' ;
+      end ;
+      when(2) do ;
+        * Is it just 'other' and one of the new values? If so--ignore 'other'. ;
+        * Should we look at e.g. birth_date & if its > the date of the new values we just call it MU? ;
+        if r_other = 'Y' then select('Y') ;
+          when(r_mena) noth_summary_race = 'MN' ;
+          when(r_hisp) noth_summary_race = 'HS' ;
+          otherwise noth_summary_race = 'MU' ;
+        end ;
+        * its 2 flags but 'other' is not one of them--call that multi. ;
+        else noth_summary_race = 'MU' ;
+      end ;
+      otherwise noth_summary_race = 'MU' ; * 3 or more flags are set ;
+    end ;
+    label
+      all_race_flags    = 'Compact display showing which r_ race flag vars are set.'
+      num_flags_set     = 'A simple count of the number of r_ flag vars that are set to Y'
+      smpl_summary_race = 'The original sample implementation from the spec change--overemphasizes MUs (simplistic)'
+      hspp_summary_race = 'KPNW''s variation--heavily favors HS--disregards concurrent r_white, r_other and r_mult flags (HS++)'
+      noth_summary_race = 'Original, but if either r_mena or r_hisp are set, ignores r_other (no-other)'
+    ;
+  run ;
+%mend summary_race_variants ;
+
