@@ -13848,3 +13848,458 @@ Citation    :
   run ;
 %mend summary_race_variants ;
 
+/*----------------------------------------------------------------------------------------------
+*----------------------------------------------------------------------------------------------
+* PROGRAM NAME: Elixhauser_Comorbidity_Refined.sas
+* DATE:   10/06/2025
+* AUTHOR: Emma Weffald
+*       Emma.X.Weffald@kp.org
+*       Adapted from code by Daniel Martin (KPCO), who adapted from macro by Joey Eavey (KPWA)
+*       Based on code from Anne Elixhauser at HCUP, Hao He (UW) and Elham Sagheb (Marshfield)
+*----------------------------------------------------------------------------------------------
+* NOTES FROM DANIEL'S ORIGINAL PROGRAM:
+* PURPOSE: This program calculates the index and prior Elixhasuer comorbidity scores for
+*      patients in the input table using code from Anne Elixhauser's group at ARHQ/HCUP.
+*
+*          This program uses the VDW dx table to calculate the  Elix score and can accomodate
+*      both ICD9 and ICD10CM diagnosis codes.  The time frame for prior diagnoses can be
+*      adjusted using days_lookback parameter.  Additionally, this code will calculate an
+*      Elixhauser score for each visit/index date in the dataset - if a patient has
+*      multiple records by index date, this program computes an Elixhauser score for each
+*      of the patients' records.
+*
+*      This version of the macro has been updated to use the 2023 version of the Elixhauser
+*      comorbidity scores. A lookup table method is used instead of variable formats.
+*
+*      Current limitations of this version (work in progress):
+*          * uses ICD-10 only (no ICD-9, not appropriate for index dates in 2015 or prior)
+*          * does not account for Diagnostic Related Group (DRG) codes of encounter,
+*            optionally used to filter DRG related to comorbidity in question
+*            (relevant to inpatient encounters from facility claims)
+*          * does not account for present on admission (POA) requirements for comorbidities,
+*            but unclear if this would be exempted for IHR use-cases
+*
+* INPUTS:
+*    Study dataset that should contain a unique person identifier and an index date for each
+*    record.  The name of this dataset is specified in the inputds parameter of the macro
+*
+*    VDW encounter and diagnosis tables
+*    Lookup table pulled from a CMR Reference File, downloaded from Elixhauser Comorbidity
+*  Software files and documentation reference listed below.
+*   CODE PULLS DIRECTLY FROM EXCEL SHEET WHEN RUN; The program extracts the
+*   DX_to_Comorb_Mapping sheet from an HCUP CMR reference file excel workbook
+*   found in an official release of their Elixhauser Comorbidity Software Refined
+*   for ICD-10-CM tools. This program has been tested using the workbooks found in
+*   the 2021-2025 versions of their tool.
+*   YOU CAN SPECIFY BELOW WHAT YEAR YOU WOULD LIKE TO USE. IF NO YEAR IS ENTERED, THE
+*   TABLE ASSOCIATED WITH THE LATEST TOOL (must be downloaded, unzipped, and in the
+*   program directory) IS USED. As of this version, the 2025 tool is the most recent
+*   version, and will be used if no year is specified below.
+*     YEAR IS SPECIFIED IN THE MARKED "EDIT SECTION" OF STEP 0.
+*
+* OUTPUT:
+*    Table with flags for each comorbidity and Elixhauser scores for each MRN + index date
+*
+* REFERENCES:
+*      Elixhauser Comorbidity Software files and documentation:
+*      https://hcup-us.ahrq.gov/toolssoftware/comorbidityicd10/comorbidity_icd10.jsp
+*
+*      For the development of readmission and mortality indices refer to:
+*      Moore BJ, White S, Washington R, Coenen N, Elixhauser A. Identifying Increased Risk of Readmission and In-hospital Mortality Using Hospital Administrative Data: The AHRQ Elixhauser Comorbidity Index. Med Care. 2017 Jul;55(7):698-705.
+*      https://pubmed.ncbi.nlm.nih.gov/28498196/
+*----------------------------------------------------------------------------------------------
+*/
+
+%macro elixhauser_refined(inputds
+                , mrn             = mrn
+                , index_date      = index_date
+                , days_lookback   = 365
+                , inpatonly       = I
+                , enctype_list    =
+                , outputds        =
+                , mapping_year    = 2025
+                );
+
+  /* Step 0--validate inputs */
+  %if &mapping_year > 2021 and &mapping_year < 2026 %then %do ;
+    %put INFO: You have requested the &mapping_year mapping of ICD-10s to comorbidity flags. ;
+  %end ;
+  %else %do i = 1 %to 5 ;
+    %put ERROR: Mapping tables are only available from 2022 through 2025--there is no file for &mapping_year. Doing nothing. ;
+    %goto exit ;
+  %end ;
+
+  filename __lk &_vdw_asset_engine "&_vdw_asset_loc/elix_&mapping_year..json" ;
+  libname __lk json ;
+
+  data dx_to_comorb_mapping_hcup ;
+    set __lk.sastabledata_dx_to_como ;
+  run ;
+
+  filename __lk clear ;
+  libname __lk clear ;
+
+  %LET lookup_table = dx_to_comorb_mapping_hcup ;
+
+  %local icd10_switchover ;
+  %let icd10_switchover = 01-oct-2015 ;
+
+  proc sql noprint ;
+    select count(*) as num_too_early
+    into :num_too_early
+    from &inputds
+    where intnx('day', &index_date, -&days_lookback) lt "&icd10_switchover"d
+    ;
+  quit ;
+
+  %if &num_too_early > 0 %then %do ;
+    %put WARNING: There are %trim(&num_too_early) records in &inputds whose lookback periods extend into the ICD-9 era. Results from this macro will not be valid for those records. ;
+  %end ;
+
+  /****************************************************/
+  /* STEP 1 - Setting up patient/dxs table      *******/
+  /****************************************************/
+  * creating a cohort table that contains the mrn and index date variables;
+  proc sort nodupkey data = &inputds out = cohort ;
+    by &mrn &index_date ;
+  run ;
+
+  * this is where the encounter types to be included gets specified;
+  %if       &inpatonly = I %then %do; %let inpatout= AND e.EncType in ('IP'); %end;
+  %else %if &inpatonly = B %then %let inpatout= AND e.EncType in ('IP','AV');
+  %else %if &inpatonly = A %then %let inpatout=;
+  %else %if &inpatonly = C %then %let inpatout= AND e.EncType in (&enctype_list);
+
+
+  * using the cohort ds to select encounters and diagnoses;
+  proc sql noprint ;
+    create table enc as
+      select distinct
+        c.&mrn as mrn
+        , c.&index_date as index_dt
+        , e.adate as enc_dt
+        , e.enc_id
+        , e.drg_version
+        , e.drg_value
+        , e.enctype
+      from  &_VDW_utilization e
+      INNER JOIN cohort c
+      on    e.mrn = c.&mrn and
+            e.adate between c.&index_date - &days_lookback and c.&index_date
+            &inpatout
+      order by c.&mrn , c.&index_date, enc_id, drg_value
+    ;
+  quit;
+
+  proc sql;
+    create table dx as
+      select distinct
+        c.&mrn as mrn
+        , c.&index_date as index_dt
+        , d.dx
+        , d.dx_codetype
+        , d.enc_id
+    from &_VDW_dx d
+    INNER JOIN cohort c
+      on    d.mrn = c.&mrn and
+            d.adate between c.&index_date - &days_lookback and c.&index_date
+    order by c.&mrn , c.&index_date, enc_id
+    ;
+
+    create table encdx as
+      select distinct
+        e.*
+        , d.dx
+        , d.dx_codetype
+      from enc e
+      LEFT JOIN dx d
+      on  e.enc_id = d.enc_id
+      order by e.mrn , e.index_dt, enc_id, drg_value
+    ;
+    drop table dx ;
+  quit;
+
+
+  /**************************************************************/
+  /* STEP 2 - Select unique comorbidities by MRN-index date *****/
+  /**************************************************************/
+  * join to lookup table;
+  proc sql;
+    create table encdxcmr as
+    select *
+    from encdx a
+    inner join &lookup_table b
+      on compress(a.DX,,'kad') = b.ICD10;
+  quit;
+
+  * select maximum comorbidity values;
+  proc sql;
+    create table ucmr as
+    select a.&mrn
+      ,a.&index_date
+    ,max(AIDS) as CMR_AIDS
+    ,max(ALCOHOL) as CMR_ALCOHOL
+    ,max(ANEMDEF) as CMR_ANEMDEF
+    ,max(AUTOIMMUNE) as CMR_AUTOIMMUNE
+    ,max(BLDLOSS) as CMR_BLDLOSS
+    ,max(CANCER_LEUK) as CMR_CANCER_LEUK
+    ,max(CANCER_LYMPH) as CMR_CANCER_LYMPH
+    ,max(CANCER_METS) as CMR_CANCER_METS
+    ,max(CANCER_NSITU) as CMR_CANCER_NSITU
+    ,max(CANCER_SOLID) as CMR_CANCER_SOLID
+    ,max(CBVD_POA) as CMR_CBVD_POA
+    ,max(CBVD_SQLA) as CMR_CBVD_SQLA
+    ,max(COAG) as CMR_COAG
+    ,max(DEMENTIA) as CMR_DEMENTIA
+    ,max(DEPRESS) as CMR_DEPRESS
+    ,max(DIAB_CX) as CMR_DIAB_CX
+    ,max(DIAB_UNCX) as CMR_DIAB_UNCX
+    ,max(DRUG_ABUSE) as CMR_DRUG_ABUSE
+    ,max(HF) as CMR_HF
+    ,max(HTN_CX) as CMR_HTN_CX
+    ,max(HTN_UNCX) as CMR_HTN_UNCX
+    ,max(LIVER_MLD) as CMR_LIVER_MLD
+    ,max(LIVER_SEV) as CMR_LIVER_SEV
+    ,max(LUNG_CHRONIC) as CMR_LUNG_CHRONIC
+    ,max(NEURO_MOVT) as CMR_NEURO_MOVT
+    ,max(NEURO_OTH) as CMR_NEURO_OTH
+    ,max(NEURO_SEIZ) as CMR_NEURO_SEIZ
+    ,max(OBESE) as CMR_OBESE
+    ,max(PARALYSIS) as CMR_PARALYSIS
+    ,max(PERIVASC) as CMR_PERIVASC
+    ,max(PSYCHOSES) as CMR_PSYCHOSES
+    ,max(PULMCIRC) as CMR_PULMCIRC
+    ,max(RENLFL_MOD) as CMR_RENLFL_MOD
+    ,max(RENLFL_SEV) as CMR_RENLFL_SEV
+    ,max(THYROID_HYPO) as CMR_THYROID_HYPO
+    ,max(THYROID_OTH) as CMR_THYROID_OTH
+    ,max(ULCER_PEPTIC) as CMR_ULCER_PEPTIC
+    ,max(VALVE) as CMR_VALVE
+    ,max(WGHTLOSS) as CMR_WGHTLOSS
+    from cohort a
+    left join encdxcmr b
+      on a.&mrn = b.mrn and a.&index_date = b.index_dt
+    group by a.&mrn , a.&index_date ;
+  quit;
+
+  * Code below adapted from HCUP/AHRQ code CMR_Mapping_Program_v2023-1.sas;
+
+   /******************************************************/
+   /* Implement exclusions for comorbidities,         ****/
+   /*  sets less severe CMR to 0 when more severe = 1 ****/
+   /******************************************************/
+  data ucmr_ex;
+    set ucmr;
+    array cx(*) CMR_: ;
+    do i = 1 to dim(cx);
+      if cx(i) = . then cx(i) = 0;
+    end;
+    if CMR_DIAB_CX      = 1 then CMR_DIAB_UNCX   = 0;
+    if CMR_HTN_CX       = 1 then CMR_HTN_UNCX    = 0;
+    if CMR_CANCER_METS  = 1 then do;
+      CMR_CANCER_SOLID = 0;
+      CMR_CANCER_NSITU = 0;
+    end;
+    if CMR_CANCER_SOLID = 1 then CMR_CANCER_NSITU = 0;
+    if CMR_LIVER_SEV    = 1 then CMR_LIVER_MLD   = 0;
+    if CMR_RENLFL_SEV   = 1 then CMR_RENLFL_MOD  = 0;
+    /* if (CMR_CBVD_POA=1) or (CMR_CBVD_POA=0 AND CMR_CBVD_NPOA=0 AND CMR_CBVD_SQLA=1) then CMR_CBVD = 1;  */
+    * will revert this line to original once POA is implemented;
+    if CMR_CBVD_POA=1 or CMR_CBVD_SQLA=1 then CMR_CBVD = 1;
+    if CMR_CBVD = . then CMR_CBVD = 0;
+  drop i;
+    label
+        CMR_AIDS         = 'Acquired immune deficiency syndrome'
+        CMR_ALCOHOL      = 'Alcohol abuse'
+        CMR_ANEMDEF      = 'Anemias due to other nutritional deficiencies'
+        CMR_AUTOIMMUNE   = 'Autoimmune conditions'
+        CMR_BLDLOSS      = 'Chronic blood loss anemia (iron deficiency)'
+        CMR_CANCER_LEUK  = 'Leukemia'
+        CMR_CANCER_LYMPH = 'Lymphoma'
+        CMR_CANCER_METS  = 'Metastatic cancer'
+        CMR_CANCER_NSITU = 'Solid tumor without metastasis, in situ'
+        CMR_CANCER_SOLID = 'Solid tumor without metastasis, malignant'
+        CMR_CBVD         = 'Cerebrovascular disease'
+    /*  CMR_CBVD_NPOA    = 'Cerebrovascular disease, not on admission' */
+        CMR_CBVD_POA     = 'Cerebrovascular disease, on admission'
+        CMR_CBVD_SQLA    = 'Cerebrovascular disease, sequela'
+        CMR_HF           = 'Heart failure'
+        CMR_COAG         = 'Coagulopathy'
+        CMR_DEMENTIA     = 'Dementia'
+        CMR_DEPRESS      = 'Depression'
+        CMR_DIAB_CX      = 'Diabetes with chronic complications'
+        CMR_DIAB_UNCX    = 'Diabetes without chronic complications'
+        CMR_DRUG_ABUSE   = 'Drug abuse'
+        CMR_HTN_CX       = 'Hypertension, complicated'
+        CMR_HTN_UNCX     = 'Hypertension, uncomplicated'
+        CMR_LIVER_MLD    = 'Liver disease, mild'
+        CMR_LIVER_SEV    = 'Liver disease, moderate to severe'
+        CMR_LUNG_CHRONIC = 'Chronic pulmonary disease'
+        CMR_NEURO_MOVT   = 'Neurological disorders affecting movement'
+        CMR_NEURO_OTH    = 'Other neurological disorders'
+        CMR_NEURO_SEIZ   = 'Seizures and epilepsy'
+        CMR_OBESE        = 'Obesity'
+        CMR_PARALYSIS    = 'Paralysis'
+        CMR_PERIVASC     = 'Peripheral vascular disease'
+        CMR_PSYCHOSES    = 'Psychoses'
+        CMR_PULMCIRC     = 'Pulmonary circulation disease'
+        CMR_RENLFL_MOD   = 'Renal failure, moderate'
+        CMR_RENLFL_SEV   = 'Renal failure, severe'
+        CMR_THYROID_HYPO = 'Hypothyroidism'
+        CMR_THYROID_OTH  = 'Other thyroid disorders'
+        CMR_ULCER_PEPTIC = 'Peptic ulcer disease x bleeding'
+        CMR_VALVE        = 'Valvular disease'
+        CMR_WGHTLOSS     = 'Weight loss'
+        ;
+  run;
+
+  /****************************************************/
+  /* STEP 3 - Calculate Elixhauser indices        *****/
+  /****************************************************/
+
+  * Following code adapted from HCUP/AHRQ file CMR_Index_Program_v2023-1.sas;
+  * added CMR_Index_Comorbidity_Count variable, made array lengths implicit, otherwise identical;
+  data &outputds ;
+    set ucmr_ex;
+
+   Length
+        CMR_Index_Comorbidity_Count CMR_Index_Readmission CMR_Index_Mortality 3;
+
+   LABEL
+        CMR_Index_Readmission = 'Comorbidity index for risk of 30-day, all-cause readmission'
+        CMR_Index_Mortality   = 'Comorbidity index for risk of in-hospital mortality'
+        CMR_Index_Comorbidity_Count = 'Number of comorbidities - unweighted index';
+        ;
+
+   /***********************************************************/
+   /*  Weights for calculating readmission index              */
+   /***********************************************************/
+   rwAIDS         =  5 ;
+   rwALCOHOL      =  3 ;
+   rwANEMDEF      =  5 ;
+   rwAUTOIMMUNE   =  2 ;
+   rwBLDLOSS      =  2 ;
+   rwCANCER_LEUK  = 10 ;
+   rwCANCER_LYMPH =  7 ;
+   rwCANCER_METS  = 11 ;
+   rwCANCER_NSITU =  0 ;
+   rwCANCER_SOLID =  7 ;
+   rwCBVD         =  0 ;
+   rwHF           =  7 ;
+   rwCOAG         =  3 ;
+   rwDEMENTIA     =  1 ;
+   rwDEPRESS      =  2 ;
+   rwDIAB_CX      =  4 ;
+   rwDIAB_UNCX    =  0 ;
+   rwDRUG_ABUSE   =  6 ;
+   rwHTN_CX       =  0 ;
+   rwHTN_UNCX     =  0 ;
+   rwLIVER_MLD    =  3 ;
+   rwLIVER_SEV    = 10 ;
+   rwLUNG_CHRONIC =  4 ;
+   rwNEURO_MOVT   =  1 ;
+   rwNEURO_OTH    =  2 ;
+   rwNEURO_SEIZ   =  5 ;
+   rwOBESE        = -2 ;
+   rwPARALYSIS    =  3 ;
+   rwPERIVASC     =  1 ;
+   rwPSYCHOSES    =  6 ;
+   rwPULMCIRC     =  3 ;
+   rwRENLFL_MOD   =  4 ;
+   rwRENLFL_SEV   =  8 ;
+   rwTHYROID_HYPO =  0 ;
+   rwTHYROID_OTH  =  0 ;
+   rwULCER_PEPTIC =  2 ;
+   rwVALVE        =  0 ;
+   rwWGHTLOSS     =  6 ;
+
+   /***********************************************************/
+   /*  Weights for calculating mortality index                */
+   /***********************************************************/
+   mwAIDS         = -4 ;
+   mwALCOHOL      = -1 ;
+   mwANEMDEF      = -3 ;
+   mwAUTOIMMUNE   =  0 ;
+   mwBLDLOSS      = -4 ;
+   mwCANCER_LEUK  =  9 ;
+   mwCANCER_LYMPH =  5 ;
+   mwCANCER_METS  = 22 ;
+   mwCANCER_NSITU =  0 ;
+   mwCANCER_SOLID = 10 ;
+   mwCBVD         =  5 ;
+   mwHF           = 14 ;
+   mwCOAG         = 14 ;
+   mwDEMENTIA     =  5 ;
+   mwDEPRESS      = -8 ;
+   mwDIAB_CX      = -2 ;
+   mwDIAB_UNCX    =  0 ;
+   mwDRUG_ABUSE   = -7 ;
+   mwHTN_CX       =  1 ;
+   mwHTN_UNCX     =  0 ;
+   mwLIVER_MLD    =  2 ;
+   mwLIVER_SEV    = 16 ;
+   mwLUNG_CHRONIC =  2 ;
+   mwNEURO_MOVT   = -1 ;
+   mwNEURO_OTH    = 22 ;
+   mwNEURO_SEIZ   =  2 ;
+   mwOBESE        = -7 ;
+   mwPARALYSIS    =  4 ;
+   mwPERIVASC     =  3 ;
+   mwPSYCHOSES    = -9 ;
+   mwPULMCIRC     =  4 ;
+   mwRENLFL_MOD   =  3 ;
+   mwRENLFL_SEV   =  7 ;
+   mwTHYROID_HYPO = -3 ;
+   mwTHYROID_OTH  = -8 ;
+   mwULCER_PEPTIC =  0 ;
+   mwVALVE        =  0 ;
+   mwWGHTLOSS     = 13 ;
+
+   /***********************************************************/
+   /*      Arrays Used to Assign Final Indexes                */
+   /***********************************************************/
+   array cmvars(*)      CMR_AIDS       CMR_ALCOHOL      CMR_ANEMDEF      CMR_AUTOIMMUNE   CMR_BLDLOSS      CMR_CANCER_LEUK  CMR_CANCER_LYMPH CMR_CANCER_METS  CMR_CANCER_NSITU
+                   CMR_CANCER_SOLID CMR_CBVD       CMR_HF           CMR_COAG         CMR_DEMENTIA     CMR_DEPRESS      CMR_DIAB_CX      CMR_DIAB_UNCX    CMR_DRUG_ABUSE   CMR_HTN_CX
+                   CMR_HTN_UNCX     CMR_LIVER_MLD  CMR_LIVER_SEV    CMR_LUNG_CHRONIC CMR_NEURO_MOVT   CMR_NEURO_OTH    CMR_NEURO_SEIZ   CMR_OBESE        CMR_PARALYSIS    CMR_PERIVASC
+                   CMR_PSYCHOSES    CMR_PULMCIRC   CMR_RENLFL_MOD   CMR_RENLFL_SEV   CMR_THYROID_HYPO CMR_THYROID_OTH  CMR_ULCER_PEPTIC CMR_VALVE        CMR_WGHTLOSS
+          ;
+
+   array rwcms(*)   rwAIDS       rwALCOHOL      rwANEMDEF      rwAUTOIMMUNE  rwBLDLOSS      rwCANCER_LEUK  rwCANCER_LYMPH rwCANCER_METS  rwCANCER_NSITU rwCANCER_SOLID
+                    rwCBVD      rwHF         rwCOAG         rwDEMENTIA     rwDEPRESS     rwDIAB_CX      rwDIAB_UNCX    rwDRUG_ABUSE   rwHTN_CX       rwHTN_UNCX
+          rwLIVER_MLD rwLIVER_SEV  rwLUNG_CHRONIC rwNEURO_MOVT   rwNEURO_OTH   rwNEURO_SEIZ   rwOBESE        rwPARALYSIS    rwPERIVASC     rwPSYCHOSES
+          rwPULMCIRC  rwRENLFL_MOD rwRENLFL_SEV   rwTHYROID_HYPO rwTHYROID_OTH rwULCER_PEPTIC rwVALVE        rwWGHTLOSS
+          ;
+
+   array mwcms(*)   mwAIDS       mwALCOHOL      mwANEMDEF      mwAUTOIMMUNE  mwBLDLOSS      mwCANCER_LEUK  mwCANCER_LYMPH mwCANCER_METS  mwCANCER_NSITU mwCANCER_SOLID
+                    mwCBVD      mwHF         mwCOAG         mwDEMENTIA     mwDEPRESS     mwDIAB_CX      mwDIAB_UNCX    mwDRUG_ABUSE   mwHTN_CX       mwHTN_UNCX
+          mwLIVER_MLD mwLIVER_SEV  mwLUNG_CHRONIC mwNEURO_MOVT   mwNEURO_OTH   mwNEURO_SEIZ   mwOBESE        mwPARALYSIS    mwPERIVASC     mwPSYCHOSES
+          mwPULMCIRC  mwRENLFL_MOD mwRENLFL_SEV   mwTHYROID_HYPO mwTHYROID_OTH mwULCER_PEPTIC mwVALVE        mwWGHTLOSS
+          ;
+
+   array ricms(*)     riAIDS       riALCOHOL      riANEMDEF      riAUTOIMMUNE   riBLDLOSS      riCANCER_LEUK  riCANCER_LYMPH riCANCER_METS  riCANCER_NSITU riCANCER_SOLID
+                    riCBVD      riHF         riCOAG         riDEMENTIA     riDEPRESS      riDIAB_CX      riDIAB_UNCX    riDRUG_ABUSE   riHTN_CX       riHTN_UNCX
+          riLIVER_MLD riLIVER_SEV  riLUNG_CHRONIC riNEURO_MOVT   riNEURO_OTH    riNEURO_SEIZ   riOBESE        riPARALYSIS    riPERIVASC     riPSYCHOSES
+          riPULMCIRC  riRENLFL_MOD riRENLFL_SEV   riTHYROID_HYPO riTHYROID_OTH  riULCER_PEPTIC riVALVE        riWGHTLOSS
+          ;
+
+   array micms(*)     miAIDS       miALCOHOL      miANEMDEF      miAUTOIMMUNE   miBLDLOSS      miCANCER_LEUK  miCANCER_LYMPH miCANCER_METS  miCANCER_NSITU miCANCER_SOLID
+                    miCBVD      miHF         miCOAG         miDEMENTIA     miDEPRESS      miDIAB_CX      miDIAB_UNCX    miDRUG_ABUSE   miHTN_CX       miHTN_UNCX
+          miLIVER_MLD miLIVER_SEV  miLUNG_CHRONIC miNEURO_MOVT   miNEURO_OTH    miNEURO_SEIZ   miOBESE        miPARALYSIS    miPEmiVASC     miPSYCHOSES
+          miPULMCIRC  miRENLFL_MOD miRENLFL_SEV   miTHYROID_HYPO miTHYROID_OTH  miULCER_PEPTIC miVALVE        miWGHTLOSS
+          ;
+
+   *****Calculate readmission and mortality indices;
+   do i = 1 to dim(cmvars);
+      ricms[i]=cmvars[i]*rwcms[i];
+      micms[i]=cmvars[i]*mwcms[i];
+   end;
+
+   CMR_Index_Comorbidity_Count = sum(of cmvars[*]);
+   CMR_Index_Readmission = sum(of ricms[*]);
+   CMR_Index_Mortality   = sum(of micms[*]);
+
+   ***drop all intermediate variables;
+   drop rw: mw: ri: mi: i;
+  run;
+  %exit:
+%mend elixhauser_refined;
