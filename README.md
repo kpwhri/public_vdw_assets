@@ -1079,7 +1079,7 @@ Developed by Rebecca Ziebell (ziebell.r@ghc.org), this macro recodes VDW.TUMOR-f
 
 
 _Note:_
-```%ser_site_recode``` also establishes two numeric formats to be used with the site\_recode variable: simple format site\_recode. and multilabel format recode\_mlf.
+```%seer_site_recode``` also establishes two numeric formats to be used with the site\_recode variable: simple format site\_recode. and multilabel format recode\_mlf.
 
 #### Sample Call
 ```sas
@@ -1169,6 +1169,73 @@ Identifying Increased Risk of Readmission and In-hospital Mortality Using Hospit
           , days_lookback = 365
          ) ;
 ```
+
+
+### %elixhauser_refined
+
+Calculates the 2025 version of HCUP's refined Elixhauser chronic disease score, on an input dataset of MRNs & index dates that you specify.
+
+This macro is due to the generous work of KPCO's Emma Weffald and Daniel Martin. They took the code [available from the HCUP site devoted to Elixhauser](https://hcup-us.ahrq.gov/toolssoftware/comorbidityicd10/comorbidity_icd10.jsp) and adapted it for use with the VDW.
+
+Note that while this macro is generally call-compatible with the earlier `%elixhauser`, it is **only** sensitive to ICD-10-era diagnoses. If any of your input data require the macro to pull diagnoses prior to the 1-oct-2015 ICD-10 switchover, you will see a WARNING in your log telling you how many input records have this problem. If you encounter that you might consider using the older `%elixhauser` macro, which can handle both ICD-9s and ICD-10s.
+
+#### Background
+
+The prior (unrefined?) version of Elixhauser conceived of "comorbidity" as "conditions *other than the main reason you're in this hospital right now* that co-occur or pre-exist in the patient". So--emphasis on the **co** part of co-morbidity. For that reason it included logic for disregarding morbidities that corresponded to the <abbr title = "Diagnostic Related Group">DRG</abbr> applicable to the stay. The refinement here discards that conception in favor of a global disease-burden type score.
+
+As with the other comorbidity scores in this library, we are often not content to stay within the limits of the data the scores' authors could access. This is why we include the `inpatonly` parameter, allowing VDW users to consider diagnoses from *any* type of encounter instead of limiting scored diagnoses to those attached to inpatient stays. This makes good sense given the rich data we have available to us, but users should note that it takes many of our uses outside of the algorithm the authors strictly validated and published.
+
+#### Parameters
+
+|Parameter Name|Parameter Purpose|
+|--------------|-----------------|
+|inputds| Name of a dataset containing MRNs and index dates for a cohort of people. It is permissible to have > 1 index date per MRN.|
+|mrn| The name of a variable in &inputds that holds MRN values.  Default is 'mrn'.|
+|index_date|  The name of a variable in &inputds that holds the index date values. Default is 'index_date'.|
+|outputds|  The name of the output dataset with scores and flags to write.|
+|days_lookback| The number of days to look back from index_date for defining the period over which to find diagnoses. Default is 365.|
+|inpatonly| Specifies the types of encounters to include (I= inpatient only, B= inpatient and ambulatory only, A = all encounters, C = specify a custom encounter type list using &enctype_list)|
+|enctype_list|  For use with inpatonly = C, use to specify a custom encounter type list|
+|mapping_year| Optional/experimental. Specify which year's dx-code-to-comorbidity-flag mapping you would like to use. Possibly useful to produce something like what you would have gotten from an earlier version of the macro (though note that the comorbidity weights all come from the 2025 version). Can be any year between 2022 and 2025. Defaults to 2025.|
+
+#### Sample Call
+
+```sas
+%elixhauser_refined(inputds = s.victims
+                , mrn             = mrn
+                , index_date      = index_date
+                , days_lookback   = 365
+                , inpatonly       = A
+                , outputds        = s.refined_2025
+                );
+
+%elixhauser_refined(inputds = s.victims
+                , mrn             = mrn
+                , index_date      = index_date
+                , days_lookback   = 365
+                , inpatonly       = A
+                , outputds        = s.refined_2024
+                , mapping_year    = 2024
+                );
+```
+
+#### Output Data
+
+The dataset created by the macro includes 40 numeric flag variables, each signifying
+|Variable|Definition|
+|--------|----------|
+|`&mrn` | As given in `&inputds`.|
+|`&index_date`|Same|
+|CMR_::condition name::|Forty 0/1 flags signifying the different comorbidities considered--see labels for descriptions|
+|CMR_Index_Comorbidity_Count| A straight count of the number of flags set to 1|
+|CMR_Index_Readmission| A weighted sum of the comorbidity flags that produce a risk of readmission|
+|CMR_Index_Mortality| A weighted sum of the comorbidity flags that produce a risk of death|
+
+#### References
+
+[Elixhauser Comorbidity website](https://hcup-us.ahrq.gov/toolssoftware/comorbidityicd10/comorbidity_icd10.jsp)
+
+Elixhauser, Anne, et al. Comorbidity Measures for Use with Administrative Data. Medical Care, vol. 36, no. 1, 1998, pp. 8-27 JSTOR, https://www.jstor.org/stable/3766985.
 
 ### %gagne
 Purpose: Calculates Gagne's combined comorbidity score, using Elixhauser's ICD-9 diagnosis codes.
