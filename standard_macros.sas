@@ -13917,15 +13917,15 @@ Citation    :
                 , inpatonly       = I
                 , enctype_list    =
                 , outputds        =
-                , mapping_year    = 2025
+                , mapping_year    = 2026
                 );
 
   /* Step 0--validate inputs */
-  %if &mapping_year > 2021 and &mapping_year < 2026 %then %do ;
+  %if &mapping_year > 2021 and &mapping_year < 2027 %then %do ;
     %put INFO: You have requested the &mapping_year mapping of ICD-10s to comorbidity flags. ;
   %end ;
   %else %do i = 1 %to 5 ;
-    %put ERROR: Mapping tables are only available from 2022 through 2025--there is no file for &mapping_year. Doing nothing. ;
+    %put ERROR: Mapping tables are only available from 2022 through 2026--there is no file for &mapping_year. Doing nothing. ;
     %goto exit ;
   %end ;
 
