@@ -1,0 +1,9 @@
+{
+  "bundle": "t001_calcage_datastep",
+  "source_file": "standard_macros.sas",
+  "source_macro": "%CalcAge (lines 23-26)",
+  "source_blob_sha": "8f121be2febfafe56ef8de2d265398d44e2df463",
+  "source_commit": "90137bd5ff70df09b3063e0f47041588b47cc19b",
+  "tier": "real_data",
+  "notes": "Calls the repo's %CalcAge macro in a DATA step to age an 8-row demographics cohort (synthetic MRN + birth_date) as of two reference dates. Macro copied verbatim from standard_macros.sas; positional call style matches the macro's positional definition."
+}

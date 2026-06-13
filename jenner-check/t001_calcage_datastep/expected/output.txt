@@ -1,0 +1,12 @@
+                             Whole-year age via %CalcAge, as of 01-Jan-2026 and 01-Jan-2000                             
+
+  Obs   MRN  BIRTH_DATE  AGE_2026  AGE_2000
+    1  A001   14FEB1980        45        19
+    2  A002   29FEB2000        25        -1
+    3  A003   01JAN1990        36        10
+    4  A004   31DEC1999        26         0
+    5  A005   15JUN1975        50        24
+    6  A006   25DEC2009        16       -10
+    7  A007   30JUN2005        20        -6
+    8  A008   02MAR1953        72        46
+

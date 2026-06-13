@@ -1,0 +1,19 @@
+{
+  "_captured_at": "2026-06-13T17:09:00.877792Z",
+  "_captured_run_id": "r_019ec1f511497db09bf21d91cf97ede8",
+  "status": "ok",
+  "exit_code": 0,
+  "log_contains": [
+    "Wrote pmca_results (3 rows, 26 columns).",
+    "Wrote flagDXes (4 rows, 23 columns).",
+    "PROC PRINT completed: 3 observations printed, 7 variables"
+  ],
+  "log_does_not_contain": [
+    "ERROR:",
+    "[JENNER-ERROR"
+  ],
+  "diagnostics": {
+    "parse_warnings": [],
+    "runtime_warnings": []
+  }
+}

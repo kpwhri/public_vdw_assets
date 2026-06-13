@@ -1,0 +1,9 @@
+{
+  "bundle": "t002_pmca",
+  "source_file": "standard_macros.sas",
+  "source_macro": "%pmca (Pediatric Medical Complexity Algorithm, lines 11007-13093)",
+  "source_blob_sha": "8f121be2febfafe56ef8de2d265398d44e2df463",
+  "source_commit": "90137bd5ff70df09b3063e0f47041588b47cc19b",
+  "tier": "real_data",
+  "notes": "Calls the repo's %pmca macro. Supplies a 3-child cohort (synthetic MRN + index date) and a small ICD-9 dx table standing in for the &_vdw_dx global the macro reads by name. Diagnoses chosen to trip known PMCA flags: 2858/2860 (hematologic), 2950 (mental health, progressive), 4659 (non-chronic). Macro body copied verbatim; results are clinically correct (two Complex Chronic, one Non-Chronic)."
+}
