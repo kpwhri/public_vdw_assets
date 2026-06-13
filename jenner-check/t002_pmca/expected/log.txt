@@ -1,0 +1,51 @@
+Jenner 0.1.0 (Unlicensed - limited to 100 observations)
+Get a license at https://jenneranalytics.com/license
+
+NOTE: Option OBS changed to 100.
+NOTE: DATA cohort
+
+NOTE: Processing inline DATALINES (3 lines)
+
+NOTE: Read 3 rows from DATALINES.
+NOTE: Wrote cohort (3 rows, 2 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: DATA _vdw_dx
+
+NOTE: Processing inline DATALINES (4 lines)
+
+NOTE: Read 4 rows from DATALINES.
+NOTE: Wrote _vdw_dx (4 rows, 5 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: PROC SQL 
+
+NOTE: Table dxes created.
+NOTE: PROC SQL statement used.
+NOTE: PROC SORT data=dxes
+
+NOTE: Unlicensed mode - input limited to 100 observations.
+NOTE: Read 4 rows from dxes.
+NOTE: Wrote dxes (4 rows, 6 columns).
+NOTE: PROC SORT statement used.
+NOTE: DATA flagDXes
+
+
+NOTE: Read 4 rows from DXes.
+NOTE: Wrote flagDXes (4 rows, 23 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: DATA pmca_results
+
+
+NOTE: Read 4 rows from flagDXes.
+NOTE: Wrote pmca_results (3 rows, 26 columns).
+NOTE: DATA elapsed:
+  wall  0.00 seconds
+  cpu   0.00 seconds
+NOTE: PROC PRINT data=pmca_results
+
+NOTE: PROC PRINT completed: 3 observations printed, 7 variables

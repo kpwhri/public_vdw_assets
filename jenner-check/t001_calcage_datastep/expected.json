@@ -1,0 +1,19 @@
+{
+  "_captured_at": "2026-06-13T16:52:13.018401Z",
+  "_captured_run_id": "r_019ec1e58f4171718ca67424a807147f",
+  "status": "ok",
+  "exit_code": 0,
+  "log_contains": [
+    "Wrote ages (8 rows, 4 columns).",
+    "PROC PRINT completed: 8 observations printed, 4 variables",
+    "Read 8 rows from demographics."
+  ],
+  "log_does_not_contain": [
+    "ERROR:",
+    "[JENNER-ERROR"
+  ],
+  "diagnostics": {
+    "parse_warnings": [],
+    "runtime_warnings": []
+  }
+}

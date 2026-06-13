@@ -1,0 +1,7 @@
+                                        PMCA complexity classification per child                                        
+
+  Obs   MRN  INDEX_DATE          COND_LESS          COND_MORE  ANYHEMATO  ANYMH  ANYPROGRESSIVE
+    1  K001  06/01/2019  3 Complex Chronic  3 Complex Chronic          1      1               1
+    2  K002  06/01/2019  3 Complex Chronic  3 Complex Chronic          1      0               1
+    3  K003  06/01/2019  1 Non-Chronic      1 Non-Chronic              0      0               0
+
